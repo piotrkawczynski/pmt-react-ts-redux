@@ -1,0 +1,47 @@
+@import "./variables.scss";
+
+@mixin breakpoint($name) {
+  $min-width: map-get($breakpoints, $name);
+
+  @media (min-width: $min-width) {
+    @content;
+  }
+}
+
+@mixin flexbox($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin form-heading {
+  font-size: $font-size-4;
+  line-height: $line-height-3;
+  font-weight: $font-weight-2;
+  text-align: center;
+  color: $rhino-blue;
+  padding: 6px 0;
+  border-bottom: 1px solid $catskill-white;
+
+  @include breakpoint(medium) {
+    font-size: $font-size-1;
+    line-height: $line-height-4;
+    font-weight: $font-weight-1;
+    text-align: left;
+    padding: 0;
+    border-bottom: none;
+  }
+}
+
+@mixin form-description {
+  font-size: $font-size-5;
+  line-height: $line-height-2;
+  font-weight: $font-weight-2;
+  text-align: left;
+  color: $rhino-blue;
+
+  @include breakpoint(medium) {
+    font-size: $font-size-3;
+    line-height: $line-height-4;
+  }
+}

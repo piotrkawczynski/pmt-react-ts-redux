@@ -1,0 +1,54 @@
+@import "../../../scss/variables";
+
+.inputWrapper {
+  margin-top: 10px;
+}
+
+.label {
+  padding-left: 2px;
+  font-size: $font-size-6;
+  line-height: $line-height-4;
+  font-weight: $font-weight-2;
+  color: $grey;
+}
+
+.input {
+  font-size: $font-size-6;
+
+  .form-control {
+    font-size: $font-size-6;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $concrete;
+    font-size: $font-size-6;
+  }
+
+  &:-moz-placeholder {
+    /* Firefox 18- */
+    color: $concrete;
+    font-size: $font-size-6;
+  }
+
+  &::-moz-placeholder {
+    /* Firefox 19+ */
+    color: $concrete;
+    font-size: $font-size-6;
+  }
+}
+
+.errorMessage {
+  font-size: 12px;
+  text-align: right;
+}
+
+.errorMessageMargin {
+  padding-bottom: 18px;
+}
+
+.labelErrorWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 1
+}

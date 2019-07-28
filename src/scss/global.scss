@@ -1,0 +1,73 @@
+@import "./mixins.scss";
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html * {
+  // Increased specificity to override reset.css
+  font-family: $font-family;
+}
+
+h1 {
+  font-size: $font-size-1;
+  font-weight: $font-weight-3;
+  line-height: $line-height-3;
+}
+
+h2 {
+  font-size: $font-size-2;
+  font-weight: $font-weight-3;
+  line-height: $line-height-3;
+}
+
+h3 {
+  font-size: $font-size-3;
+  font-weight: $font-weight-3;
+}
+
+h4 {
+  font-size: $font-size-4;
+  font-weight: $font-weight-3;
+}
+
+h5 {
+  font-size: $font-size-5;
+  font-weight: $font-weight-3;
+}
+
+p {
+  font-size: $font-size-5;
+  line-height: $line-height-4;
+}
+
+input {
+  margin: 0 !important;
+  font-size: $font-size-6 !important;
+}
+
+button {
+  background-color: $midnight-blue !important;
+  border-color: $midnight-blue !important;
+}
+
+.link {
+  font-size: $font-size-6;
+  font-weight: $font-weight-3;
+  background: transparent;
+  box-shadow: none;
+  text-decoration: none;
+  min-width: 0;
+  border-radius: 0;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
