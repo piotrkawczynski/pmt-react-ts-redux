@@ -72,7 +72,6 @@ class SignInPage extends Component<SignInPageProps> {
                   name="email"
                   label="Email"
                   onChange={handleChange}
-                  value={email}
                   error={errors.email && touched.email && errors.email}
                 />
                 <Input
@@ -82,7 +81,6 @@ class SignInPage extends Component<SignInPageProps> {
                   name="password"
                   label="Password"
                   onChange={handleChange}
-                  value={password}
                   error={errors.password && touched.password && errors.password}
                 />
                 <div

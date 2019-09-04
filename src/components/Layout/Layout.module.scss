@@ -1,0 +1,22 @@
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+$background: rgba($clouds, 0.1);
+
+.wrapper {
+  position: relative;
+  top: 0;
+  height: 100vh;
+}
+
+.mainPanel {
+  position: relative;
+  float: right;
+  width: calc(100% - 260px);
+  background-color: $clouds;
+
+  .content {
+    padding: 20px 0;
+    min-height: calc(100vh - 60px);
+  }
+}

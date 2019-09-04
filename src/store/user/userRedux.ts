@@ -1,63 +1,65 @@
 import { createReducer } from "reduxsauce"
 import {
-  createFailureExtendedReducer,
-  createInitExtendedReducer,
-  createRequestExtendedReducer,
-  createSuccessExtendedReducer,
+  createNestedReducer,
+  createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
 import { ApplicationState } from "../redux"
 import { types } from "./userActions"
+import { Auth } from "../../types/auth"
+import { User } from "../../types/user"
 
 /* ------------- Initial UserRedux ------------- */
 export interface UserRedux {
   loggedIn: boolean
-  userList: PromiseState<string>
-  permissionList: PromiseState<string>
-  user: PromiseState<string>
-}
-
-const PROMISE_STATE: PromiseState<string> = {
-  status: "init",
-  isLoading: false,
-  data: null,
-  error: null,
+  user: PromiseState<Auth, string>
+  registerUser: PromiseState<void, string>
+  users: PromiseState<User[], string>
 }
 
 export const INITIAL_STATE: UserRedux = {
   loggedIn: false,
-  userList: { ...PROMISE_STATE },
-  permissionList: { ...PROMISE_STATE },
-  user: { ...PROMISE_STATE },
+  user: { ...createPromiseState<Auth, string>() },
+  registerUser: { ...createPromiseState<void, string>() },
+  users: { ...createPromiseState<User[], string>() },
 }
 
 /* ------------- Selectors ------------- */
+const token = (state: ApplicationState) => {
+  const user = state.user.user.data
+
+  return (user && user.token) || null
+}
 const user = (state: ApplicationState) => state.user.user
 const loggedIn = (state: ApplicationState) => state.user.loggedIn
 
-export const UserSelector = {
+export const userSelector = {
   user,
   loggedIn,
+  token,
 }
 
 /* ------------- Reducers ------------- */
 
+export const setUserLoggedInReducer = (state = INITIAL_STATE) => {
+  return {
+    ...state,
+    loggedIn: true,
+  }
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 export default createReducer(INITIAL_STATE, {
-  [types.LOGIN.INIT]: createInitExtendedReducer<UserRedux>(
+  [types.SET_USER_LOGGED_IN]: setUserLoggedInReducer,
+  ...createNestedReducer<UserRedux>(types.LOGIN, INITIAL_STATE, "user"),
+  ...createNestedReducer<UserRedux>(
+    types.REGISTER,
     INITIAL_STATE,
-    "user"
+    "registerUser"
   ),
-  [types.LOGIN.REQUEST]: createRequestExtendedReducer<UserRedux>(
+  ...createNestedReducer<UserRedux>(
+    types.GET_USER_LIST,
     INITIAL_STATE,
-    "user"
-  ),
-  [types.LOGIN.SUCCESS]: createSuccessExtendedReducer<UserRedux>(
-    INITIAL_STATE,
-    "user"
-  ),
-  [types.LOGIN.FAILURE]: createFailureExtendedReducer<UserRedux>(
-    INITIAL_STATE,
-    "user"
+    "users"
   ),
 })

@@ -7,6 +7,8 @@ import { RouteComponentProps, withRouter } from "react-router-dom"
 import { connect } from "react-redux"
 import { ApplicationState } from "../../store/redux"
 
+import styles from "./Sidebar.module.scss"
+
 export interface SidebarItem {
   route: string
   icon: IconDefinition
@@ -19,10 +21,10 @@ const data: SidebarItem[] = [
   { route: "/profile", icon: faCode, name: "Profile" },
 ]
 
-const projectLinks: SidebarItem[] = [
-  { route: "/backlog", icon: faCode, name: "Backlog" },
-  { route: "/project", icon: faCode, name: "Project" },
-]
+// const projectLinks: SidebarItem[] = [
+//   { route: "/backlog", icon: faCode, name: "Backlog" },
+//   { route: "/project", icon: faCode, name: "Project" },
+// ]
 
 
 interface RouteParams {
@@ -42,19 +44,19 @@ class Sidebar extends Component<SidebarProps> {
   // }
 
   render() {
-    const {
-      match: {
-        params: { projectId },
-      },
-    } = this.props
+    // const {
+    //   match: {
+    //     params: { projectId },
+    //   },
+    // } = this.props
 
     return (
-      <div className="sidebar">
-        <div className="header">
-          <FontAwesomeIcon icon={faReact} className={"fa-spin"} size={"lg"} />
-          <div className="text">Project Management Tool</div>
+      <div className={styles.sidebar}>
+        <div className={styles.header}>
+          <FontAwesomeIcon icon={faReact} className={styles.faSpin} size={"lg"} />
+          <h6>Project Management Tool</h6>
         </div>
-        <div className="line" />
+        <div className={styles.line} />
         <div>
           <ItemList data={data} />
           {/*{projectId && <ItemList data={this.updateRoutes(projectId)} />}*/}

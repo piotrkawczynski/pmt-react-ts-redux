@@ -1,14 +1,12 @@
 import classnames from "classnames"
-import { ErrorMessage } from "formik"
+import { ErrorMessage, Field } from "formik"
 import React from "react"
 
 import styles from "./Input.module.scss"
-import { Input as ReactInput } from "reactstrap"
 import { InputType } from "reactstrap/lib/Input"
 
 interface InputProps {
   type: InputType
-  value: string
   name: string
   error?: string | false
   label: string
@@ -17,19 +15,19 @@ interface InputProps {
   onChange?: (event: React.FocusEvent<HTMLInputElement>) => void
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
   className?: string
+  value?: string
 }
 
 const Input: React.FC<InputProps> = (props) => {
   const {
     name,
-    value,
     type,
     label,
     isDisabled,
-    onChange,
+    onChange = null,
     onBlur,
     placeholder = "",
-    className
+    className,
   } = props
 
   const wrapperClassName = classnames(styles.inputWrapper, className)
@@ -46,7 +44,7 @@ const Input: React.FC<InputProps> = (props) => {
           className={styles.errorMessage}
         />
       </div>
-      <ReactInput
+      <Field
         type={type}
         id={name}
         className={classnames(styles.input, {
@@ -55,9 +53,7 @@ const Input: React.FC<InputProps> = (props) => {
         name={name}
         placeholder={placeholder}
         disabled={isDisabled}
-        invalid={false}
-        value={value}
-        onChange={onChange}
+        {...(onChange && { onChange })}
         {...(onBlur && { onBlur })}
       />
     </div>

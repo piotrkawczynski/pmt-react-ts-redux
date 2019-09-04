@@ -1,0 +1,32 @@
+@import "../../../scss/mixins";
+@import "../../../scss/variables";
+
+.navLink {
+  margin: 2px 0px;
+  padding: 8px 10px;
+  font-size: 1.1em;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    color: $midnight-blue;
+    background: #ecf0f1;
+    text-decoration: none;
+  }
+}
+
+.icon {
+  width: 40px;
+  font-size: 15px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-size: 15px;
+  display: flex;
+  flex-grow: 0.8;
+}

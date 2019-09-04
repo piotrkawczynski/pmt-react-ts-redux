@@ -1,0 +1,16 @@
+@import "../../../scss/variables";
+
+.createdTagList {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 60px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}

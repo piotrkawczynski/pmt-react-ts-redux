@@ -42,6 +42,36 @@ export interface PromiseState<T, E = string> {
   data: T | null
 }
 
+export const createPromiseState = <T, E>(): PromiseState<T, E> => {
+  return {
+    status: "init",
+    isLoading: false,
+    data: null,
+    error: null,
+  }
+}
+
+export const createNestedReducer = <State>(type: CreateAsyncType, initialState: State, key: keyof State) => {
+  return {
+    [type.INIT]: createInitExtendedReducer<State>(
+      initialState,
+      key
+    ),
+    [type.REQUEST]: createRequestExtendedReducer<State>(
+      initialState,
+      key
+    ),
+    [type.SUCCESS]: createSuccessExtendedReducer<State>(
+      initialState,
+      key
+    ),
+    [type.FAILURE]: createFailureExtendedReducer<State>(
+      initialState,
+      key
+    ),
+  }
+}
+
 export function createInitExtendedReducer<T>(initialState: T, key: keyof T) {
   return (state = initialState) => {
     return {
@@ -114,7 +144,7 @@ export function createFailureExtendedReducer<T>(initialState: T, key: keyof T) {
         ...state[key],
         error: action.payload.error,
         isLoading: false,
-        status: "success",
+        status: "failure",
       },
     }
   }

@@ -1,0 +1,46 @@
+@import "../../../../scss/variables";
+
+.itemContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 5px 10px 5px 10px;
+  margin: 5px;
+  font-weight: 700;
+  font-size: 13px;
+  background-color: $clouds;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+.name {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+}
+
+.order {
+  display: inline-block;
+  width: auto;
+  color: #000000;
+}
+
+.closeButtonContainer {
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  background-color: $midnight-blue;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  margin: 0;
+}
+
+.arms {
+  height: 2px;
+  width: 10px;
+  top: 6px;
+  left: 2px;
+  background-color: $clouds;
+}

@@ -1,11 +1,11 @@
 import React from "react"
-import { IRoutes } from "../../routes/routes"
+import { Route } from "../../routes/routes"
 import signBackground from "../../assets/signBackground.jpeg"
 
 import styles from "./LayoutWithoutSidebar.module.scss"
 
 interface InnerProps {
-  route: IRoutes
+  route: Route
 }
 
 class LayoutWithoutSidebar extends React.Component<InnerProps> {
@@ -21,6 +21,7 @@ class LayoutWithoutSidebar extends React.Component<InnerProps> {
       <div className={styles.wrapper}>
         {signBackground && (
           <img
+            alt="backgroundImage"
             className={styles.backgroundImage}
             src={signBackground}
             style={{

@@ -1,0 +1,23 @@
+@import "../../../scss/variables";
+
+.formContainer {
+  margin: 15px 5px 0 5px;
+  padding-bottom: 10px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1;
+  justify-content: space-between;
+  margin-top: -10px;
+}
+
+.input {
+  flex: 0.78;
+}
+
+.colorInput {
+  flex: 0.18;
+  padding: 0 2px;
+}

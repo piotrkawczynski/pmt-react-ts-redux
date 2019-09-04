@@ -1,12 +1,22 @@
 import { all } from "redux-saga/effects"
-import { userSaga } from "./user/userSagas"
-
-/* ------------- Types ------------- */
 
 /* ------------- Sagas ------------- */
+import { userSaga } from "./user/userSagas"
+import { projectSaga } from "./project/projectSagas"
+import { tagSaga } from "./tag/tagSagas"
+import { statusSaga } from "./status/statusSagas"
+import { inviteSaga } from "./invite/inviteSagas"
+import { permissionSaga } from "./permission/permissionSagas"
 
 /* ------------- Connect Types To Sagas ------------- */
 
 export default function* rootSaga() {
-  yield all([userSaga()])
+  yield all([
+    userSaga(),
+    projectSaga(),
+    tagSaga(),
+    statusSaga(),
+    inviteSaga(),
+    permissionSaga(),
+  ])
 }

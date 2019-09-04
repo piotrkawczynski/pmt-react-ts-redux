@@ -1,16 +1,23 @@
 import React from "react"
 import { connect } from "react-redux"
-import { Button, FormFeedback } from "reactstrap"
+import { Button } from "reactstrap"
 import { Link } from "react-router-dom"
 import { ApplicationState } from "../../store/redux"
-import { Form, Formik, FormikErrors, FormikProps } from "formik"
+import { Form, Formik, FormikActions } from "formik"
 import classnames from "classnames"
 import * as Yup from "yup"
 
 import styles from "../SignInPage/SignInPage.module.scss"
 import Input from "../../components/Inputs/Input/Input"
+import { registerActions } from "../../store/user/userActions"
 
-const INITIAL_VALUES: SignUpFormValues = {
+interface PropsFromDispatch {
+  registerActionRequest: typeof registerActions.registerRequest
+}
+
+type RegisterPageProps = PropsFromDispatch
+
+const INITIAL_VALUES: RegisterFormValues = {
   email: "",
   firstName: "",
   lastName: "",
@@ -34,7 +41,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
     .required("Confirm password is required"),
 })
 
-interface SignUpFormValues {
+export interface RegisterFormValues {
   email: string
   firstName: string
   lastName: string
@@ -43,18 +50,11 @@ interface SignUpFormValues {
   confirmPassword: string
 }
 
-class SignUpPage extends React.Component {
-  componentDidMount() {}
+class RegisterPage extends React.Component<RegisterPageProps> {
 
-  handleOnSubmit = () => {
-    // const { userRegisterAttempt } = this.props
-    //
-    // userRegisterAttempt()
-  }
-
-  private onSubmit = (values: SignUpFormValues) => {
-    // const { userAuthenticationAttempt } = this.props
-    // userAuthenticationAttempt()
+  private onSubmit = (values: RegisterFormValues, formikActions: FormikActions<RegisterFormValues>) => {
+    const { registerActionRequest } = this.props
+    registerActionRequest(values, formikActions)
   }
 
   render() {
@@ -70,14 +70,6 @@ class SignUpPage extends React.Component {
           >
             {(formikProps) => {
               const {
-                values: {
-                  email,
-                  firstName,
-                  lastName,
-                  username,
-                  password,
-                  confirmPassword,
-                },
                 isSubmitting,
                 handleChange,
               } = formikProps
@@ -91,7 +83,6 @@ class SignUpPage extends React.Component {
                     name="email"
                     label="Email"
                     onChange={handleChange}
-                    value={email}
                   />
                   <Input
                     className={styles.inputWrapper}
@@ -100,7 +91,6 @@ class SignUpPage extends React.Component {
                     name="firstName"
                     label="First name"
                     onChange={handleChange}
-                    value={firstName}
                   />
                   <Input
                     className={styles.inputWrapper}
@@ -109,7 +99,6 @@ class SignUpPage extends React.Component {
                     name="lastName"
                     label="Last name"
                     onChange={handleChange}
-                    value={lastName}
                   />
                   <Input
                     className={styles.inputWrapper}
@@ -118,7 +107,6 @@ class SignUpPage extends React.Component {
                     name="username"
                     label="Username"
                     onChange={handleChange}
-                    value={username}
                   />
                   <Input
                     className={styles.inputWrapper}
@@ -127,7 +115,6 @@ class SignUpPage extends React.Component {
                     name="password"
                     label="Password"
                     onChange={handleChange}
-                    value={password}
                   />
                   <Input
                     className={styles.inputWrapper}
@@ -136,7 +123,6 @@ class SignUpPage extends React.Component {
                     name="confirmPassword"
                     label="Confirm password"
                     onChange={handleChange}
-                    value={confirmPassword}
                   />
                   <div className={styles.buttonWrapper}>
                     <Button
@@ -165,10 +151,10 @@ class SignUpPage extends React.Component {
 const mapStateToProps = (state: ApplicationState) => ({})
 
 const mapDispatchToProps = {
-  // userRegisterAttempt: userRegister.Attempt,
+  registerActionRequest: registerActions.registerRequest,
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUpPage)
+)(RegisterPage)

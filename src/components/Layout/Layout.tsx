@@ -1,17 +1,20 @@
 import * as React from "react"
 import { connect } from "react-redux"
-import { UserSelector } from "../../store/user/userRedux"
 import { Redirect } from "react-router-dom"
+
 import Sidebar from "../Sidebar/Sidebar"
 import Header from "../Header/Header"
 import { ApplicationState } from "../../store/redux"
-import { IRoutes } from "../../routes/routes"
+import { Route } from "../../routes/routes"
+import { userSelector } from "../../store/user/userRedux"
+
+import styles from "./Layout.module.scss"
 
 interface InnerProps {
   component: React.ReactNode
-  route: IRoutes
+  route: Route
   renderProps: any
-  withoutSidebar: boolean
+  withoutSidebar?: boolean
 }
 
 interface PropsFromState {
@@ -35,11 +38,11 @@ class Layout extends React.Component<LayoutProps> {
     }
 
     return (
-      <div className="wrapper">
+      <div className={styles.wrapper}>
         <Sidebar />
-        <div className="main-panel" ref="mainPanel">
+        <div className={styles.mainPanel} ref="mainPanel">
           <Header title={route.title} />
-          <div className={"content"}>{children}</div>
+          <div className={styles.content}>{children}</div>
         </div>
       </div>
     )
@@ -47,7 +50,7 @@ class Layout extends React.Component<LayoutProps> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  loggedIn: UserSelector.loggedIn(state),
+  loggedIn: userSelector.loggedIn(state),
 })
 
 const mapDispatchToProps = {}

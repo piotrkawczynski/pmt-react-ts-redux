@@ -1,0 +1,37 @@
+.projectListWrapper {
+  width: 100%;
+}
+.headerWrapper {
+  display: flex;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 12px 20px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.avatar {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.project {
+  flex: 1;
+}
+
+.tag {
+  flex: 0.4;
+}
+
+.company {
+  flex: 0.6;
+}
+
+.listGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 4px;
+}

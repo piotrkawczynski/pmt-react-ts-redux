@@ -1,0 +1,15 @@
+@import "../../../scss/variables";
+
+.createdStatusList {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 5px 0;
+  min-height: 60px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}

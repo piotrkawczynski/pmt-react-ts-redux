@@ -1,0 +1,21 @@
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.formContainer {
+  position: relative;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  padding: 10px 10px 5px 10px;
+  margin: 20px 0 10px 0;
+}
+
+.label {
+  padding: 0 5px;
+  position: absolute;
+  top: -7px;
+  left: 12px;
+  color: $midnight-blue;
+  background-color: $clouds;
+  font-weight: 700;
+  font-size: 12px;
+}

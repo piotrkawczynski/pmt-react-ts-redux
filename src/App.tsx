@@ -10,7 +10,7 @@ import rootSaga from "./store/sagas"
 import { updateApiHeader } from "./store/user/userActions"
 import { Store } from "redux"
 import { PersistorOptions } from "redux-persist/es/types"
-import { authRoutes, withoutSidebarRoutes } from "./routes/routes"
+import { authRoutes, Routes, withoutSidebarRoutes } from "./routes/routes"
 import Layout from "./components/Layout/Layout"
 import LayoutWithoutSidebar from "./components/LayoutWithoutSidebar/LayoutWithoutSidebar"
 
@@ -47,30 +47,32 @@ class App extends Component<AppProps, AppState> {
         <Router history={history}>
           <>
             <Switch>
-              {authRoutes.map((route, index) => (
+              {authRoutes.map((route) => (
                 <Route
                   key={route.path}
                   path={route.path}
                   render={() => <LayoutWithoutSidebar route={route} />}
                 />
               ))}
-              {/*{Routes.map((route, index) => (*/}
-              {/*  <Route*/}
-              {/*    key={route.path}*/}
-              {/*    path={route.path}*/}
-              {/*    exact={route.exact}*/}
-              {/*    render={(props) => (*/}
-              {/*      <Layout*/}
-              {/*        component={route.component}*/}
-              {/*        route={route}*/}
-              {/*        renderProps={props}*/}
-              {/*      />*/}
-              {/*    )}*/}
-              {/*  />*/}
-              {/*))}*/}
+              {Routes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  exact={route.exact}
+                  render={(props) => (
+                    <Layout
+                      component={route.component}
+                      route={route}
+                      renderProps={props}
+                    >
+                      <route.component route={route} router={props} />
+                    </Layout>
+                  )}
+                />
+              ))}
               <Route path="*" component={NotFound} />
             </Switch>
-            {withoutSidebarRoutes.map((route, index) => (
+            {withoutSidebarRoutes.map((route) => (
               <Route
                 key={route.path}
                 path={route.path}

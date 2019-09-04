@@ -1,0 +1,67 @@
+@import "../../scss/variables";
+
+.createProject {
+  width: 100%;
+}
+
+.formContainer {
+  margin: 15px 5px 0 5px;
+  padding-bottom: 10px;
+}
+
+.label {
+  padding: 0 5px;
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  color: $midnight-blue;
+  background-color: $clouds;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.projectFormContainer {
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-color: #669999;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.createProject .inline-row {
+  display: flex;
+}
+
+.menuPortal {
+  z-index: 9999;
+}
+
+.input-section {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.select {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  font-size: 0.8em;
+}
+
+.react-select__control {
+  flex: 1;
+}
+
+.select-flex-1-2 {
+  margin-bottom: 10px;
+  display: flex;
+  flex: 0.48;
+}
+
+.submitButton {
+  margin: 10px 5px;
+}

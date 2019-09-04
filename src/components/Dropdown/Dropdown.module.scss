@@ -1,0 +1,149 @@
+@import "../../scss/variables";
+
+.dropdownWrapper {
+  margin-top: 10px;
+  width: 100%;
+
+  &.container {
+    position: relative;
+  }
+
+  :global .react-select {
+
+    &__control {
+      height: 36px;
+      padding: 0;
+      background-color: $white;
+      cursor: pointer;
+      transition: box-shadow 0.2s ease-out;
+
+      &:hover {
+        border: none;
+      }
+
+      &--is-focused {
+        border: none;
+        outline: 0;
+      }
+
+      &--is-disabled {
+        .react-select__indicator {
+          color: $rock-gray;
+        }
+      }
+    }
+
+    &__indicator {
+      height: 36px;
+      color: $rhino-blue;
+
+      &:hover {
+        color: $rhino-blue;
+      }
+
+      &-separator {
+        background-color: transparent;
+      }
+    }
+
+
+    &__placeholder {
+      color: $rock-gray;
+      font-size: $font-size-6;
+      font-family: $font-family;
+    }
+
+    &__single-value {
+      font-size: $font-size-6;
+      color: $rhino-blue;
+      font-family: $font-family;
+    }
+
+    &__menu {
+      border-radius: 4px;
+      margin-top: 16px;
+      box-shadow: $grey-box-shadow;
+      position: absolute;
+
+      &-list {
+        border-radius: 4px;
+        background-color: $catskill-white;
+        border: none;
+        padding: 0;
+      }
+
+      &-notice--no-options {
+        color: $rock-gray;
+        font-size: $font-size-6;
+        font-family: $font-family;
+      }
+    }
+
+    &__option {
+      background-color: $white;
+      font-size: $font-size-6;
+      line-height: $line-height-3;
+      color: $rhino-blue;
+      font-family: $font-family;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      &:hover {
+        background-color: $concrete;
+        cursor: pointer;
+      }
+    }
+
+    &__option:active {
+      background-color: $aqua-white;
+    }
+
+    &__option--is-selected {
+      background-color: $catskill-white;
+      color: $rhino-blue;
+    }
+  }
+}
+
+.label {
+  padding-left: 2px;
+  font-size: $font-size-6;
+  line-height: $line-height-4;
+  font-weight: $font-weight-2;
+  color: $grey;
+}
+
+.input.input {
+  height: 36px;
+  font-size: $font-size-6;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &::-webkit-input-placeholder {
+    color: $concrete;
+    font-size: $font-size-6;
+  }
+
+  &:-moz-placeholder {
+    /* Firefox 18- */
+    color: $concrete;
+    font-size: $font-size-6;
+  }
+
+  &::-moz-placeholder {
+    /* Firefox 19+ */
+    color: $concrete;
+    font-size: $font-size-6;
+  }
+}

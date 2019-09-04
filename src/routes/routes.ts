@@ -1,35 +1,50 @@
 import * as React from "react"
+
 import SignIn from "../pages/SignInPage/SignInPage"
 import SignUp from "../pages/SignUpPage/SignUpPage"
+import HomePage from "../pages/HomePage/HomePage"
+import CreateProjectPage from "../pages/CreateProjectPage/CreateProjectPage"
+import FulfillProjectPage from "../pages/FulfillProjectPage/FulfillProjectPage"
+import BacklogPage from "../pages/BacklogPage/BacklogPage"
 
-export interface IRoutes {
+export interface Route {
   path: string
   exact: boolean
   component: typeof React.Component
   title?: string
 }
 
-export const Routes: IRoutes[] = [
-  // {
-  //   path: '/',
-  //   exact: true,
-  //   component: Home,
-  //   title: 'Dashboard',
-  //   backgroundImage: null,
-  // },
+export const Routes: Route[] = [
+  {
+    path: '/',
+    exact: true,
+    component: HomePage,
+    title: 'Dashboard',
+  },
   // {
   //   path: '/backlog/:projectId',
   //   component: Backlog,
   //   title: 'Backlog',
   //   backgroundImage: null,
   // },
-  // {
-  //   path: '/create-project',
-  //   exact: true,
-  //   component: CreateProject,
-  //   title: 'Create project',
-  //   backgroundImage: null,
-  // },
+  {
+    path: '/project/create',
+    exact: true,
+    component: CreateProjectPage,
+    title: 'Create project',
+  },
+  {
+    path: '/project/:id/edit',
+    exact: true,
+    component: FulfillProjectPage,
+    title: 'Create project',
+  },
+  {
+    path: '/project/:id/backlog',
+    exact: true,
+    component: BacklogPage,
+    title: 'Backlog',
+  },
   // {
   //   path: '/project/:projectId',
   //   component: Project,
@@ -50,7 +65,7 @@ export const Routes: IRoutes[] = [
   // },
 ]
 
-export const authRoutes: IRoutes[] = [
+export const authRoutes: Route[] = [
   {
     path: "/login",
     exact: true,
@@ -69,7 +84,7 @@ export const authRoutes: IRoutes[] = [
   // },
 ]
 
-export const withoutSidebarRoutes: IRoutes[] = [
+export const withoutSidebarRoutes: Route[] = [
   // {
   //   path: '/backlog/:projectId/issue/:issueId/photo',
   //   exact: true,

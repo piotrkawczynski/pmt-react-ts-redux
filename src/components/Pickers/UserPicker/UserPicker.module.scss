@@ -1,0 +1,29 @@
+@import "../../../scss/variables";
+
+.formContainer {
+  margin: 15px 5px 0 5px;
+  padding-bottom: 10px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1;
+  justify-content: space-between;
+  margin-top: -10px;
+}
+
+.dropdownWrapper {
+  flex: 0.48;
+  overflow: visible;
+}
+
+.email {
+  flex: 0.48;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}

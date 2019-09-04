@@ -1,0 +1,35 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.containerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentWrapper {
+  background-color: $white;
+  width: 60%;
+  padding: 20px;
+  border: none;
+  border-radius: 4px;
+  margin: auto;
+}
+
+.inlineSection {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.dropdownWrapper {
+  width: 300px;
+}
+
+.multipleDropdownWrapper {
+  width: 300px;
+
+  &:not(:first-child) {
+    margin-left: 30px
+  }
+}
