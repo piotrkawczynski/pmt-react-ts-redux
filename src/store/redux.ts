@@ -1,10 +1,11 @@
 import { combineReducers } from "redux"
-import user, { UserRedux } from "./user/userRedux"
-import project, { ProjectRedux } from "./project/projectRedux"
-import tag, { TagRedux } from "./tag/tagRedux"
-import status, { StatusRedux } from "./status/statusRedux"
 import invite, { InviteRedux } from "./invite/inviteRedux"
 import permission, { PermissionRedux } from "./permission/permissionRedux"
+import project, { ProjectRedux } from "./project/projectRedux"
+import sprint, { SprintRedux } from "./sprint/sprintRedux"
+import status, { StatusRedux } from "./status/statusRedux"
+import tag, { TagRedux } from "./tag/tagRedux"
+import user, { UserRedux } from "./user/userRedux"
 
 export interface ApplicationState {
   user: UserRedux
@@ -13,6 +14,7 @@ export interface ApplicationState {
   status: StatusRedux
   invite: InviteRedux
   permission: PermissionRedux
+  sprint: SprintRedux
 }
 
 const rootReducer = combineReducers<ApplicationState>({
@@ -21,7 +23,8 @@ const rootReducer = combineReducers<ApplicationState>({
   tag,
   status,
   invite,
-  permission
+  permission,
+  sprint,
 })
 
 export default rootReducer

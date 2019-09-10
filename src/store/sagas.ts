@@ -1,12 +1,13 @@
 import { all } from "redux-saga/effects"
 
 /* ------------- Sagas ------------- */
-import { userSaga } from "./user/userSagas"
-import { projectSaga } from "./project/projectSagas"
-import { tagSaga } from "./tag/tagSagas"
-import { statusSaga } from "./status/statusSagas"
 import { inviteSaga } from "./invite/inviteSagas"
 import { permissionSaga } from "./permission/permissionSagas"
+import { projectSaga } from "./project/projectSagas"
+import { sprintSaga } from "./sprint/sprintSagas"
+import { statusSaga } from "./status/statusSagas"
+import { tagSaga } from "./tag/tagSagas"
+import { userSaga } from "./user/userSagas"
 
 /* ------------- Connect Types To Sagas ------------- */
 
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     statusSaga(),
     inviteSaga(),
     permissionSaga(),
+    sprintSaga(),
   ])
 }

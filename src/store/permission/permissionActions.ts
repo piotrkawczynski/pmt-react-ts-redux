@@ -18,7 +18,7 @@ const getPermissionListRequest = () => ({
 
 const getPermissionListSuccess = (permissionList: Permission[]) => ({
   type: GET_PERMISSION_LIST.SUCCESS,
-  payload: permissionList
+  payload: permissionList,
 })
 
 const getPermissionListFailure = (error: string) => ({

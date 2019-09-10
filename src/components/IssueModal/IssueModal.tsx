@@ -51,8 +51,6 @@ class IssueModal extends Component<IssueModalProps> {
   constructor(props: IssueModalProps) {
     super(props)
 
-    console.log("props", props)
-
     this.statusListOptions = props.statusList!.map((status) => {
       return { label: status.name, value: status.id.toString() } as Option
     })
@@ -81,8 +79,6 @@ class IssueModal extends Component<IssueModalProps> {
   handleSubmit = (values: IssueFormValues) => {}
 
   render() {
-    console.log("this.props", this.props)
-
     return (
       <Modal>
         <Formik initialValues={INITIAL_VALUES} onSubmit={this.handleSubmit}>

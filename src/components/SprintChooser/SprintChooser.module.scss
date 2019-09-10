@@ -1,0 +1,63 @@
+@import "../../scss/variables";
+
+.sprintChooserContainer {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.titleContainer {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  background-color: #ffffff;
+  padding: 5px 20px;
+  border-radius: 15px;
+  box-shadow: $elevation-2dp-box-shadow;
+}
+
+.buttonContainer {
+  width: 30px;
+}
+
+.sprintPaginate {
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: $elevation-2dp-box-shadow;
+
+  &:focus {
+    outline: none;
+    border: none;
+    background-color: #ffffff;
+  }
+
+  &:hover {
+    background-color: #c8c8c8;
+  }
+}
+
+.sprintPaginateLeft {
+  @extend .sprintPaginate;
+
+  padding: 0 2px 0 0;
+}
+
+.sprintPaginateRight {
+  @extend .sprintPaginate;
+
+  padding: 0 0 0 4px;
+}

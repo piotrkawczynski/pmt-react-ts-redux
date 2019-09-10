@@ -12,15 +12,15 @@ const apiInstance = Axios.create({
   timeout: 30000,
 })
 
-apiInstance.interceptors.request.use((request) => {
-  console.log("Starting Request", request)
-  return request
-})
-
-apiInstance.interceptors.response.use((response) => {
-  console.log("Response:", response)
-  return response
-})
+// apiInstance.interceptors.request.use((request) => {
+//   console.log("Starting Request", request)
+//   return request
+// })
+//
+// apiInstance.interceptors.response.use((response) => {
+//   console.log("Response:", response)
+//   return response
+// })
 
 const updateApiHeaders = (token: string) => {
   console.log(token)
@@ -104,6 +104,10 @@ const getPermissionList = async () => {
   return await apiInstance.get(`/permissions`)
 }
 
+const getSprintList = async (projectId: number) => {
+  return await apiInstance.get(`/projects/${projectId}/sprints`)
+}
+
 const api = {
   auth: {
     login,
@@ -121,8 +125,11 @@ const api = {
     getUserList,
   },
   permissions: {
-    getPermissionList
-  }
+    getPermissionList,
+  },
+  sprints: {
+    getSprintList,
+  },
 }
 
 export { apiInstance, updateApiHeaders, api }

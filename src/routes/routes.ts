@@ -1,11 +1,11 @@
 import * as React from "react"
 
-import SignIn from "../pages/SignInPage/SignInPage"
-import SignUp from "../pages/SignUpPage/SignUpPage"
-import HomePage from "../pages/HomePage/HomePage"
+import BacklogPage from "../pages/BacklogPage/BacklogPage"
 import CreateProjectPage from "../pages/CreateProjectPage/CreateProjectPage"
 import FulfillProjectPage from "../pages/FulfillProjectPage/FulfillProjectPage"
-import BacklogPage from "../pages/BacklogPage/BacklogPage"
+import HomePage from "../pages/HomePage/HomePage"
+import SignIn from "../pages/SignInPage/SignInPage"
+import SignUp from "../pages/SignUpPage/SignUpPage"
 
 export interface Route {
   path: string
@@ -16,10 +16,10 @@ export interface Route {
 
 export const Routes: Route[] = [
   {
-    path: '/',
+    path: "/",
     exact: true,
     component: HomePage,
-    title: 'Dashboard',
+    title: "Dashboard",
   },
   // {
   //   path: '/backlog/:projectId',
@@ -28,22 +28,22 @@ export const Routes: Route[] = [
   //   backgroundImage: null,
   // },
   {
-    path: '/project/create',
+    path: "/project/create",
     exact: true,
     component: CreateProjectPage,
-    title: 'Create project',
+    title: "Create project",
   },
   {
-    path: '/project/:id/edit',
+    path: "/project/:id/edit",
     exact: true,
     component: FulfillProjectPage,
-    title: 'Create project',
+    title: "Create project",
   },
   {
-    path: '/project/:id/backlog',
+    path: "/project/:id/backlog",
     exact: true,
     component: BacklogPage,
-    title: 'Backlog',
+    title: "Backlog",
   },
   // {
   //   path: '/project/:projectId',

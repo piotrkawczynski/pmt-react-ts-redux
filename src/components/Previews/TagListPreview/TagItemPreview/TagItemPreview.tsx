@@ -16,8 +16,6 @@ class TagItemPreview extends Component<TagItemPreviewProps> {
       handleOnDelete,
     } = this.props
 
-    console.log("image", image)
-
     return (
       <div className={styles.itemContainer}>
         <div>

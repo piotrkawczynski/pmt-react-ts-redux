@@ -19,7 +19,12 @@ const UPDATE_STATUS_ORDER = createPromiseType("UPDATE_STATUS_ORDER")
 const DELETE_STATUS = createPromiseType("DELETE_STATUS")
 const GET_STATUS_LIST = createPromiseType("GET_STATUS_LIST")
 
-export const types = { CREATE_STATUS, UPDATE_STATUS_ORDER, DELETE_STATUS, GET_STATUS_LIST }
+export const types = {
+  CREATE_STATUS,
+  UPDATE_STATUS_ORDER,
+  DELETE_STATUS,
+  GET_STATUS_LIST,
+}
 
 /* ------------- Action Creators ------------- */
 
@@ -96,7 +101,7 @@ const deleteStatusRequest = (id: number, setValues: () => void) => ({
   type: DELETE_STATUS.REQUEST,
   payload: {
     id,
-    setValues
+    setValues,
   },
 })
 
@@ -123,13 +128,13 @@ const getStatusListInit = () => ({
 const getStatusListRequest = (projectId: number) => ({
   type: GET_STATUS_LIST.REQUEST,
   payload: {
-    projectId
+    projectId,
   },
 })
 
 const getStatusListSuccess = (statusList: Status[]) => ({
   type: GET_STATUS_LIST.SUCCESS,
-  payload: statusList
+  payload: statusList,
 })
 
 const getStatusListFailure = (error: string) => ({

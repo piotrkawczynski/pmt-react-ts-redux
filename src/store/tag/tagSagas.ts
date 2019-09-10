@@ -2,7 +2,12 @@ import { takeLatest, call, put } from "redux-saga/effects"
 import { ActionType } from "typesafe-actions"
 import { api } from "../../services/api"
 import * as objectToFormdata from "object-to-formdata"
-import { types, createTagActions, deleteTagActions, getTagListActions } from "./tagActions"
+import {
+  types,
+  createTagActions,
+  deleteTagActions,
+  getTagListActions,
+} from "./tagActions"
 import { TagFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import { Tag } from "./tagRedux"
 
@@ -16,7 +21,6 @@ function* createTagFlow(
 
     const { data } = yield call(api.tags.createTag, formData)
 
-    console.log(data)
     const createdTag: TagFormValues = {
       id: data.id,
       name: data.name,
@@ -24,7 +28,6 @@ function* createTagFlow(
     }
     //
     yield put(createTagActions.createTagSuccess(createdTag))
-    console.log("createdTag", createdTag)
     setValues()
   } catch (error) {
     console.error(error)

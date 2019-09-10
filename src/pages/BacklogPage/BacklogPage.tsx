@@ -1,19 +1,22 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
+import { RouteComponentProps, withRouter } from "react-router"
 import IssueModal from "../../components/IssueModal/IssueModal"
-import { getUserListActions } from "../../store/user/userActions"
-import { getStatusListActions } from "../../store/status/statusActions"
-import { getTagListActions } from "../../store/tag/tagActions"
+import SprintChooser from "../../components/SprintChooser/SprintChooser"
 import { getPermissionListActions } from "../../store/permission/permissionActions"
 import { ApplicationState } from "../../store/redux"
-import { RouteComponentProps, withRouter } from "react-router"
+import { getSprintListActions } from "../../store/sprint/sprintActions"
+import { getStatusListActions } from "../../store/status/statusActions"
+import { getTagListActions } from "../../store/tag/tagActions"
+import { getUserListActions } from "../../store/user/userActions"
 
 interface PropsFromDispatch {
   getUserListRequest: typeof getUserListActions.getUserListRequest
   getStatusListRequest: typeof getStatusListActions.getStatusListRequest
   getTagListRequest: typeof getTagListActions.getTagListRequest
   getPermissionListRequest: typeof getPermissionListActions.getPermissionListRequest
+  getSprintListRequest: typeof getSprintListActions.getSprintListRequest
 }
 
 interface PropsFromState {
@@ -21,6 +24,7 @@ interface PropsFromState {
   tagList: ApplicationState["tag"]["tagList"]
   statusList: ApplicationState["status"]["statusList"]
   permissionList: ApplicationState["permission"]["permissionList"]
+  sprintList: ApplicationState["sprint"]["sprintList"]
 }
 
 interface RouteParams {
@@ -38,6 +42,7 @@ class BacklogPage extends Component<BacklogPageProps> {
       getStatusListRequest,
       getTagListRequest,
       getUserListRequest,
+      getSprintListRequest,
       match: { params },
     } = this.props
 
@@ -47,6 +52,7 @@ class BacklogPage extends Component<BacklogPageProps> {
     getStatusListRequest(projectId)
     getPermissionListRequest()
     getUserListRequest(projectId)
+    getSprintListRequest(projectId)
   }
 
   areListsReady = () => {
@@ -58,19 +64,29 @@ class BacklogPage extends Component<BacklogPageProps> {
   }
 
   render() {
-    const { statusList, tagList, permissionList, userList } = this.props
+    const {
+      statusList,
+      tagList,
+      permissionList,
+      userList,
+      sprintList: { data: sprintListData },
+    } = this.props
 
     return (
       <div>
-        <div>Backlog</div>
-        {this.areListsReady() && (
-          <IssueModal
-            statusList={statusList.data}
-            tagList={tagList.data}
-            permissionList={permissionList.data}
-            userList={userList.data}
-          />
+        {sprintListData && !!sprintListData.length && (
+          <SprintChooser sprintList={sprintListData} />
         )}
+        <div>Backlog</div>
+
+        {/*{this.areListsReady() && (*/}
+        {/*  <IssueModal*/}
+        {/*    statusList={statusList.data}*/}
+        {/*    tagList={tagList.data}*/}
+        {/*    permissionList={permissionList.data}*/}
+        {/*    userList={userList.data}*/}
+        {/*  />*/}
+        {/*)}*/}
       </div>
     )
   }
@@ -81,6 +97,7 @@ const mapStateToProps = (state: ApplicationState) => ({
   tagList: state.tag.tagList,
   statusList: state.status.statusList,
   permissionList: state.permission.permissionList,
+  sprintList: state.sprint.sprintList,
 })
 
 const mapDispatchToProps = {
@@ -88,6 +105,7 @@ const mapDispatchToProps = {
   getStatusListRequest: getStatusListActions.getStatusListRequest,
   getTagListRequest: getTagListActions.getTagListRequest,
   getPermissionListRequest: getPermissionListActions.getPermissionListRequest,
+  getSprintListRequest: getSprintListActions.getSprintListRequest,
 }
 
 export default connect(

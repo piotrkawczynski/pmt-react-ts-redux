@@ -123,8 +123,6 @@ class FulfillProjectPage extends Component<
     const { statusList } = this.props
     const { data: statusListData, status: statusListStatus } = statusList
 
-    console.log("statusList", statusList)
-
     if (
       statusListData &&
       prevStatusListStatus === "loading" &&

@@ -21,8 +21,6 @@ function* createInviteFlow(
       permissionId: Number(invite.permission),
     })
 
-    console.log("data", data)
-
     const createdInvite: InviteFormValues = {
       id: data.id,
       email: data.email,

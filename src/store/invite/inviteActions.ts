@@ -54,10 +54,7 @@ const deleteInviteInit = () => ({
   type: DELETE_INVITE.INIT,
 })
 
-const deleteInviteRequest = (
-  id: number,
-  setValues: () => void
-) => ({
+const deleteInviteRequest = (id: number, setValues: () => void) => ({
   type: DELETE_INVITE.REQUEST,
   payload: {
     id,
@@ -85,18 +82,16 @@ const getInviteListInit = () => ({
   type: GET_INVITE_LIST.INIT,
 })
 
-const getInviteListRequest = (
-  projectId: number
-) => ({
+const getInviteListRequest = (projectId: number) => ({
   type: GET_INVITE_LIST.REQUEST,
   payload: {
-    projectId
+    projectId,
   },
 })
 
 const getInviteListSuccess = (inviteList: InviteFormValues[]) => ({
   type: GET_INVITE_LIST.SUCCESS,
-  payload: inviteList
+  payload: inviteList,
 })
 
 const getInviteListFailure = (error: string) => ({
