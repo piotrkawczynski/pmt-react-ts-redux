@@ -6,6 +6,7 @@ import FulfillProjectPage from "../pages/FulfillProjectPage/FulfillProjectPage"
 import HomePage from "../pages/HomePage/HomePage"
 import SignIn from "../pages/SignInPage/SignInPage"
 import SignUp from "../pages/SignUpPage/SignUpPage"
+import KanbanPage from "../pages/KanbanPage/KanbanPage"
 
 export interface Route {
   path: string
@@ -44,6 +45,12 @@ export const Routes: Route[] = [
     exact: true,
     component: BacklogPage,
     title: "Backlog",
+  },
+  {
+    path: "/project/:id",
+    exact: true,
+    component: KanbanPage,
+    title: "Kanban Scheme",
   },
   // {
   //   path: '/project/:projectId',
@@ -100,7 +107,7 @@ export const withoutSidebarRoutes: Route[] = [
   // {
   //   path: '/backlog/:projectId/create',
   //   exact: true,
-  //   component: IssueModal,
+  //   component: CreateIssueModal,
   //   backgroundImage: null,
   // },
   // {

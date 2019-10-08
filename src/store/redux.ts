@@ -1,5 +1,7 @@
 import { combineReducers } from "redux"
+import comment, { CommentRedux } from "./comment/commentRedux"
 import invite, { InviteRedux } from "./invite/inviteRedux"
+import issue, { IssueRedux } from "./issue/issueRedux"
 import permission, { PermissionRedux } from "./permission/permissionRedux"
 import project, { ProjectRedux } from "./project/projectRedux"
 import sprint, { SprintRedux } from "./sprint/sprintRedux"
@@ -15,6 +17,8 @@ export interface ApplicationState {
   invite: InviteRedux
   permission: PermissionRedux
   sprint: SprintRedux
+  issue: IssueRedux
+  comment: CommentRedux
 }
 
 const rootReducer = combineReducers<ApplicationState>({
@@ -25,6 +29,8 @@ const rootReducer = combineReducers<ApplicationState>({
   invite,
   permission,
   sprint,
+  issue,
+  comment,
 })
 
 export default rootReducer

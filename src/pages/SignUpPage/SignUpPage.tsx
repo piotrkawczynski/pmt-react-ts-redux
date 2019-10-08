@@ -77,7 +77,7 @@ class RegisterPage extends React.Component<RegisterPageProps> {
               return (
                 <Form>
                   <Input
-                    className={styles.inputWrapper}
+                    containerClassName={styles.inputWrapper}
                     placeholder="Email"
                     type="text"
                     name="email"
@@ -85,7 +85,7 @@ class RegisterPage extends React.Component<RegisterPageProps> {
                     onChange={handleChange}
                   />
                   <Input
-                    className={styles.inputWrapper}
+                    containerClassName={styles.inputWrapper}
                     placeholder="First name"
                     type="text"
                     name="firstName"
@@ -93,7 +93,7 @@ class RegisterPage extends React.Component<RegisterPageProps> {
                     onChange={handleChange}
                   />
                   <Input
-                    className={styles.inputWrapper}
+                    containerClassName={styles.inputWrapper}
                     placeholder="Last name"
                     type="text"
                     name="lastName"
@@ -101,7 +101,7 @@ class RegisterPage extends React.Component<RegisterPageProps> {
                     onChange={handleChange}
                   />
                   <Input
-                    className={styles.inputWrapper}
+                    containerClassName={styles.inputWrapper}
                     placeholder="Username"
                     type="text"
                     name="username"
@@ -109,7 +109,7 @@ class RegisterPage extends React.Component<RegisterPageProps> {
                     onChange={handleChange}
                   />
                   <Input
-                    className={styles.inputWrapper}
+                    containerClassName={styles.inputWrapper}
                     placeholder="Password"
                     type="password"
                     name="password"
@@ -117,7 +117,7 @@ class RegisterPage extends React.Component<RegisterPageProps> {
                     onChange={handleChange}
                   />
                   <Input
-                    className={styles.inputWrapper}
+                    containerClassName={styles.inputWrapper}
                     placeholder="Confirm password"
                     type="password"
                     name="confirmPassword"

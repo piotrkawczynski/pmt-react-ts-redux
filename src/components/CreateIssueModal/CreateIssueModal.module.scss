@@ -30,6 +30,33 @@
   width: 300px;
 
   &:not(:first-child) {
-    margin-left: 30px
+    margin-left: 30px;
   }
+}
+
+.imageUploaderWrapper {
+  margin-top: 10px;
+}
+
+.imagesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.label {
+  padding-left: 2px;
+  font-size: $font-size-6;
+  line-height: $line-height-4;
+  font-weight: $font-weight-2;
+  color: $grey;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0;
+}
+
+.createButton {
+  margin-left: 10px;
 }

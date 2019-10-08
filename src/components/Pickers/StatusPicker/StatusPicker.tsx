@@ -97,13 +97,13 @@ class StatusPicker extends Component<StatusPickerProps, StatusPickerState> {
                 <div className={styles.inputsWrapper}>
                   <Input
                     type="text"
-                    className={styles.input}
+                    containerClassName={styles.input}
                     label="status"
                     name="name"
                   />
                   <Input
                     type="text"
-                    className={styles.input}
+                    containerClassName={styles.input}
                     label="order"
                     name="order"
                     isDisabled={true}

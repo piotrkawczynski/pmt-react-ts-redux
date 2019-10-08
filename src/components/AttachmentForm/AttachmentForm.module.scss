@@ -1,0 +1,20 @@
+@import "../../scss/variables";
+
+.imageUploaderWrapper {
+  padding-top: 8px;
+  border-top: 2px solid $clouds;
+}
+
+.label {
+  margin-bottom: 8px;
+  padding-left: 2px;
+  font-size: $font-size-6;
+  line-height: $line-height-4;
+  font-weight: $font-weight-2;
+  color: $grey;
+}
+
+.imagesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}

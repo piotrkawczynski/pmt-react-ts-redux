@@ -1,0 +1,67 @@
+@import "../../../../scss/variables";
+
+.kanbanItem {
+  $font-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: rgba($wet-asphalt, 0.2);
+  margin: 10px;
+  padding: 5px;
+  font-size: $font-size;
+  box-shadow: $elevation-1dp-box-shadow;
+}
+
+.kanbanItemHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.image {
+  object-fit: cover;
+  height: 24px;
+  width: 30px;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.tag {
+  background-color: $wet-asphalt;
+  border-radius: 2px;
+  height: 24px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  margin-right: auto;
+  color: $white;
+  font-size: $font-size-6;
+}
+
+.code {
+  background-color: $wet-asphalt;
+  border-radius: 2px;
+  height: 24px;
+  padding: 5px 10px;
+  color: $white;
+  font-size: $font-size-6;
+}
+
+.title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: $font-weight-3;
+}
+
+.description {
+  $line-height: 1.4;
+  font-size: $font-size-6;
+  line-height: $line-height;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

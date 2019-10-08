@@ -14,8 +14,10 @@ interface InputProps {
   isDisabled?: boolean
   onChange?: (event: React.FocusEvent<HTMLInputElement>) => void
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
-  className?: string
+  containerClassName?: string
+  inputClassName?: string
   value?: string
+  textarea?: boolean
 }
 
 const Input: React.FC<InputProps> = (props) => {
@@ -27,10 +29,12 @@ const Input: React.FC<InputProps> = (props) => {
     onChange = null,
     onBlur,
     placeholder = "",
-    className,
+    inputClassName,
+    containerClassName,
+    textarea,
   } = props
 
-  const wrapperClassName = classnames(styles.inputWrapper, className)
+  const wrapperClassName = classnames(styles.inputWrapper, containerClassName)
 
   return (
     <div className={wrapperClassName}>
@@ -47,9 +51,14 @@ const Input: React.FC<InputProps> = (props) => {
       <Field
         type={type}
         id={name}
-        className={classnames(styles.input, {
-          [styles.isDisabled]: isDisabled,
-        })}
+        className={classnames(
+          styles.input,
+          {
+            [styles.isDisabled]: isDisabled,
+          },
+          inputClassName
+        )}
+        component={textarea && "textarea"}
         name={name}
         placeholder={placeholder}
         disabled={isDisabled}

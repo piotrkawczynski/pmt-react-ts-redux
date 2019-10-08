@@ -66,7 +66,7 @@ class SignInPage extends Component<SignInPageProps> {
             }) => (
               <Form>
                 <Input
-                  className={styles.inputWrapper}
+                  containerClassName={styles.inputWrapper}
                   placeholder="Email"
                   type="text"
                   name="email"
@@ -75,7 +75,7 @@ class SignInPage extends Component<SignInPageProps> {
                   error={errors.email && touched.email && errors.email}
                 />
                 <Input
-                  className={styles.inputWrapper}
+                  containerClassName={styles.inputWrapper}
                   placeholder="Password"
                   type="text"
                   name="password"

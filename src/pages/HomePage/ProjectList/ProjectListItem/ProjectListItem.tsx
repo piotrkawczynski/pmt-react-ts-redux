@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 
-import history from "../../../../utilities/history"
 import { Project } from "../../../../types/project"
+import history from "../../../../utilities/history"
 
-import styles from "./ProjectListItem.module.scss"
 import { Link } from "react-router-dom"
+import styles from "./ProjectListItem.module.scss"
 
 interface InnerProps {
   className?: string

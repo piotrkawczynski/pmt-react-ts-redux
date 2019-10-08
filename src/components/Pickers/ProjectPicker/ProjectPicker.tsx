@@ -35,19 +35,19 @@ class ProjectPicker extends Component<ProjectPickerProps> {
         <div className={styles.inputsWrapper}>
           <Input
             type="text"
-            className={styles.input}
+            containerClassName={styles.input}
             label="project name"
             name="name"
           />
           <Input
             type="text"
-            className={styles.input}
+            containerClassName={styles.input}
             label="company name"
             name="company"
           />
           <Input
             type="text"
-            className={styles.sprintInput}
+            containerClassName={styles.sprintInput}
             label="sprint duration"
             name="sprintDuration"
           />
@@ -68,13 +68,13 @@ class ProjectPicker extends Component<ProjectPickerProps> {
         <div className={styles.inputsWrapper}>
           <Input
             type="text"
-            className={styles.input}
+            containerClassName={styles.input}
             label="label"
             name="label"
           />
           <Input
             type="color"
-            className={styles.colorInput}
+            containerClassName={styles.colorInput}
             label="color"
             name="color"
           />

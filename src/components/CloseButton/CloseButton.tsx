@@ -5,8 +5,8 @@ import styles from "./CloseButton.module.scss"
 
 interface InnerProps {
   onClick: () => void
-  containerClassName: string
-  armClassName: string
+  containerClassName?: string
+  armClassName?: string
 }
 
 export const CloseButton = (props: InnerProps) => {

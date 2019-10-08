@@ -85,7 +85,7 @@ class UserPicker extends Component<UserPickerProps> {
                     label="user email"
                     name="email"
                     type="text"
-                    className={styles.email}
+                    containerClassName={styles.email}
                   />
                   <div className={styles.dropdownWrapper}>
                     <Dropdown

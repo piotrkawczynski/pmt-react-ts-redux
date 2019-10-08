@@ -1,0 +1,36 @@
+@import "../../scss/variables";
+
+.itemContainer {
+  position: relative;
+}
+.name {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+}
+
+.attachment {
+  object-fit: contain;
+  max-height: 160px;
+  border-radius: 4px;
+  margin: 0 10px 10px 0;
+}
+
+.closeButtonContainer {
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  background-color: $midnight-blue;
+  position: absolute;
+  top: -5px;
+  right: 5px;
+  margin: 0;
+}
+
+.arms {
+  height: 2px;
+  width: 10px;
+  top: 6px;
+  left: 2px;
+  background-color: $clouds;
+}

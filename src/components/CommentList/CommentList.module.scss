@@ -1,0 +1,24 @@
+@import "../../scss/variables";
+
+.commentSection {
+  border-top: 2px solid $clouds;
+  padding-top: 8px;
+}
+
+
+.label {
+  margin-bottom: 8px;
+  padding-left: 2px;
+  font-size: $font-size-6;
+  line-height: $line-height-4;
+  font-weight: $font-weight-2;
+  color: $grey;
+}
+
+.titleSection {
+  margin-bottom: 5px;
+  margin-left: 5px;
+  color: $midnight-blue;
+  font-weight: 700;
+  font-size: 12px;
+}

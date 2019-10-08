@@ -2,12 +2,16 @@ import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { Component } from "react"
 import { RouteComponentProps, withRouter } from "react-router"
+import { getIssueListActions } from "../../store/issue/issueActions"
 import { Sprint } from "../../types/sprint"
 
 import styles from "./SprintChooser.module.scss"
 
 interface InnerProps {
   sprintList: Sprint[]
+  getIssueListRequest: typeof getIssueListActions.getIssueListRequest
+  projectId: number
+  setSprintId: (sprintId: number) => void
 }
 
 interface SprintChooserState {
@@ -48,22 +52,32 @@ class SprintChooser extends Component<SprintChooserProps, SprintChooserState> {
       nextSprint = sprintList[sprintIndex + 1]
     }
 
+    if (currentSprint) {
+      this.props.setSprintId(currentSprint!.id)
+    }
+
     return {
       previousSprint,
-      currentSprint: (sprintList[sprintIndex]) || null,
+      currentSprint: sprintList[sprintIndex] || null,
       nextSprint,
     }
   }
 
+  getSprint = (sprintId: number) => () => {
+    this.props.getIssueListRequest(this.props.projectId, sprintId)
+  }
+
   previousSprintClick = () => {
     this.setState(
-      this.prepareSprints(this.state.previousSprint, this.props.sprintList)
+      this.prepareSprints(this.state.previousSprint, this.props.sprintList),
+      this.getSprint(this.state.previousSprint!.id)
     )
   }
 
   nextSprintClick = () => {
     this.setState(
-      this.prepareSprints(this.state.nextSprint, this.props.sprintList)
+      this.prepareSprints(this.state.nextSprint, this.props.sprintList),
+      this.getSprint(this.state.nextSprint!.id)
     )
   }
 
@@ -101,8 +115,6 @@ class SprintChooser extends Component<SprintChooserProps, SprintChooserState> {
 
   render() {
     const { currentSprint } = this.state
-
-    console.log(this.state)
 
     return (
       <div className={styles.sprintChooserContainer}>

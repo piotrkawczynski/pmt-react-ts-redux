@@ -1,0 +1,33 @@
+@import "../../scss/variables.scss";
+
+.label {
+  padding-left: 2px;
+  font-size: $font-size-6;
+  line-height: $line-height-4;
+  font-weight: $font-weight-2;
+  color: $grey;
+}
+
+.image.image {
+  padding: 0;
+  height: 36px;
+  width: 46px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.uploadWrapper {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.iconWrapper {
+  display: flex;
+  /* flex-direction: column; */
+  /* flex: 1; */
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: $concrete;
+}

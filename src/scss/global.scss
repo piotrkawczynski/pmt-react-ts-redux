@@ -1,7 +1,17 @@
 @import "./mixins.scss";
+@import "./variables.scss";
 
 html {
   box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+div[id=root] {
+  background-color: #ecf0f1;
 }
 
 *,
@@ -87,4 +97,10 @@ input {
     background-color: rgba($midnight-blue, 0.8);
     border-color: $midnight-blue;
   }
+}
+
+.textEllipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

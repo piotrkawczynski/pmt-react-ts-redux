@@ -1,0 +1,93 @@
+@import "../../../scss/variables";
+
+.kanbanScheme {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+.statusColumnContainer {
+  display: flex;
+  flex-direction: column;
+}
+.statusColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+  width: 250px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header {
+  font-size: 15px;
+  font-weight: $font-weight-3;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.kanbanItem {
+  $font-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: rgba($wet-asphalt, 0.2);
+  margin: 10px;
+  padding: 5px;
+  font-size: $font-size;
+}
+.kanban-item-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.image-container {
+  background-color: white;
+  border-radius: 13px;
+}
+.image {
+  height: 20px;
+  object-fit: cover;
+  margin: 3px;
+  border-radius: 13;
+}
+.tag {
+  background-color: bisque;
+  border-radius: 2px;
+  padding: 0 5px;
+  margin-left: 5px;
+  margin-right: auto;
+}
+.code {
+  padding: 0 5px;
+  background-color: bisque;
+  border-radius: 2px;
+}
+
+.title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.description {
+  $line-height: 1.4;
+  $lines-to-show: 2;
+
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: $font-size-6 * $line-height * $lines-to-show; /* Fallback for non-webkit */
+  font-size: $font-size-6;
+  line-height: $line-height;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

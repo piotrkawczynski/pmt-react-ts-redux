@@ -94,7 +94,7 @@ class TagPicker extends Component<TagPickerProps> {
                 <div className={styles.inputsWrapper}>
                   <Input
                     type="text"
-                    className={styles.input}
+                    containerClassName={styles.input}
                     label="tag"
                     name="name"
                   />

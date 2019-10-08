@@ -11,13 +11,13 @@ class LabelPicker extends Component {
         <div className={styles.inputWrapper}>
         <Input
           type="text"
-          className={styles.input}
+          containerClassName={styles.input}
           label="title"
           name="label.title"
         />
         <Input
           type="color"
-          className={styles.colorInput}
+          containerClassName={styles.colorInput}
           label="color"
           name="label.color"
         />
