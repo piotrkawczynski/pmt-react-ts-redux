@@ -4,16 +4,21 @@
 $background: rgba($clouds, 0.1);
 
 .wrapper {
+  display: flex;
   min-height: 100vh;
+  width: 100%;
 }
 
 .mainPanel {
-  float: right;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: calc(100% - 260px);
   background-color: $clouds;
+  overflow-y: auto;
+  width: 100%;
 
   .content {
-    padding: 20px 0;
+    width: 100%;
+    padding: 20px 20px;
   }
 }

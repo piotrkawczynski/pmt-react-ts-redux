@@ -1,5 +1,6 @@
 import { combineReducers } from "redux"
 import comment, { CommentRedux } from "./comment/commentRedux"
+import components, { ComponentsRedux } from "./components/componentsRedux"
 import invite, { InviteRedux } from "./invite/inviteRedux"
 import issue, { IssueRedux } from "./issue/issueRedux"
 import permission, { PermissionRedux } from "./permission/permissionRedux"
@@ -19,6 +20,7 @@ export interface ApplicationState {
   sprint: SprintRedux
   issue: IssueRedux
   comment: CommentRedux
+  components: ComponentsRedux
 }
 
 const rootReducer = combineReducers<ApplicationState>({
@@ -31,6 +33,7 @@ const rootReducer = combineReducers<ApplicationState>({
   sprint,
   issue,
   comment,
+  components,
 })
 
 export default rootReducer

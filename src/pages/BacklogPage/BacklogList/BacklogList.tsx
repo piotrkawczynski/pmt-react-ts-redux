@@ -9,7 +9,7 @@ import BacklogListItem from "./BacklogListItem/BacklogListItem"
 import styles from "./BacklogList.module.scss"
 
 interface InnerProps {
-  sprintId: number
+  sprintId: number | null
   setIssueId: (issueId: number | null) => void
   issueListSource: "backlog" | "sprint"
   issueList: Issue[] | null
@@ -33,8 +33,6 @@ class BacklogList extends Component<InnerProps> {
       sprintId,
     } = this.props
 
-    console.log(issueList)
-
     return (
       <div className={styles.listWrapper}>
         <div className={styles.headerWrapper}>
@@ -44,6 +42,7 @@ class BacklogList extends Component<InnerProps> {
           <p className={styles.assignee}>Assignee</p>
           <p className={styles.author}>Author</p>
         </div>
+        {issueList && !issueList.length && this.renderEmptyList()}
         <div className={styles.listGroup}>
           {issueList &&
             issueList.map((issue) => (
@@ -59,6 +58,14 @@ class BacklogList extends Component<InnerProps> {
               />
             ))}
         </div>
+      </div>
+    )
+  }
+
+  private renderEmptyList = () => {
+    return (
+      <div className={styles.emptyListWrapper}>
+        <h3 className={styles.backlogHeader}>No issues in the list.</h3>
       </div>
     )
   }

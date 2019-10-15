@@ -6,6 +6,8 @@ import {
   registerActions,
   setUserLoggedIn,
   getUserListActions,
+  remainPasswordActions,
+  changePasswordActions,
 } from "./userActions"
 import { ActionType } from "typesafe-actions"
 import { userSelector } from "./userRedux"
@@ -79,11 +81,43 @@ function* getUserListFlow(
   }
 }
 
+function* remainPasswordFlow(
+  action: ActionType<typeof remainPasswordActions.remainPasswordRequest>
+) {
+  try {
+    yield call(api.auth.remainPassword, action.payload.email)
+
+    yield put(remainPasswordActions.remainPasswordSuccess())
+    history.push("/login")
+  } catch (error) {
+    console.error(error.message)
+    yield put(remainPasswordActions.remainPasswordFailure(error.message))
+  }
+}
+
+function* changePasswordFlow(
+  action: ActionType<typeof changePasswordActions.changePasswordRequest>
+) {
+  try {
+    const { changePasswordValues, token } = action.payload
+
+    yield call(api.auth.changePassword, changePasswordValues, token)
+
+    yield put(changePasswordActions.changePasswordSuccess())
+    history.push("/login")
+  } catch (error) {
+    console.error(error.message)
+    yield put(changePasswordActions.changePasswordFailure(error.message))
+  }
+}
+
 function* userSaga() {
   yield takeLatest(types.UPDATE_API_HEADER, updateApiHeaderFlow)
   yield takeLatest(types.LOGIN.REQUEST, loginUserFlow)
   yield takeLatest(types.REGISTER.REQUEST, registerUserFlow)
   yield takeLatest(types.GET_USER_LIST.REQUEST, getUserListFlow)
+  yield takeLatest(types.REMAIN_PASSWORD.REQUEST, remainPasswordFlow)
+  yield takeLatest(types.CHANGE_PASSWORD.REQUEST, changePasswordFlow)
 }
 
 export { userSaga }

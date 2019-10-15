@@ -1,3 +1,4 @@
+import { ChangePasswordFormValues } from "../../pages/ChangePasswordPage/ChangePasswordPage"
 import { createPromiseType } from "../../utilities/ReduxFunctions"
 import { SignInFormValues } from "../../pages/SignInPage/SignInPage"
 import { User } from "../../types/user"
@@ -11,6 +12,8 @@ const SET_USER_LOGGED_IN = "SET_USER_LOGGED_IN"
 const LOGIN = createPromiseType("LOGIN")
 const REGISTER = createPromiseType("REGISTER")
 const GET_USER_LIST = createPromiseType("GET_USER_LIST")
+const REMAIN_PASSWORD = createPromiseType("REMAIN_PASSWORD")
+const CHANGE_PASSWORD = createPromiseType("CHANGE_PASSWORD")
 
 export const types = {
   UPDATE_API_HEADER,
@@ -18,6 +21,8 @@ export const types = {
   LOGIN,
   REGISTER,
   GET_USER_LIST,
+  REMAIN_PASSWORD,
+  CHANGE_PASSWORD,
 }
 
 /* ------------- Action Creators ------------- */
@@ -103,4 +108,62 @@ export const getUserListActions = {
   getUserListRequest,
   getUserListSuccess,
   getUserListFailure,
+}
+
+const remainPasswordInit = () => ({
+  type: REMAIN_PASSWORD.INIT,
+})
+
+const remainPasswordRequest = (email: string) => ({
+  type: REMAIN_PASSWORD.REQUEST,
+  payload: {
+    email,
+  },
+})
+
+const remainPasswordSuccess = () => ({
+  type: REMAIN_PASSWORD.SUCCESS,
+})
+
+const remainPasswordFailure = (error: string) => ({
+  type: REMAIN_PASSWORD.FAILURE,
+  error,
+})
+
+export const remainPasswordActions = {
+  remainPasswordInit,
+  remainPasswordRequest,
+  remainPasswordSuccess,
+  remainPasswordFailure,
+}
+
+const changePasswordInit = () => ({
+  type: CHANGE_PASSWORD.INIT,
+})
+
+const changePasswordRequest = (
+  changePasswordValues: ChangePasswordFormValues,
+  token: string
+) => ({
+  type: CHANGE_PASSWORD.REQUEST,
+  payload: {
+    changePasswordValues,
+    token,
+  },
+})
+
+const changePasswordSuccess = () => ({
+  type: CHANGE_PASSWORD.SUCCESS,
+})
+
+const changePasswordFailure = (error: string) => ({
+  type: CHANGE_PASSWORD.FAILURE,
+  error,
+})
+
+export const changePasswordActions = {
+  changePasswordInit,
+  changePasswordRequest,
+  changePasswordSuccess,
+  changePasswordFailure,
 }

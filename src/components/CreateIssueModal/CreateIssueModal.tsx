@@ -1,16 +1,14 @@
 import classnames from "classnames"
-import { Formik, FormikProps, Form, FormikActions } from "formik"
+import { Form, Formik, FormikActions, FormikProps } from "formik"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Button } from "reactstrap"
 
 import { createIssueActions } from "../../store/issue/issueActions"
 import { ApplicationState } from "../../store/redux"
-import { getStatusListActions } from "../../store/status/statusActions"
 import { LoaderImage } from "../../types/loaderImage"
-import AttachmentPreview from "../AttachmentPreview/AttachmentPreview"
+import AttachmentForm from "../AttachmentForm/AttachmentForm"
 import Dropdown, { Option } from "../Dropdown/Dropdown"
-import ImageUploader from "../ImageUploader/ImageUploader"
 import Input from "../Inputs/Input/Input"
 import Modal from "../Modal/Modal"
 
@@ -48,7 +46,10 @@ export interface CreateIssueFormValues {
 // tslint:disable-next-line:no-empty-interface
 interface CreateIssueModalState extends CreateIssueFormValues {}
 
-class CreateIssueModal extends Component<CreateIssueModalProps, CreateIssueModalState> {
+class CreateIssueModal extends Component<
+  CreateIssueModalProps,
+  CreateIssueModalState
+> {
   private readonly statusOptions: Option[]
   private readonly userOptions: Option[]
   private readonly tagOptions: Option[]
@@ -85,8 +86,6 @@ class CreateIssueModal extends Component<CreateIssueModalProps, CreateIssueModal
     }
   }
 
-  componentDidMount() {}
-
   handleSelect = (
     formikProps: FormikProps<CreateIssueFormValues>,
     key: keyof CreateIssueFormValues
@@ -106,8 +105,155 @@ class CreateIssueModal extends Component<CreateIssueModalProps, CreateIssueModal
 
     this.props.createIssueRequest(values, projectId, sprintId!)
     formikActions.setSubmitting(false)
+    this.props.onCancel!()
   }
 
+  render() {
+    return (
+      <Modal>
+        <Formik
+          initialValues={this.state}
+          onSubmit={this.handleSubmit}
+          enableReinitialize
+        >
+          {(formikProps) => {
+            return (
+              <Form>
+                <div className={styles.containerWrapper}>
+                  <div className={styles.leftSideWrapper}>
+                    {this.renderLeftSideForm(formikProps)}
+                  </div>
+                  <div className={styles.rightSideWrapper}>
+                    {this.renderRightSideForm(formikProps)}
+                  </div>
+                </div>
+              </Form>
+            )
+          }}
+        </Formik>
+      </Modal>
+    )
+  }
+
+  private renderLeftSideForm = (
+    formikProps: FormikProps<CreateIssueFormValues>
+  ) => {
+    return (
+      <div>
+        <h2 className={styles.title}>Create issue</h2>
+        <Input
+          containerClassName={styles.titleInput}
+          placeholder="Title"
+          type="text"
+          name="title"
+          label="Title"
+          onChange={formikProps.handleChange}
+        />
+        <Input
+          inputClassName={styles.descriptionInput}
+          containerClassName={styles.descriptionInputContainer}
+          placeholder="Description"
+          type="textarea"
+          textarea
+          name="description"
+          label="Description"
+          onChange={formikProps.handleChange}
+        />
+        <AttachmentForm
+          formikProps={formikProps}
+          name="attachment"
+          attachmentList={formikProps.values.attachment}
+        />
+        <div className={styles.buttonsWrapper}>
+          <Button
+            type="button"
+            className="simple-button"
+            style={{ fontSize: "14px", alignSelf: "flex-start" }}
+            onClick={this.props.onCancel}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            className={classnames("simple-button", styles.createButton)}
+            style={{ fontSize: "14px", alignSelf: "flex-start" }}
+          >
+            Create issue
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  private renderRightSideForm = (
+    formikProps: FormikProps<CreateIssueFormValues>
+  ) => {
+    const {
+      assigneeValue,
+      reviewerValue,
+      statusValue,
+      tagValue,
+    } = this.getDropdownValues(formikProps)
+
+    return (
+      <div>
+        <Dropdown
+          label="status"
+          options={this.statusOptions}
+          onSelect={this.handleSelect(formikProps, "statusId")}
+          value={statusValue}
+        />
+        <Dropdown
+          label="tag"
+          options={this.tagOptions}
+          onSelect={this.handleSelect(formikProps, "tagId")}
+          value={tagValue}
+        />
+        <Dropdown
+          label="assignee"
+          options={this.userOptions}
+          onSelect={this.handleSelect(formikProps, "assigneeId")}
+          value={assigneeValue}
+        />
+        <Dropdown
+          label="reviewer"
+          options={this.userOptions}
+          onSelect={this.handleSelect(formikProps, "reviewerId")}
+          value={reviewerValue}
+        />
+      </div>
+    )
+  }
+
+  private getDropdownValues = (
+    formikProps: FormikProps<CreateIssueFormValues>
+  ) => {
+    const { assigneeId, reviewerId, statusId, tagId } = formikProps.values
+
+    const statusValue =
+      this.statusOptions.find(
+        (status) => status.value === statusId.toString()
+      ) || this.statusOptions[0]
+
+    const tagValue =
+      this.tagOptions.find((tag) => tag.value === tagId.toString()) ||
+      this.tagOptions[0]
+
+    const assigneeValue =
+      this.userOptions.find((user) => user.value === assigneeId.toString()) ||
+      this.userOptions[0]
+
+    const reviewerValue =
+      (reviewerId &&
+        this.userOptions.find(
+          (user) => user.value === reviewerId!.toString()
+        )) ||
+      null
+
+    return { statusValue, tagValue, assigneeValue, reviewerValue }
+  }
+}
+/*
   render() {
     return (
       <Modal>
@@ -269,6 +415,7 @@ class CreateIssueModal extends Component<CreateIssueModalProps, CreateIssueModal
     )
   }
 }
+ */
 
 const mapStateToProps = (state: ApplicationState) => ({})
 

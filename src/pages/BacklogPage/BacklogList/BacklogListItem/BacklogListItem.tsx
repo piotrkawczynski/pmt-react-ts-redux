@@ -18,7 +18,7 @@ interface InnerProps {
   userList: User[]
   onClick: () => void
   updateIssueSprintRequest: typeof updateIssueSprintActions.updateIssueSprintRequest
-  sprintId: number
+  sprintId: number | null
 }
 
 interface BacklogListItemState {
@@ -49,13 +49,13 @@ class BacklogListItem extends Component<InnerProps, BacklogListItemState> {
   handleMoveToSprintClick = () => {
     const { issue, updateIssueSprintRequest, sprintId } = this.props
 
-    updateIssueSprintRequest(issue.id, sprintId, issue.projectId, "toSprint")
+    updateIssueSprintRequest(issue.id, sprintId!, issue.projectId, "toSprint")
   }
 
   handleMoveToBacklog = () => {
     const { issue, sprintId, updateIssueSprintRequest } = this.props
 
-    updateIssueSprintRequest(issue.id, sprintId, issue.projectId, "toBacklog")
+    updateIssueSprintRequest(issue.id, sprintId!, issue.projectId, "toBacklog")
   }
 
   createTooltip = (id: number) => {
@@ -100,7 +100,7 @@ class BacklogListItem extends Component<InnerProps, BacklogListItemState> {
   }
 
   render() {
-    const { issue, statusList, userList, onClick } = this.props
+    const { issue, statusList, userList, onClick, sprintId } = this.props
 
     const { code, title, statusId, assigneeId, authorId } = issue
 
@@ -125,13 +125,15 @@ class BacklogListItem extends Component<InnerProps, BacklogListItemState> {
           <p className={styles.assignee}>{assigneeFullName}</p>
           <p className={styles.author}>{authorFullName}</p>
         </div>
-        <div
-          className={styles.buttonWrapper}
-          id={this.createTooltip(issue.id)}
-          onClick={this.onClick}
-        >
-          {this.renderArrowIcon(issue.id)}
-        </div>
+        {sprintId && (
+          <div
+            className={styles.buttonWrapper}
+            id={this.createTooltip(issue.id)}
+            onClick={this.onClick}
+          >
+            {this.renderArrowIcon(issue.id)}
+          </div>
+        )}
       </div>
     )
   }

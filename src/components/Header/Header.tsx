@@ -16,6 +16,8 @@ import history from "../../utilities/history"
 import { connect } from "react-redux"
 // import { signOut, updateProfile, UserSelector } from "../../store/redux/user"
 
+import styles from "./Header.module.scss"
+
 interface InnerProps {
   title?: string
 }
@@ -58,7 +60,7 @@ class Header extends Component<HeaderProps, HeaderState> {
   render() {
     const { title } = this.props
     return (
-      <Navbar className={"navbar"} expand="md">
+      <Navbar className={styles.navbar} expand="md">
         {title && (
           <NavLink className={"link"} to="/">
             {title}

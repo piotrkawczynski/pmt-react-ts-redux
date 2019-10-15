@@ -15,6 +15,8 @@ export interface UserRedux {
   user: PromiseState<Auth, string>
   registerUser: PromiseState<void, string>
   users: PromiseState<User[], string>
+  remainPassword: PromiseState<void, string>
+  changePassword: PromiseState<void, string>
 }
 
 export const INITIAL_STATE: UserRedux = {
@@ -22,6 +24,8 @@ export const INITIAL_STATE: UserRedux = {
   user: { ...createPromiseState<Auth, string>() },
   registerUser: { ...createPromiseState<void, string>() },
   users: { ...createPromiseState<User[], string>() },
+  remainPassword: { ...createPromiseState<void, string>() },
+  changePassword: { ...createPromiseState<void, string>() },
 }
 
 /* ------------- Selectors ------------- */
@@ -61,5 +65,15 @@ export default createReducer(INITIAL_STATE, {
     types.GET_USER_LIST,
     INITIAL_STATE,
     "users"
+  ),
+  ...createNestedReducer<UserRedux>(
+    types.REMAIN_PASSWORD,
+    INITIAL_STATE,
+    "remainPassword"
+  ),
+  ...createNestedReducer<UserRedux>(
+    types.REMAIN_PASSWORD,
+    INITIAL_STATE,
+    "changePassword"
   ),
 })

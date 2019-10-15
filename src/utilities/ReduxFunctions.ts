@@ -131,7 +131,7 @@ export function createFailureExtendedReducer<T>(initialState: T, key: keyof T) {
         ...state,
         [key]: {
           ...state[key as keyof T],
-          error: action.payload.error,
+          error: action.error,
           isLoading: false,
           status: "failure",
         },
@@ -142,7 +142,7 @@ export function createFailureExtendedReducer<T>(initialState: T, key: keyof T) {
       ...state,
       [key]: {
         ...state[key],
-        error: action.payload.error,
+        error: action.error,
         isLoading: false,
         status: "failure",
       },
@@ -194,7 +194,7 @@ export function createFailureReducer<T>(initialState: PromiseState<T, string>) {
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error,
+        error: action.error,
         status: "failure",
       }
     }

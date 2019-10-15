@@ -24,7 +24,14 @@ class KanbanItem extends Component<KanbanItemProps, KanbanItemState> {
   }
 
   render() {
-    const { issue, onDragStart, onDrop, onDragEnd, tagList } = this.props
+    const {
+      issue,
+      onDragStart,
+      onDrop,
+      onDragEnd,
+      tagList,
+      onClick,
+    } = this.props
 
     const { id, title, code, tagId, description } = issue
 
@@ -37,13 +44,12 @@ class KanbanItem extends Component<KanbanItemProps, KanbanItemState> {
         onDragEnd={onDragEnd}
         draggable
         onDrop={onDrop}
+        onClick={onClick}
         className={styles.kanbanItem}
       >
         <div className={styles.kanbanItemHeader}>
           <img className={styles.image} src={tag.image} />
-          <div className={styles.tag}>
-            {tag.name}
-          </div>
+          <div className={styles.tag}>{tag.name}</div>
           <div className={styles.code}>#{code}</div>
         </div>
         <div className={styles.title}>{title}</div>

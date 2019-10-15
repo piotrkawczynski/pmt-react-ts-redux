@@ -1,9 +1,11 @@
 import * as React from "react"
 
 import BacklogPage from "../pages/BacklogPage/BacklogPage"
+import ChangePasswordPage from "../pages/ChangePasswordPage/ChangePasswordPage"
 import CreateProjectPage from "../pages/CreateProjectPage/CreateProjectPage"
 import FulfillProjectPage from "../pages/FulfillProjectPage/FulfillProjectPage"
 import HomePage from "../pages/HomePage/HomePage"
+import RemainPasswordPage from "../pages/RemainPasswordPage/RemainPasswordPage"
 import SignIn from "../pages/SignInPage/SignInPage"
 import SignUp from "../pages/SignUpPage/SignUpPage"
 import KanbanPage from "../pages/KanbanPage/KanbanPage"
@@ -83,12 +85,16 @@ export const authRoutes: Route[] = [
     exact: true,
     component: SignUp,
   },
-  // {
-  //   path: '/remain-password',
-  //   exact: true,
-  //   component: RemainPassword,
-  //   backgroundImage: signBackground,
-  // },
+  {
+    path: "/remain-password",
+    exact: true,
+    component: RemainPasswordPage,
+  },
+  {
+    path: "/change-password",
+    exact: true,
+    component: ChangePasswordPage,
+  },
 ]
 
 export const withoutSidebarRoutes: Route[] = [

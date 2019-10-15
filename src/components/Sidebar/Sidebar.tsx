@@ -1,11 +1,18 @@
-import React, { Component } from "react"
-import { faCode, IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import ItemList from "./Components/ItemList"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import classNames from "classnames"
 import { faReact } from "@fortawesome/free-brands-svg-icons"
-import { RouteComponentProps, withRouter } from "react-router-dom"
+import {
+  faCode,
+  faCaretLeft,
+  faCaretRight,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React, { Component } from "react"
 import { connect } from "react-redux"
+import { RouteComponentProps, withRouter } from "react-router-dom"
+import { setSidebarExtension as setSidebarExtensionAction } from "../../store/components/componentsActions"
 import { ApplicationState } from "../../store/redux"
+import ItemList from "./Components/ItemList"
 
 import styles from "./Sidebar.module.scss"
 
@@ -26,12 +33,21 @@ const data: SidebarItem[] = [
 //   { route: "/project", icon: faCode, name: "Project" },
 // ]
 
-
 interface RouteParams {
   projectId: string
 }
 
-type SidebarProps = RouteComponentProps<RouteParams>
+interface PropsFromDispatch {
+  setSidebarExtension: typeof setSidebarExtensionAction
+}
+
+interface PropsFromState {
+  isSidebarExtended: boolean
+}
+
+type SidebarProps = RouteComponentProps<RouteParams> &
+  PropsFromDispatch &
+  PropsFromState
 
 class Sidebar extends Component<SidebarProps> {
   // updateRoutes = (projectId) => {
@@ -42,6 +58,11 @@ class Sidebar extends Component<SidebarProps> {
   //       return item
   //     })
   // }
+  onExtend = () => {
+    const { setSidebarExtension, isSidebarExtended } = this.props
+
+    setSidebarExtension(!isSidebarExtended)
+  }
 
   render() {
     // const {
@@ -50,11 +71,37 @@ class Sidebar extends Component<SidebarProps> {
     //   },
     // } = this.props
 
+    const sidebarExtendedIcon = this.props.isSidebarExtended
+      ? faCaretRight
+      : faCaretLeft
+
     return (
-      <div className={styles.sidebar}>
-        <div className={styles.header}>
-          <FontAwesomeIcon icon={faReact} className={styles.faSpin} size={"lg"} />
-          <h6>Project Management Tool</h6>
+      <div
+        className={classNames(styles.sidebar, {
+          [styles.sidebarShrink]: this.props.isSidebarExtended,
+        })}
+      >
+        <div
+          className={classNames(styles.extendButton, {
+            [styles.extendButtonShrink]: this.props.isSidebarExtended,
+          })}
+          onClick={this.onExtend}
+        >
+          <FontAwesomeIcon
+            icon={sidebarExtendedIcon}
+            size={"lg"}
+            className={classNames(styles.iconWrapper,
+              !this.props.isSidebarExtended && styles.iconWrapperRight)
+            }
+          />
+        </div>
+        <div className={styles.headerWrapper}>
+          <FontAwesomeIcon
+            icon={faReact}
+            className={styles.faSpin}
+            size={"lg"}
+          />
+          <h6 className={styles.header}>Project Management Tool</h6>
         </div>
         <div className={styles.line} />
         <div>
@@ -66,9 +113,13 @@ class Sidebar extends Component<SidebarProps> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({})
+const mapStateToProps = (state: ApplicationState) => ({
+  isSidebarExtended: state.components.isSidebarExtended,
+})
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  setSidebarExtension: setSidebarExtensionAction,
+}
 
 export default withRouter(
   connect(

@@ -28,7 +28,7 @@ class Layout extends React.Component<LayoutProps> {
     const { loggedIn } = this.props
 
     if (!loggedIn) {
-      return <Redirect to="/sign-in" />
+      return <Redirect to="/login" />
     }
 
     const { children, route, withoutSidebar } = this.props

@@ -10,10 +10,16 @@ import { types } from "./sprintActions"
 /* ------------- Initial UserRedux ------------- */
 export interface SprintRedux {
   sprintList: PromiseState<Sprint[], string>
+  createSprint: PromiseState<void, string>
+  updateSprint: PromiseState<Sprint, string>
+  deleteSprint: PromiseState<void, string>
 }
 
 export const INITIAL_STATE: SprintRedux = {
   sprintList: { ...createPromiseState<Sprint[], string>() },
+  createSprint: { ...createPromiseState<void, string>() },
+  updateSprint: { ...createPromiseState<Sprint, string>() },
+  deleteSprint: { ...createPromiseState<void, string>() },
 }
 
 /* ------------- Selectors ------------- */
@@ -26,5 +32,20 @@ export default createReducer(INITIAL_STATE, {
     types.GET_SPRINT_LIST,
     INITIAL_STATE,
     "sprintList"
+  ),
+  ...createNestedReducer<SprintRedux>(
+    types.CREATE_SPRINT,
+    INITIAL_STATE,
+    "createSprint"
+  ),
+  ...createNestedReducer<SprintRedux>(
+    types.UPDATE_SPRINT,
+    INITIAL_STATE,
+    "updateSprint"
+  ),
+  ...createNestedReducer<SprintRedux>(
+    types.DELETE_SPRINT,
+    INITIAL_STATE,
+    "deleteSprint"
   ),
 })

@@ -2,36 +2,83 @@
 @import "../../scss/variables";
 
 .sidebar {
-  position: fixed;
-  top: 0;
-  height: 100%;
-  bottom: 0;
+  position: relative;
+  min-width: 260px;
   width: 260px;
-  left: 0;
   z-index: 1030;
   background: $midnight-blue;
   color: #fff;
   transition: all 0.3s;
 }
 
-.header {
-  height: 60px;
-  padding-right: 20px;
+.sidebarShrink {
+  min-width: 60px;
+  width: 60px;
+}
+
+.extendButton {
+  cursor: pointer;
+  color: black;
+  position: absolute;
+  left: 247px;
+  top: 108px;
+  background-color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  box-shadow: $elevation-2dp-box-shadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+
+  &:focus {
+    outline: none;
+    border: none;
+    background-color: #ffffff;
+  }
+
+  &:hover {
+    background-color: #c8c8c8;
+  }
+}
+
+.extendButtonShrink {
+  left: 48px;
+}
+
+.iconWrapper {
+  margin-left: 3px;
+  margin-right: 0;
+}
+
+.iconWrapperRight {
+  margin-left: 0;
+  margin-right: 3px;
+}
+
+.headerWrapper {
+  height: 120px;
+  padding: 10px 17px;
+  font-size: 20px;
   display: flex;
   flex-grow: 1;
   align-items: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
+
+.header {
+  margin: 0 16px;
+}
+
 .faSpin {
   display: flex;
-  flex-grow: 0.2;
-  width: 24%;
   -webkit-animation: fa-spin 10s infinite linear !important;
   animation: fa-spin 10s infinite linear !important;
 }
 
 .text {
-  display: flex;
-  flex-grow: 0.8;
   overflow-wrap: break-spaces;
   font-size: 18px;
   font-weight: 400;
@@ -42,4 +89,5 @@
   height: 1px;
   width: calc(100% - 30px);
   background-color: $clouds;
+  margin-bottom: 5px;
 }

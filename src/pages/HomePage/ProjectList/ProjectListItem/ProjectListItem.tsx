@@ -32,11 +32,10 @@ class ProjectListItem extends Component<InnerProps> {
     } = this.props
 
     return (
-      <div className={styles.itemWrapper}>
+      <div className={styles.itemWrapper} style={{ backgroundColor: color }}>
         <div
           onClick={this.handleDetailProject(id, completed)}
           className={styles.item}
-          style={{ backgroundColor: color }}
         >
           <div className={styles.imageContainer}>
             <img alt="Avatar" src={avatar} className={styles.image} />
@@ -45,9 +44,11 @@ class ProjectListItem extends Component<InnerProps> {
           <p className={styles.tag}>{label}</p>
           <p className={styles.company}>{company}</p>
         </div>
-        <Link to={`/project/${id}/edit`}>
-          <p>edit</p>
-        </Link>
+        <div className={styles.linkWrapper}>
+          <Link to={`/project/${id}/edit`}>
+            <p>edit</p>
+          </Link>
+        </div>
       </div>
     )
   }

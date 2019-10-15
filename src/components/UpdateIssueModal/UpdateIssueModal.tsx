@@ -164,10 +164,11 @@ class UpdateIssueModal extends Component<
     values: UpdateIssueFormValues,
     formikActions: FormikActions<UpdateIssueFormValues>
   ) => {
-    const { issueId, updateIssueRequest } = this.props
+    const { issueId, updateIssueRequest, setIssueId } = this.props
 
     updateIssueRequest(values, issueId)
     formikActions.setSubmitting(false)
+    setIssueId(null)
   }
 
   render() {
@@ -200,11 +201,7 @@ class UpdateIssueModal extends Component<
   private renderLeftSideForm = (
     formikProps: FormikProps<UpdateIssueFormValues>
   ) => {
-    const {
-      commentList,
-      permissionList,
-      userList,
-    } = this.props
+    const { commentList, permissionList, userList } = this.props
 
     return (
       <div>

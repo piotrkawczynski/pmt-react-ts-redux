@@ -21,17 +21,9 @@ export default (rootReducer: Reducer<ApplicationState>, rootSaga: any) => {
   enhancers.push(applyMiddleware(...middleware))
 
   const persistConfig = {
-    key: "22",
+    key: "24",
     storage,
-    blacklist: [
-      "project",
-      "issue",
-      "status",
-      "tag",
-      "createProject",
-      "component",
-      "form",
-    ],
+    whitelist: ["user", "components"],
   }
 
   const store = createStore(

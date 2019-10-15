@@ -1,4 +1,6 @@
 import Axios, { AxiosRequestConfig } from "axios"
+import { SprintFormValues } from "../components/SprintModal/SprintModal"
+import { ChangePasswordFormValues } from "../pages/ChangePasswordPage/ChangePasswordPage"
 import { SignInFormValues } from "../pages/SignInPage/SignInPage"
 import { RegisterFormValues } from "../pages/SignUpPage/SignUpPage"
 import {
@@ -38,6 +40,20 @@ const login = async (values: SignInFormValues) => {
 
 const register = async (values: RegisterFormValues) => {
   return await apiInstance.post("/auth/register", values)
+}
+
+const remainPassword = async (email: string) => {
+  return await apiInstance.post("/auth/remain-password", { email })
+}
+
+const changePassword = async (
+  changePasswordValues: ChangePasswordFormValues,
+  token: string
+) => {
+  return await apiInstance.post("/auth/change-password", {
+    ...changePasswordValues,
+    token,
+  })
 }
 
 const getProjectList = async () => {
@@ -108,6 +124,23 @@ const getPermissionList = async () => {
 const getSprintList = async (projectId: number) => {
   return await apiInstance.get(`/projects/${projectId}/sprints`)
 }
+const createSprint = async (
+  createdFormValues: SprintFormValues,
+  projectId: number
+) => {
+  return await apiInstance.post("/sprints", { ...createdFormValues, projectId })
+}
+const updateSprint = async (
+  updatedFormValues: SprintFormValues,
+  sprintId: number
+) => {
+  return await apiInstance.patch(`/sprints/${sprintId}`, {
+    ...updatedFormValues,
+  })
+}
+const deleteSprint = async (sprintId: number) => {
+  return await apiInstance.delete(`/sprints/${sprintId}`)
+}
 
 const getIssueListWithSprintId = async (
   sprintId: number,
@@ -156,6 +189,8 @@ const api = {
   auth: {
     login,
     register,
+    remainPassword,
+    changePassword,
   },
   projects: { getProjectList, createProject, getBacklogIssues },
   tags: { createTag, deleteTag, getTagList },
@@ -173,6 +208,9 @@ const api = {
   },
   sprints: {
     getSprintList,
+    createSprint,
+    updateSprint,
+    deleteSprint,
   },
   issues: {
     getIssue,

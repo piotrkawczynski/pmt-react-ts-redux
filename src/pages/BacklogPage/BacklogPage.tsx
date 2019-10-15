@@ -6,6 +6,9 @@ import { Button } from "reactstrap"
 
 import CreateIssueModal from "../../components/CreateIssueModal/CreateIssueModal"
 import SprintChooser from "../../components/SprintChooser/SprintChooser"
+import SprintModal, {
+  SprintFormValues,
+} from "../../components/SprintModal/SprintModal"
 import UpdateIssueModal from "../../components/UpdateIssueModal/UpdateIssueModal"
 import {
   getBacklogIssuesActions,
@@ -14,7 +17,11 @@ import {
 } from "../../store/issue/issueActions"
 import { getPermissionListActions } from "../../store/permission/permissionActions"
 import { ApplicationState } from "../../store/redux"
-import { getSprintListActions } from "../../store/sprint/sprintActions"
+import {
+  createSprintActions,
+  deleteSprintActions,
+  getSprintListActions,
+} from "../../store/sprint/sprintActions"
 import { getStatusListActions } from "../../store/status/statusActions"
 import { getTagListActions } from "../../store/tag/tagActions"
 import { getUserListActions } from "../../store/user/userActions"
@@ -31,6 +38,8 @@ interface PropsFromDispatch {
   getIssueListRequest: typeof getIssueListActions.getIssueListRequest
   getBacklogIssueListRequest: typeof getBacklogIssuesActions.getBacklogIssuesRequest
   updateIssueSprintRequest: typeof updateIssueSprintActions.updateIssueSprintRequest
+  createSprintRequest: typeof createSprintActions.createSprintRequest
+  deleteSprintRequest: typeof deleteSprintActions.deleteSprintRequest
 }
 
 interface PropsFromState {
@@ -39,6 +48,7 @@ interface PropsFromState {
   statusList: ApplicationState["status"]["statusList"]
   permissionList: ApplicationState["permission"]["permissionList"]
   sprintList: ApplicationState["sprint"]["sprintList"]
+  deleteSprint: ApplicationState["sprint"]["deleteSprint"]
   issueList: ApplicationState["issue"]["issueList"]
   backlogIssueList: ApplicationState["issue"]["backlogIssueList"]
 }
@@ -56,6 +66,8 @@ interface BacklogPageState {
   openUpdateIssueModal: boolean
   sprintId: number | null
   selectedIssueId: number | null
+  openCreateSprintModal: boolean
+  openUpdateSprintModal: boolean
 }
 
 class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
@@ -74,6 +86,8 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
       openUpdateIssueModal: true,
       sprintId: null,
       selectedIssueId: null,
+      openCreateSprintModal: false,
+      openUpdateSprintModal: false,
     }
   }
 
@@ -84,7 +98,6 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
       getTagListRequest,
       getUserListRequest,
       getSprintListRequest,
-      getIssueListRequest,
       getBacklogIssueListRequest,
     } = this.props
 
@@ -93,8 +106,22 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
     getPermissionListRequest()
     getUserListRequest(this.projectId)
     getSprintListRequest(this.projectId)
-    getIssueListRequest(this.projectId, 1, true)
     getBacklogIssueListRequest(this.projectId)
+  }
+
+  componentDidUpdate(prevProps: BacklogPageProps) {
+    const { sprintList } = this.props
+
+    if (
+      prevProps.sprintList.status === "loading" &&
+      sprintList.status === "success" &&
+      sprintList.data &&
+      !sprintList.data.length
+    ) {
+      this.setState({
+        sprintId: null,
+      })
+    }
   }
 
   areListsReady = () => {
@@ -117,13 +144,33 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
     this.setState({ openCreateIssueModal: false, selectedIssueId: null })
   }
 
+  handleDeleteSprint = () => {
+    this.props.deleteSprintRequest(this.state.sprintId!, this.projectId)
+  }
+
+  isLastSprint = () => {
+    const { sprintId } = this.state
+
+    const {
+      sprintList: { data },
+    } = this.props
+
+    if (data && !!data.length) {
+      const sprintListIndex = data.findIndex(({ id }) => id === sprintId)
+
+      return sprintListIndex === data.length - 1
+    }
+
+    return false
+  }
+
   render() {
     const {
       statusList,
       tagList,
       permissionList,
       userList,
-      sprintList: { data: sprintListData },
+      sprintList,
       issueList: { data: issueListData },
       getIssueListRequest,
       backlogIssueList: { data: backlogIssueListData },
@@ -132,36 +179,44 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
 
     const { openCreateIssueModal, sprintId, selectedIssueId } = this.state
 
-    console.log(this.props)
+    // console.log(this.state)
 
     return (
       <div className={styles.containerWrapper}>
-        {sprintListData && !!sprintListData.length && (
+        {sprintList.data && !!sprintList.data.length && (
           <SprintChooser
-            sprintList={sprintListData}
+            sprintList={sprintList}
             getIssueListRequest={getIssueListRequest}
             projectId={this.projectId}
             setSprintId={this.setSprintId}
           />
         )}
         <div className={styles.createButtonsWrapper}>
-          {sprintId && (
+          <Button
+            type="button"
+            className="button"
+            onClick={() => this.setState({ openCreateIssueModal: true })}
+          >
+            Create issue
+          </Button>
+          {this.isLastSprint() && (
             <Button
               type="button"
-              className="button"
-              onClick={() => this.setState({ openCreateIssueModal: true })}
+              className={classnames("button", styles.createSprintButton)}
+              onClick={this.handleDeleteSprint}
             >
-              Create issue
+              Delete latest sprint
             </Button>
           )}
           <Button
             type="button"
             className={classnames("button", styles.createSprintButton)}
+            onClick={this.openCreateSprintModal}
           >
             Create next sprint
           </Button>
         </div>
-        {sprintId && statusList.data && userList.data && (
+        {statusList.data && userList.data && (
           <BacklogList
             issueListSource="sprint"
             setIssueId={this.setIssueId}
@@ -175,7 +230,7 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
         <div className={styles.titleContainer}>
           <div className={styles.title}>Backlog</div>
         </div>
-        {sprintId && statusList.data && userList.data && (
+        {statusList.data && userList.data && (
           <BacklogList
             issueListSource="backlog"
             setIssueId={this.setIssueId}
@@ -210,7 +265,35 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
             onCancel={this.onCancel}
           />
         )}
+        {this.renderCreateSprintModal()}
       </div>
+    )
+  }
+
+  openCreateSprintModal = () => {
+    this.setState({ openCreateSprintModal: true })
+  }
+
+  onSubmitCreateSprint = (values: SprintFormValues) => {
+    this.props.createSprintRequest(values, this.projectId)
+    this.setState({ openCreateSprintModal: false })
+  }
+
+  onCancelCreateSprint = () => {
+    this.setState({ openCreateSprintModal: false })
+  }
+
+  private renderCreateSprintModal = () => {
+    if (!this.state.openCreateSprintModal) {
+      return null
+    }
+
+    return (
+      <SprintModal
+        projectId={this.projectId}
+        onSubmit={this.onSubmitCreateSprint}
+        onCancel={this.onCancelCreateSprint}
+      />
     )
   }
 }
@@ -223,6 +306,7 @@ const mapStateToProps = (state: ApplicationState) => ({
   sprintList: state.sprint.sprintList,
   issueList: state.issue.issueList,
   backlogIssueList: state.issue.backlogIssueList,
+  deleteSprint: state.sprint.deleteSprint,
 })
 
 const mapDispatchToProps = {
@@ -234,6 +318,8 @@ const mapDispatchToProps = {
   getIssueListRequest: getIssueListActions.getIssueListRequest,
   getBacklogIssueListRequest: getBacklogIssuesActions.getBacklogIssuesRequest,
   updateIssueSprintRequest: updateIssueSprintActions.updateIssueSprintRequest,
+  createSprintRequest: createSprintActions.createSprintRequest,
+  deleteSprintRequest: deleteSprintActions.deleteSprintRequest,
 }
 
 export default connect(

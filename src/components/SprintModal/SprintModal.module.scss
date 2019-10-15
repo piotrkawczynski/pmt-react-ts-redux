@@ -1,0 +1,34 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.containerWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.datesWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: $font-size-6;
+  color: $grey;
+}
+
+.card {
+  background-color: $white;
+  width: 450px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.submitButton {
+  margin-left: 10px;
+}

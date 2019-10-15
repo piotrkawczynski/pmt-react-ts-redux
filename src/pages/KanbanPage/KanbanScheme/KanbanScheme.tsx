@@ -1,6 +1,7 @@
 import { Dictionary } from "lodash"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import UpdateIssueModal from "../../../components/UpdateIssueModal/UpdateIssueModal"
 
 import { updateIssueStatusActions } from "../../../store/issue/issueActions"
 import { IssueSelectors } from "../../../store/issue/issueRedux"
@@ -23,7 +24,10 @@ interface InnerProps {
   statusList: ApplicationState["status"]["statusList"]["data"]
   issueList: ApplicationState["issue"]["issueList"]["data"]
   tagList: ApplicationState["tag"]["tagList"]["data"]
+  permissionList: ApplicationState["permission"]["permissionList"]
+  userList: ApplicationState["user"]["users"]
   sprintId: number | null
+  projectId: number
 }
 
 type KanbanSchemeProps = PropsFromDispatch & PropsFromState & InnerProps
@@ -44,6 +48,11 @@ class KanbanScheme extends Component<KanbanSchemeProps, KanbanSchemeState> {
   }
 
   handleShowModal = (issueId: number) => () => {
+    console.log(issueId)
+    this.setState({ selectedIssueId: issueId })
+  }
+
+  setIssueId = (issueId: number | null) => {
     this.setState({ selectedIssueId: issueId })
   }
 
@@ -94,20 +103,30 @@ class KanbanScheme extends Component<KanbanSchemeProps, KanbanSchemeState> {
     event.stopPropagation()
   }
 
-  renderItem = (issue: Issue, tagList: Tag[]) => (
-    <KanbanItem
-      key={issue.id}
-      issue={issue}
-      tagList={tagList}
-      onClick={this.handleShowModal(issue.id)}
-      onDragStart={this.onDragStart(issue)}
-      onDrop={this.onDropItem(issue)}
-      onDragEnd={this.onDragEnd}
-    />
-  )
+  areListsReady = () => {
+    const { statusList, tagList, permissionList, userList } = this.props
+
+    return (
+      statusList && tagList && permissionList.data && userList.data
+    )
+  }
+
+  onCancel = () => {
+    this.setState({ selectedIssueId: null })
+  }
 
   render() {
-    const { statusList, issueList, groupedIssuesByStatus, tagList } = this.props
+    const {
+      statusList,
+      issueList,
+      groupedIssuesByStatus,
+      tagList,
+      projectId,
+      sprintId,
+      permissionList,
+      userList,
+    } = this.props
+    const { selectedIssueId } = this.state
 
     if (!issueList) {
       return null
@@ -133,9 +152,34 @@ class KanbanScheme extends Component<KanbanSchemeProps, KanbanSchemeState> {
               </div>
             </div>
           ))}
+        {this.areListsReady() && selectedIssueId && (
+          <UpdateIssueModal
+            setIssueId={this.setIssueId}
+            issueId={selectedIssueId}
+            projectId={projectId}
+            sprintId={sprintId}
+            statusList={statusList}
+            tagList={tagList}
+            permissionList={permissionList.data}
+            userList={userList.data}
+            onCancel={this.onCancel}
+          />
+        )}
       </div>
     )
   }
+
+  private renderItem = (issue: Issue, tagList: Tag[]) => (
+    <KanbanItem
+      key={issue.id}
+      issue={issue}
+      tagList={tagList}
+      onClick={this.handleShowModal(issue.id)}
+      onDragStart={this.onDragStart(issue)}
+      onDrop={this.onDropItem(issue)}
+      onDragEnd={this.onDragEnd}
+    />
+  )
 }
 
 const mapStateToProps = (state: ApplicationState) => ({

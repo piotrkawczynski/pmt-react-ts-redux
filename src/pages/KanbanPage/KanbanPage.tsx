@@ -3,10 +3,13 @@ import { connect } from "react-redux"
 import { RouteComponentProps, withRouter } from "react-router"
 
 import SprintChooser from "../../components/SprintChooser/SprintChooser"
+import SprintModal, {
+  SprintFormValues,
+} from "../../components/SprintModal/SprintModal"
 import { getIssueListActions } from "../../store/issue/issueActions"
 import { getPermissionListActions } from "../../store/permission/permissionActions"
 import { ApplicationState } from "../../store/redux"
-import { getSprintListActions } from "../../store/sprint/sprintActions"
+import { createSprintActions, getSprintListActions } from "../../store/sprint/sprintActions"
 import { getStatusListActions } from "../../store/status/statusActions"
 import { getTagListActions } from "../../store/tag/tagActions"
 import { getUserListActions } from "../../store/user/userActions"
@@ -21,6 +24,7 @@ interface PropsFromDispatch {
   getPermissionListRequest: typeof getPermissionListActions.getPermissionListRequest
   getSprintListRequest: typeof getSprintListActions.getSprintListRequest
   getIssueListRequest: typeof getIssueListActions.getIssueListRequest
+  createSprintRequest: typeof createSprintActions.createSprintRequest,
 }
 
 interface PropsFromState {
@@ -71,7 +75,6 @@ class Project extends Component<KanbanPageProps, KanbanPageState> {
       getTagListRequest,
       getUserListRequest,
       getSprintListRequest,
-      getIssueListRequest,
     } = this.props
 
     getTagListRequest(this.projectId)
@@ -79,55 +82,62 @@ class Project extends Component<KanbanPageProps, KanbanPageState> {
     getPermissionListRequest()
     getUserListRequest(this.projectId)
     getSprintListRequest(this.projectId)
-    getIssueListRequest(this.projectId, 1, true)
-  }
-
-  areListsReady = () => {
-    const { statusList, tagList, permissionList, userList } = this.props
-
-    return (
-      statusList.data && tagList.data && permissionList.data && userList.data
-    )
   }
 
   setSprintId = (sprintId: number) => {
     this.setState({ sprintId })
   }
 
-  setIssueId = (issueId: number | null) => {
-    this.setState({ issueId })
-  }
-
   render() {
     const {
       statusList,
       tagList,
-      permissionList,
-      userList,
-      sprintList: { data: sprintListData },
+      sprintList,
       issueList: { data: issueListData },
       getIssueListRequest,
+      permissionList,
+      userList,
     } = this.props
 
     const { sprintId } = this.state
 
+    if (!!sprintList.data && !sprintList.data.length) {
+      return this.renderCreateSprintModal()
+    }
+
     return (
       <div className={styles.project}>
-        {sprintListData && !!sprintListData.length && (
+        {sprintList.data && !!sprintList.data.length && (
           <SprintChooser
-            sprintList={sprintListData}
+            sprintList={sprintList}
             getIssueListRequest={getIssueListRequest}
             projectId={this.projectId}
             setSprintId={this.setSprintId}
           />
         )}
         <KanbanScheme
+          projectId={this.projectId}
           sprintId={sprintId}
           statusList={statusList.data}
           issueList={issueListData}
           tagList={tagList.data}
+          permissionList={permissionList}
+          userList={userList}
         />
       </div>
+    )
+  }
+
+  onSubmitCreateSprint = (values: SprintFormValues) => {
+    this.props.createSprintRequest(values, this.projectId)
+  }
+
+  private renderCreateSprintModal = () => {
+    return (
+      <SprintModal
+        projectId={this.projectId}
+        onSubmit={this.onSubmitCreateSprint}
+      />
     )
   }
 }
@@ -148,6 +158,7 @@ const mapDispatchToProps = {
   getPermissionListRequest: getPermissionListActions.getPermissionListRequest,
   getSprintListRequest: getSprintListActions.getSprintListRequest,
   getIssueListRequest: getIssueListActions.getIssueListRequest,
+  createSprintRequest: createSprintActions.createSprintRequest,
 }
 
 export default connect(
