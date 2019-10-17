@@ -15,27 +15,38 @@ class ProjectListItem extends Component<InnerProps> {
   handleDetailProject = (id: number, completed: number) => (
     event: React.MouseEvent
   ) => {
+    event.preventDefault()
+
     const url = `/project/${id}`
 
     if (completed) {
       history.push(url)
     } else {
-      history.push(`${url}/edit`)
+      alert(
+        "If you are admin, You need to fulfill project details to complete and move forward."
+      )
     }
-
-    event.preventDefault()
   }
 
   render() {
     const {
-      project: { id, name, company, avatar, label, color, completed },
+      project: {
+        id,
+        name,
+        company,
+        avatar,
+        label,
+        color,
+        completed,
+        permissionId,
+      },
     } = this.props
 
     return (
       <div className={styles.itemWrapper} style={{ backgroundColor: color }}>
         <div
-          onClick={this.handleDetailProject(id, completed)}
           className={styles.item}
+          onClick={this.handleDetailProject(id, completed)}
         >
           <div className={styles.imageContainer}>
             <img alt="Avatar" src={avatar} className={styles.image} />
@@ -44,11 +55,13 @@ class ProjectListItem extends Component<InnerProps> {
           <p className={styles.tag}>{label}</p>
           <p className={styles.company}>{company}</p>
         </div>
-        <div className={styles.linkWrapper}>
-          <Link to={`/project/${id}/edit`}>
-            <p>edit</p>
-          </Link>
-        </div>
+        {permissionId === 2 && (
+          <div className={styles.linkWrapper}>
+            <Link to={`/project/${id}/edit`}>
+              <p>edit</p>
+            </Link>
+          </div>
+        )}
       </div>
     )
   }

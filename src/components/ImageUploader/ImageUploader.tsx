@@ -43,13 +43,9 @@ class ImageUploader extends React.Component<
   onDropAccepted = (acceptedFiles: File[]) => {
     const { multipleImages = false, formikProps } = this.props
 
-    console.log("acceptedFiles", acceptedFiles)
-
     let file = null
 
-    if (multipleImages) {
-      file = acceptedFiles
-    } else {
+    if (!multipleImages) {
       file = acceptedFiles[0]
       const imagePreview = URL.createObjectURL(file)
 

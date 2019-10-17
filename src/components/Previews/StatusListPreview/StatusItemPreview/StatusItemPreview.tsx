@@ -2,8 +2,9 @@ import React, { Component } from "react"
 
 import { CloseButton } from "../../../CloseButton/CloseButton"
 
-import styles from "./StatusItemPreview.module.scss"
 import { StatusFormValues } from "../../../../pages/FulfillProjectPage/FulfillProjectPage"
+
+import styles from "./StatusItemPreview.module.scss"
 
 interface StatusItemPreviewProps {
   status: StatusFormValues

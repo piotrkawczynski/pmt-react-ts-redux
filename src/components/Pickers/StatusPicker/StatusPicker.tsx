@@ -1,12 +1,12 @@
 import classnames from "classnames"
+import { Form, Formik, FormikActions } from "formik"
 import React, { Component } from "react"
 import { Button } from "reactstrap"
-import { Formik, FormikActions, Form } from "formik"
 
+import { StatusFormValues } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
+import { createStatusActions } from "../../../store/status/statusActions"
 import FormContainer from "../../FormContainer/FormContainer"
 import Input from "../../Inputs/Input/Input"
-import { createStatusActions } from "../../../store/status/statusActions"
-import { StatusFormValues } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
 
 import styles from "./StatusPicker.module.scss"
 

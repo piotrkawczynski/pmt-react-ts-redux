@@ -54,7 +54,7 @@ interface PropsFromState {
 }
 
 interface RouteParams {
-  id: string
+  projectId: string
 }
 
 type BacklogPageProps = PropsFromDispatch &
@@ -79,7 +79,7 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
       match: { params },
     } = props
 
-    this.projectId = Number(params.id)
+    this.projectId = Number(params.projectId)
 
     this.state = {
       openCreateIssueModal: false,
@@ -178,8 +178,6 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
     } = this.props
 
     const { openCreateIssueModal, sprintId, selectedIssueId } = this.state
-
-    // console.log(this.state)
 
     return (
       <div className={styles.containerWrapper}>

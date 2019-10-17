@@ -14,13 +14,11 @@ import Dropdown, { Option } from "../Dropdown/Dropdown"
 import Input from "../Inputs/Input/Input"
 import Modal from "../Modal/Modal"
 
-import {
-  createCommentActions,
-  getCommentListActions,
-} from "../../store/comment/commentActions"
+import { getCommentListActions } from "../../store/comment/commentActions"
 import AttachmentForm from "../AttachmentForm/AttachmentForm"
 import CommentInput from "../CommentInput/CommentInput"
 import CommentList from "../CommentList/CommentList"
+
 import styles from "./UpdateIssueModal.module.scss"
 
 interface PropsFromDispatch {
@@ -121,7 +119,6 @@ class UpdateIssueModal extends Component<
         reviewerId,
         title,
         description,
-        code,
         attachments,
       } = this.props.issue.data!
 

@@ -1,5 +1,5 @@
-import { createPromiseType } from "../../utilities/ReduxFunctions"
 import { Permission } from "../../types/permission"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
 
 /* ------------- Action Types ------------- */
 const GET_PERMISSION_LIST = createPromiseType("GET_PERMISSION_LIST")

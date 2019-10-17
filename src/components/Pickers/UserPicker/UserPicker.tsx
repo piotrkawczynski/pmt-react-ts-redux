@@ -1,16 +1,15 @@
+import classnames from "classnames"
+import { Form, Formik, FormikActions, FormikProps } from "formik"
 import React, { Component } from "react"
-
-import FormContainer from "../../FormContainer/FormContainer"
-import Input from "../../Inputs/Input/Input"
 import { Button } from "reactstrap"
 
-import styles from "./UserPicker.module.scss"
-import Dropdown, { Option } from "../../Dropdown/Dropdown"
-import classnames from "classnames"
-import { Formik, FormikActions, FormikProps, Form } from "formik"
-import { createInviteActions } from "../../../store/invite/inviteActions"
-import { InviteFormValues } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
 import { PERMISSION_LIST } from "../../../consts/userPermission"
+import { InviteFormValues } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
+import { createInviteActions } from "../../../store/invite/inviteActions"
+import Dropdown, { Option } from "../../Dropdown/Dropdown"
+import FormContainer from "../../FormContainer/FormContainer"
+import Input from "../../Inputs/Input/Input"
+import styles from "./UserPicker.module.scss"
 
 interface InnerProps {
   createInviteRequest: typeof createInviteActions.createInviteRequest

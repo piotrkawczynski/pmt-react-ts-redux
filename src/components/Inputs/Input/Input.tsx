@@ -1,9 +1,9 @@
 import classnames from "classnames"
 import { ErrorMessage, Field } from "formik"
 import React from "react"
+import { InputType } from "reactstrap/lib/Input"
 
 import styles from "./Input.module.scss"
-import { InputType } from "reactstrap/lib/Input"
 
 interface InputProps {
   type: InputType

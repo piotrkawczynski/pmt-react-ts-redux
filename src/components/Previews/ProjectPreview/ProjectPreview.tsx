@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 
-import styles from "./ProjectPreview.module.scss"
 import { CreateProjectPageFormValues } from "../../../pages/CreateProjectPage/CreateProjectPage"
+
+import styles from "./ProjectPreview.module.scss"
 
 interface InnerProps {
   className?: string

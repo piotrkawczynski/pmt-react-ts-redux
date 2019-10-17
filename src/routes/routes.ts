@@ -5,10 +5,11 @@ import ChangePasswordPage from "../pages/ChangePasswordPage/ChangePasswordPage"
 import CreateProjectPage from "../pages/CreateProjectPage/CreateProjectPage"
 import FulfillProjectPage from "../pages/FulfillProjectPage/FulfillProjectPage"
 import HomePage from "../pages/HomePage/HomePage"
+import KanbanPage from "../pages/KanbanPage/KanbanPage"
 import RemainPasswordPage from "../pages/RemainPasswordPage/RemainPasswordPage"
 import SignIn from "../pages/SignInPage/SignInPage"
 import SignUp from "../pages/SignUpPage/SignUpPage"
-import KanbanPage from "../pages/KanbanPage/KanbanPage"
+import UpdateProfilePage from "../pages/UpdateProfilePage/UpdateProfilePage"
 
 export interface Route {
   path: string
@@ -24,12 +25,6 @@ export const Routes: Route[] = [
     component: HomePage,
     title: "Dashboard",
   },
-  // {
-  //   path: '/backlog/:projectId',
-  //   component: Backlog,
-  //   title: 'Backlog',
-  //   backgroundImage: null,
-  // },
   {
     path: "/project/create",
     exact: true,
@@ -37,41 +32,29 @@ export const Routes: Route[] = [
     title: "Create project",
   },
   {
-    path: "/project/:id/edit",
+    path: "/project/:projectId/edit",
     exact: true,
     component: FulfillProjectPage,
     title: "Create project",
   },
   {
-    path: "/project/:id/backlog",
+    path: "/project/:projectId/backlog",
     exact: true,
     component: BacklogPage,
     title: "Backlog",
   },
   {
-    path: "/project/:id",
+    path: "/project/:projectId",
     exact: true,
     component: KanbanPage,
     title: "Kanban Scheme",
   },
-  // {
-  //   path: '/project/:projectId',
-  //   component: Project,
-  //   title: 'Project',
-  //   backgroundImage: null,
-  // },
-  // {
-  //   path: '/profile',
-  //   component: Profile,
-  //   title: 'Profile',
-  //   backgroundImage: null,
-  // },
-  // {
-  //   path: '/change_password',
-  //   component: ChangePassword,
-  //   title: 'Change Password',
-  //   backgroundImage: null,
-  // },
+  {
+    path: "/profile",
+    exact: true,
+    component: UpdateProfilePage,
+    title: "Update profile",
+  },
 ]
 
 export const authRoutes: Route[] = [
@@ -95,31 +78,4 @@ export const authRoutes: Route[] = [
     exact: true,
     component: ChangePasswordPage,
   },
-]
-
-export const withoutSidebarRoutes: Route[] = [
-  // {
-  //   path: '/backlog/:projectId/issue/:issueId/photo',
-  //   exact: true,
-  //   component: Carousel,
-  //   backgroundImage: null,
-  // },
-  // {
-  //   path: '/project/:projectId/issue/:issueId/photo',
-  //   exact: true,
-  //   component: Carousel,
-  //   backgroundImage: null,
-  // },
-  // {
-  //   path: '/backlog/:projectId/create',
-  //   exact: true,
-  //   component: CreateIssueModal,
-  //   backgroundImage: null,
-  // },
-  // {
-  //   path: '/project/:projectId/issue/:issueId',
-  //   exact: true,
-  //   component: EditIssueModal,
-  //   backgroundImage: null,
-  // },
 ]

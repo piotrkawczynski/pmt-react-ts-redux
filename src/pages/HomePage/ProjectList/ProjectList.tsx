@@ -1,6 +1,7 @@
 import React, { Component } from "react"
-import ProjectListItem from "./ProjectListItem/ProjectListItem"
+
 import { Project } from "../../../types/project"
+import ProjectListItem from "./ProjectListItem/ProjectListItem"
 
 import styles from "./ProjectList.module.scss"
 

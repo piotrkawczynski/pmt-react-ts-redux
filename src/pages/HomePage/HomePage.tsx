@@ -3,8 +3,8 @@ import { connect } from "react-redux"
 
 import { projectListActions } from "../../store/project/projectActions"
 import { ApplicationState } from "../../store/redux"
-import { PromiseState } from "../../utilities/ReduxFunctions"
 import { Project } from "../../types/project"
+import { PromiseState } from "../../utilities/ReduxFunctions"
 import ProjectList from "./ProjectList/ProjectList"
 
 interface PropsFromDispatch {

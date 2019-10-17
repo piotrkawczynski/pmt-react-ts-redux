@@ -5,6 +5,7 @@ import {
   createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
+import { types as userTypes } from "../user/userActions"
 import { types } from "./sprintActions"
 
 /* ------------- Initial UserRedux ------------- */
@@ -48,4 +49,6 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "deleteSprint"
   ),
+
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

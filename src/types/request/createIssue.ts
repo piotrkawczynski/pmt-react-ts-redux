@@ -1,5 +1,3 @@
-import { LoaderImage } from "../loaderImage"
-
 export interface CreateIssue {
   attachment: File[]
   statusId: number

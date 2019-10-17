@@ -1,22 +1,25 @@
 import React, { Component } from "react"
 import { Provider } from "react-redux"
-import { Router, Route, Switch } from "react-router-dom"
+import { Route, Router, Switch } from "react-router-dom"
+import { Store } from "redux"
 import { persistStore } from "redux-persist"
-import history from "./utilities/history"
+
+import { PersistorOptions } from "redux-persist/es/types"
+import Layout from "./components/Layout/Layout"
+import LayoutWithoutSidebar from "./components/LayoutWithoutSidebar/LayoutWithoutSidebar"
 import NotFound from "./components/NotFound/NotFound"
+import { authRoutes, Routes } from "./routes/routes"
 import configureStore from "./store/configureStore"
 import rootReducer from "./store/redux"
 import rootSaga from "./store/sagas"
 import { updateApiHeader } from "./store/user/userActions"
-import { Store } from "redux"
-import { PersistorOptions } from "redux-persist/es/types"
-import { authRoutes, Routes, withoutSidebarRoutes } from "./routes/routes"
-import Layout from "./components/Layout/Layout"
-import LayoutWithoutSidebar from "./components/LayoutWithoutSidebar/LayoutWithoutSidebar"
+import history from "./utilities/history"
 
 interface AppState {
   rehydrated: boolean
 }
+
+// tslint:disable-next-line:no-empty-interface
 interface AppProps {}
 
 class App extends Component<AppProps, AppState> {
@@ -72,23 +75,6 @@ class App extends Component<AppProps, AppState> {
               ))}
               <Route path="*" component={NotFound} />
             </Switch>
-            {withoutSidebarRoutes.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                exact={route.exact}
-                render={(props) => (
-                  <Layout
-                    component={route.component}
-                    route={route}
-                    withoutSidebar={true}
-                    renderProps={props}
-                  >
-                    <route.component route={route} router={props} />
-                  </Layout>
-                )}
-              />
-            ))}
           </>
         </Router>
       </Provider>

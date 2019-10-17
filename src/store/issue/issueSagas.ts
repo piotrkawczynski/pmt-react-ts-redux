@@ -1,6 +1,14 @@
-import { call, put, takeLatest, select } from "redux-saga/effects"
+import { AxiosRequestConfig } from "axios"
+import * as objectToFormdata from "object-to-formdata"
+import { call, put, takeLatest } from "redux-saga/effects"
 import { ActionType } from "typesafe-actions"
+
 import { api } from "../../services/api"
+import { Issue, IssueDetails } from "../../types/issue"
+import { LoaderImage } from "../../types/loaderImage"
+import { CreateIssue } from "../../types/request/createIssue"
+import { UpdateIssue } from "../../types/request/updateIssue"
+
 import {
   createIssueActions,
   getBacklogIssuesActions,
@@ -11,13 +19,6 @@ import {
   updateIssueSprintActions,
   updateIssueStatusActions,
 } from "./issueActions"
-import { Issue, IssueDetails } from "../../types/issue"
-import { AxiosRequestConfig } from "axios"
-import { CreateIssue } from "../../types/request/createIssue"
-import * as objectToFormdata from "object-to-formdata"
-import { LoaderImage } from "../../types/loaderImage"
-import { UpdateIssue } from "../../types/request/updateIssue"
-import { IssueSelectors } from "./issueRedux"
 
 function* getIssueListFlow(
   action: ActionType<typeof getIssueListActions.getIssueListRequest>
@@ -42,6 +43,7 @@ function* getIssueListFlow(
 
     yield put(getIssueListActions.getIssueListSuccess(issueListResponse))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getIssueListActions.getIssueListFailure(error.message))
   }
@@ -71,6 +73,7 @@ function* createIssueFlow(
     yield put(createIssueActions.createIssueSuccess())
     yield put(getIssueListActions.getIssueListRequest(projectId, sprintId))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(createIssueActions.createIssueFailure(error.message))
   }
@@ -103,8 +106,6 @@ function* updateIssueFlow(
 
     const { data } = yield call(api.issues.updateIssue, formData)
 
-    console.log("updateIssue", data)
-
     yield put(updateIssueActions.updateIssueSuccess())
     const updatedIssue = data as Issue
 
@@ -121,6 +122,7 @@ function* updateIssueFlow(
       )
     }
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(updateIssueActions.updateIssueFailure(error.message))
   }
@@ -138,6 +140,7 @@ function* getIssueFlow(
 
     yield put(getIssueActions.getIssueSuccess(issueResponse))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getIssueActions.getIssueFailure(error.message))
   }
@@ -156,12 +159,11 @@ function* updateIssueStatusFlow(
       )
     )
 
-    const { data } = yield call(api.issues.updateIssueStatus, issueId, statusId)
-
-    console.log(data)
+    yield call(api.issues.updateIssueStatus, issueId, statusId)
 
     yield put(updateIssueStatusActions.updateIssueStatusSuccess())
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     const { issueId, prevStatusId } = action.payload
     yield put(
@@ -186,6 +188,7 @@ function* getBacklogIssueListFlow(
       getBacklogIssuesActions.getBacklogIssuesSuccess(issueListResponse)
     )
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getBacklogIssuesActions.getBacklogIssuesFailure(error.message))
   }
@@ -205,6 +208,7 @@ function* updateIssueSprintFlow(
     yield put(getBacklogIssuesActions.getBacklogIssuesRequest(projectId))
     yield put(getIssueListActions.getIssueListRequest(projectId, sprintId))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(updateIssueSprintActions.updateIssueSprintFailure(error.message))
   }

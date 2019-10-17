@@ -1,13 +1,13 @@
-import { takeLatest, call, put } from "redux-saga/effects"
+import { call, put, takeLatest } from "redux-saga/effects"
 import { ActionType } from "typesafe-actions"
+import { InviteFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import { api } from "../../services/api"
 import {
-  types,
   createInviteActions,
   deleteInviteActions,
   getInviteListActions,
+  types,
 } from "./inviteActions"
-import { InviteFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 
 function* createInviteFlow(
   action: ActionType<typeof createInviteActions.createInviteRequest>
@@ -30,6 +30,7 @@ function* createInviteFlow(
     yield put(createInviteActions.createInviteSuccess(createdInvite))
     yield call(setValues)
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(createInviteActions.createInviteFailure(error.message))
   }
@@ -47,6 +48,7 @@ function* deleteInviteFlow(
     yield call(setValues)
     setValues()
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(deleteInviteActions.deleteInviteFailure(error.message))
   }
@@ -70,14 +72,15 @@ function* getInviteListFlow(
 
     const inviteList: InviteFormValues[] = inviteListResponse.map(
       ({ id, email, permissionId }) => ({
-        id: id,
-        email: email,
+        id,
+        email,
         permission: permissionId.toString(),
       })
     )
 
     yield put(getInviteListActions.getInviteListSuccess(inviteList))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getInviteListActions.getInviteListFailure(error.message))
   }

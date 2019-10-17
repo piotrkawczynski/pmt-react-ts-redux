@@ -14,6 +14,6 @@ export interface Issue {
   updatedAt: string
 }
 
-export interface IssueDetails extends Issue{
+export interface IssueDetails extends Issue {
   attachments: string[]
 }

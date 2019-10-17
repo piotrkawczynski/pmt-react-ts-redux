@@ -7,7 +7,6 @@ import { Button } from "reactstrap"
 import * as Yup from "yup"
 
 import Input from "../../components/Inputs/Input/Input"
-import { ApplicationState } from "../../store/redux"
 import { remainPasswordActions } from "../../store/user/userActions"
 
 import styles from "./RemainPasswordPage.module.scss"
@@ -33,7 +32,6 @@ export interface RemainPasswordFormValues {
 }
 
 class RemainPasswordPage extends Component<RemainPasswordPageProps> {
-  componentDidMount() {}
 
   onSubmit = (
     values: RemainPasswordFormValues,
@@ -85,13 +83,11 @@ class RemainPasswordPage extends Component<RemainPasswordPageProps> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({})
-
 const mapDispatchToProps = {
   remainPasswordRequest: remainPasswordActions.remainPasswordRequest,
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(RemainPasswordPage)

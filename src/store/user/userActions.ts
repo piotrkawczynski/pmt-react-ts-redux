@@ -1,10 +1,11 @@
-import { ChangePasswordFormValues } from "../../pages/ChangePasswordPage/ChangePasswordPage"
-import { createPromiseType } from "../../utilities/ReduxFunctions"
-import { SignInFormValues } from "../../pages/SignInPage/SignInPage"
-import { User } from "../../types/user"
-import { Auth } from "../../types/auth"
 import { FormikActions } from "formik"
+import { ChangePasswordFormValues } from "../../pages/ChangePasswordPage/ChangePasswordPage"
+import { SignInFormValues } from "../../pages/SignInPage/SignInPage"
 import { RegisterFormValues } from "../../pages/SignUpPage/SignUpPage"
+import { UpdateProfileValues } from "../../pages/UpdateProfilePage/UpdateProfilePage"
+import { Auth } from "../../types/auth"
+import { User } from "../../types/user"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
 
 /* ------------- Action Types ------------- */
 const UPDATE_API_HEADER = "UPDATE_API_HEADER"
@@ -14,6 +15,9 @@ const REGISTER = createPromiseType("REGISTER")
 const GET_USER_LIST = createPromiseType("GET_USER_LIST")
 const REMAIN_PASSWORD = createPromiseType("REMAIN_PASSWORD")
 const CHANGE_PASSWORD = createPromiseType("CHANGE_PASSWORD")
+const UPDATE_PROFILE = createPromiseType("UPDATE_PROFILE")
+const UPDATE_USER = "UPDATE_USER"
+const LOGOUT_USER = "LOGOUT_USER"
 
 export const types = {
   UPDATE_API_HEADER,
@@ -23,6 +27,9 @@ export const types = {
   GET_USER_LIST,
   REMAIN_PASSWORD,
   CHANGE_PASSWORD,
+  UPDATE_PROFILE,
+  UPDATE_USER,
+  LOGOUT_USER,
 }
 
 /* ------------- Action Creators ------------- */
@@ -167,3 +174,42 @@ export const changePasswordActions = {
   changePasswordSuccess,
   changePasswordFailure,
 }
+
+const updateProfileInit = () => ({
+  type: UPDATE_PROFILE.INIT,
+})
+
+const updateProfileRequest = (updateProfileValues: UpdateProfileValues) => ({
+  type: UPDATE_PROFILE.REQUEST,
+  payload: {
+    updateProfileValues,
+  },
+})
+
+const updateProfileSuccess = () => ({
+  type: UPDATE_PROFILE.SUCCESS,
+})
+
+const updateProfileFailure = (error: string) => ({
+  type: UPDATE_PROFILE.FAILURE,
+  error,
+})
+
+const updateUser = (updateProfileValues: UpdateProfileValues) => ({
+  type: UPDATE_USER,
+  payload: {
+    updateProfileValues,
+  },
+})
+
+export const updateProfileActions = {
+  updateProfileInit,
+  updateProfileRequest,
+  updateProfileSuccess,
+  updateProfileFailure,
+  updateUser,
+}
+
+export const logoutUser = () => ({
+  type: LOGOUT_USER,
+})

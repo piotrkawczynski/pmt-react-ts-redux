@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects"
 import { ActionType } from "typesafe-actions"
 import { api } from "../../services/api"
-import { Issue } from "../../types/issue"
 import { Sprint } from "../../types/sprint"
 import {
   getBacklogIssuesActions,
@@ -49,6 +48,7 @@ function* getSprintListFlow(
       )
     }
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getSprintListActions.getSprintListFailure(error.message))
   }
@@ -65,6 +65,7 @@ function* createSprintFlow(
     yield put(createSprintActions.createSprintSuccess())
     yield put(getSprintListActions.getSprintListRequest(projectId))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(createSprintActions.createSprintFailure(error.message))
   }
@@ -91,6 +92,7 @@ function* updateSprintFlow(
     yield put(updateSprintActions.updateSprintSuccess(sprint))
     yield put(getSprintListActions.getSprintListRequest(projectId))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(updateSprintActions.updateSprintFailure(error.message))
   }
@@ -108,6 +110,7 @@ function* deleteSprintFlow(
     yield put(getSprintListActions.getSprintListRequest(projectId))
     yield put(getBacklogIssuesActions.getBacklogIssuesRequest(projectId))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(deleteSprintActions.deleteSprintFailure(error.message))
   }

@@ -1,7 +1,8 @@
-import { takeLatest, call, put } from "redux-saga/effects"
+import { call, put, takeLatest } from "redux-saga/effects"
 import { api } from "../../services/api"
-import { types, getPermissionListActions } from "./permissionActions"
 import { Permission } from "../../types/permission"
+
+import { getPermissionListActions, types } from "./permissionActions"
 
 function* getPermissionListFlow() {
   try {
@@ -11,6 +12,7 @@ function* getPermissionListFlow() {
       getPermissionListActions.getPermissionListSuccess(data as Permission[])
     )
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getPermissionListActions.getPermissionListFailure(error.message))
   }

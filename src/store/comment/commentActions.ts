@@ -1,7 +1,6 @@
-import { Comment } from "../../types/comment"
-import { CreateComment } from "../../types/request/createComment"
-import { createPromiseType } from "../../utilities/ReduxFunctions"
 import { CommentInputForm } from "../../components/CommentInput/CommentInput"
+import { Comment } from "../../types/comment"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
 
 /* ------------- Action Types ------------- */
 const GET_COMMENT_LIST = createPromiseType("GET_COMMENT_LIST")

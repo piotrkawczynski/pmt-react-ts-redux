@@ -1,8 +1,3 @@
-import { Issue, IssueDetails } from "../../types/issue"
-import { createPromiseType } from "../../utilities/ReduxFunctions"
-import { CreateIssueFormValues } from "../../components/CreateIssueModal/CreateIssueModal"
-import { UpdateIssueFormValues } from "../../components/UpdateIssueModal/UpdateIssueModal"
-
 /* ------------- Action Types ------------- */
 const SET_SIDEBAR_EXTENSION = "SET_SIDEBAR_EXTENSION"
 

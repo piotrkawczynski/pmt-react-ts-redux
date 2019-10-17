@@ -1,11 +1,12 @@
 import { createReducer } from "reduxsauce"
+import { Project } from "../../types/project"
 import {
   createNestedReducer,
   createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
+import { types as userTypes } from "../user/userActions"
 import { types } from "./projectActions"
-import { Project } from "../../types/project"
 
 /* ------------- Initial UserRedux ------------- */
 export interface ProjectRedux {
@@ -34,4 +35,6 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "createProject"
   ),
+
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

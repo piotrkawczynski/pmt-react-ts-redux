@@ -1,10 +1,10 @@
 import classnames from "classnames"
 import React, { Component } from "react"
 import Select from "react-select"
+import { StylesConfig } from "react-select/src/styles"
+import { ValueType } from "react-select/src/types"
 
 import styles from "./Dropdown.module.scss"
-import { ValueType } from "react-select/src/types"
-import { StylesConfig } from "react-select/src/styles"
 
 export interface Option {
   value: string
@@ -58,7 +58,7 @@ class Dropdown extends Component<DropdownProps> {
           name={name}
           defaultValue={defaultValue}
           isDisabled={isDisabled}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }),   }}
+          styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
           value={value}
         />
       </div>

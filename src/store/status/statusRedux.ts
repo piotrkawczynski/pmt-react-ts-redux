@@ -1,11 +1,12 @@
 import { createReducer } from "reduxsauce"
+import { StatusFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import {
   createNestedReducer,
   createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
+import { types as userTypes } from "../user/userActions"
 import { types } from "./statusActions"
-import { StatusFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 
 export interface Status {
   id: number
@@ -54,4 +55,5 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "statusList"
   ),
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

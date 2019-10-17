@@ -1,12 +1,12 @@
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import classnames from "classnames"
 import { ErrorMessage, FormikProps } from "formik"
 import React from "react"
 import Dropzone from "react-dropzone"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
-import { TagPickerValues } from "../Pickers/TagPicker/TagPicker"
 import { CreateProjectPageFormValues } from "../../pages/CreateProjectPage/CreateProjectPage"
+import { TagPickerValues } from "../Pickers/TagPicker/TagPicker"
 
 import styles from "./ImageLoader.module.scss"
 

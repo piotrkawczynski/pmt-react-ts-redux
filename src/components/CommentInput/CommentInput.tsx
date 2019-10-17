@@ -1,18 +1,17 @@
+import classnames from "classnames"
 import { Formik } from "formik"
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import { Button } from "reactstrap"
+import * as Yup from "yup"
 
-import { ApplicationState } from "../../store/redux"
+import { createCommentActions } from "../../store/comment/commentActions"
 import { LoaderImage } from "../../types/loaderImage"
 import AttachmentPreview from "../AttachmentPreview/AttachmentPreview"
 import ImageUploader from "../ImageUploader/ImageUploader"
 import Input from "../Inputs/Input/Input"
 
 import styles from "./CommentInput.module.scss"
-import { Button } from "reactstrap"
-import classnames from "classnames"
-import * as Yup from "yup"
-import { createCommentActions } from "../../store/comment/commentActions"
 
 interface CommentInputProps {
   createCommentRequest: typeof createCommentActions.createCommentRequest
@@ -49,16 +48,6 @@ class CommentInput extends Component<CommentInputProps, CommentInputState> {
     }
   }
 
-  componentDidMount() {}
-
-  // handleOnClick = () => {
-  //   const { sendComment } = this.props
-  //   const { description, permission, imageList } = this.state
-  //   if (description || imageList) {
-  //     sendComment({ description, permission, imageList })
-  //   }
-  // }
-
   handleSubmit = (values: CommentInputForm) => {
     const { attachments, comment } = values
     const { issueId, createCommentRequest } = this.props
@@ -75,9 +64,6 @@ class CommentInput extends Component<CommentInputProps, CommentInputState> {
           onSubmit={this.handleSubmit}
         >
           {(formikProps) => {
-            console.log(formikProps.values)
-            console.log(formikProps.errors)
-
             return (
               <>
                 <div className={styles.inputsWrapper}>
@@ -143,13 +129,11 @@ class CommentInput extends Component<CommentInputProps, CommentInputState> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({})
-
 const mapDispatchToProps = {
   createCommentRequest: createCommentActions.createCommentRequest,
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CommentInput)

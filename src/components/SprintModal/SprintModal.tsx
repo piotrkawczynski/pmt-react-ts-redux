@@ -2,19 +2,12 @@ import classnames from "classnames"
 import { format } from "date-fns"
 import { Form, Formik } from "formik"
 import React, { Component } from "react"
-import { connect } from "react-redux"
 import { Button } from "reactstrap"
 
-import { ApplicationState } from "../../store/redux"
-import { LoaderImage } from "../../types/loaderImage"
 import Input from "../Inputs/Input/Input"
 import Modal from "../Modal/Modal"
 
 import styles from "./SprintModal.module.scss"
-
-interface PropsFromDispatch {}
-
-interface PropsFromState {}
 
 interface InnerProps {
   initialValues?: SprintFormValues
@@ -23,7 +16,7 @@ interface InnerProps {
   onSubmit: (values: SprintFormValues) => void
 }
 
-type SprintModalProps = PropsFromDispatch & PropsFromState & InnerProps
+type SprintModalProps = InnerProps
 
 export interface SprintFormValues {
   dateFrom: string
@@ -39,8 +32,6 @@ class SprintModal extends Component<SprintModalProps, SprintModalState> {
   constructor(props: SprintModalProps) {
     super(props)
 
-    console.log("sprint moda", props)
-
     this.state = {
       formValues: {
         dateFrom: format(new Date(), "yyyy-MM-dd"),
@@ -50,10 +41,6 @@ class SprintModal extends Component<SprintModalProps, SprintModalState> {
       },
     }
   }
-
-  componentDidMount() {}
-
-  componentWillUnmount() {}
 
   render() {
     const { initialValues, onSubmit, onCancel } = this.props
@@ -67,7 +54,7 @@ class SprintModal extends Component<SprintModalProps, SprintModalState> {
           onSubmit={onSubmit}
           enableReinitialize
         >
-          {(formikProps) => {
+          {() => {
             return (
               <Form>
                 <div className={styles.containerWrapper}>
@@ -117,11 +104,4 @@ class SprintModal extends Component<SprintModalProps, SprintModalState> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({})
-
-const mapDispatchToProps = {}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SprintModal)
+export default SprintModal

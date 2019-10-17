@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { connect } from "react-redux"
 
 import { ApplicationState } from "../../store/redux"
 import Comment from "./Comment/Comment"
@@ -13,12 +12,6 @@ interface CommentListProps {
 }
 
 class CommentList extends Component<CommentListProps> {
-  constructor(props: CommentListProps) {
-    super(props)
-  }
-
-  componentDidMount() {}
-
   render() {
     const {
       commentList: { data },
@@ -49,11 +42,4 @@ class CommentList extends Component<CommentListProps> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => {}
-
-const mapDispatchToProps = {}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(CommentList)
+export default CommentList

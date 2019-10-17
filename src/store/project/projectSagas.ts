@@ -1,12 +1,12 @@
-import { takeLatest, call, put } from "redux-saga/effects"
-import {
-  types,
-  projectListActions,
-  createProjectActions,
-} from "./projectActions"
+import * as objectToFormdata from "object-to-formdata"
+import { call, put, takeLatest } from "redux-saga/effects"
 import { ActionType } from "typesafe-actions"
 import { api } from "../../services/api"
-import * as objectToFormdata from "object-to-formdata"
+import {
+  createProjectActions,
+  projectListActions,
+  types,
+} from "./projectActions"
 
 function* projectListFlow() {
   try {
@@ -14,6 +14,7 @@ function* projectListFlow() {
 
     yield put(projectListActions.projectListSuccess(data))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(projectListActions.projectListFailure(error.message))
   }
@@ -42,6 +43,7 @@ function* createProjectFlow(
 
     // yield put(projectListActions.projectListSuccess(data))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(projectListActions.projectListFailure(error.message))
   }

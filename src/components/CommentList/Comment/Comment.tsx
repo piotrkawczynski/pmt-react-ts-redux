@@ -26,12 +26,6 @@ interface PropsFromDispatch {
 type CommentProps = InnerProps & PropsFromState & PropsFromDispatch
 
 class Comment extends Component<CommentProps> {
-  constructor(props: CommentProps) {
-    super(props)
-  }
-
-  componentDidMount() {}
-
   handleDelete = () => {
     const { deleteCommentRequest, comment } = this.props
     deleteCommentRequest(comment.id, comment.issueId)
@@ -79,7 +73,7 @@ class Comment extends Component<CommentProps> {
                     key={`attachment${index}`}
                     className={styles.attachedImage}
                     src={attachment}
-                    // onClick={() => this.onClick(element.image, index)}
+                    alt={`attachment${index}`}
                   />
                 ))}
               </div>

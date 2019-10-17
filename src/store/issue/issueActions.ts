@@ -1,7 +1,7 @@
-import { Issue, IssueDetails } from "../../types/issue"
-import { createPromiseType } from "../../utilities/ReduxFunctions"
 import { CreateIssueFormValues } from "../../components/CreateIssueModal/CreateIssueModal"
 import { UpdateIssueFormValues } from "../../components/UpdateIssueModal/UpdateIssueModal"
+import { Issue, IssueDetails } from "../../types/issue"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
 
 /* ------------- Action Types ------------- */
 const GET_ISSUE_LIST = createPromiseType("GET_ISSUE_LIST")

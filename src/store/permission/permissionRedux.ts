@@ -1,11 +1,12 @@
 import { createReducer } from "reduxsauce"
+import { Permission } from "../../types/permission"
 import {
   createNestedReducer,
   createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
+import { types as userTypes } from "../user/userActions"
 import { types } from "./permissionActions"
-import { Permission } from "../../types/permission"
 
 /* ------------- Initial UserRedux ------------- */
 export interface PermissionRedux {
@@ -27,4 +28,5 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "permissionList"
   ),
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

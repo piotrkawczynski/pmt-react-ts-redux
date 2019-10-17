@@ -1,11 +1,12 @@
 import { createReducer } from "reduxsauce"
+import { InviteFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import {
   createNestedReducer,
   createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
+import { types as userTypes } from "../user/userActions"
 import { types } from "./inviteActions"
-import { InviteFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 
 /* ------------- Initial UserRedux ------------- */
 export interface InviteRedux {
@@ -41,4 +42,5 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "inviteList"
   ),
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

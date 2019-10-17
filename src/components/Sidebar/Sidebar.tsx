@@ -1,15 +1,20 @@
-import classNames from "classnames"
 import { faReact } from "@fortawesome/free-brands-svg-icons"
 import {
-  faCode,
   faCaretLeft,
   faCaretRight,
+  faEdit,
+  faListOl,
+  faPlusSquare,
+  faTable,
+  faTasks,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import classNames from "classnames"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { RouteComponentProps, withRouter } from "react-router-dom"
+
 import { setSidebarExtension as setSidebarExtensionAction } from "../../store/components/componentsActions"
 import { ApplicationState } from "../../store/redux"
 import ItemList from "./Components/ItemList"
@@ -20,18 +25,8 @@ export interface SidebarItem {
   route: string
   icon: IconDefinition
   name: string
+  show: boolean
 }
-
-const data: SidebarItem[] = [
-  { route: "/", icon: faCode, name: "Home" },
-  { route: "/create-project", icon: faCode, name: "Create Project" },
-  { route: "/profile", icon: faCode, name: "Profile" },
-]
-
-// const projectLinks: SidebarItem[] = [
-//   { route: "/backlog", icon: faCode, name: "Backlog" },
-//   { route: "/project", icon: faCode, name: "Project" },
-// ]
 
 interface RouteParams {
   projectId: string
@@ -50,14 +45,43 @@ type SidebarProps = RouteComponentProps<RouteParams> &
   PropsFromState
 
 class Sidebar extends Component<SidebarProps> {
-  // updateRoutes = (projectId) => {
-  //   return projectLinks
-  //     .map((item) => ({ ...item }))
-  //     .map((item) => {
-  //       item.route += `/${projectId}`
-  //       return item
-  //     })
-  // }
+  getRoutes = (projectId: string | null) => {
+    const sidebarData: SidebarItem[] = [
+      {
+        route: "/",
+        icon: faListOl,
+        name: "Projects",
+        show: true,
+      },
+      {
+        route: `/project/${projectId}`,
+        icon: faTable,
+        name: "Kanban Scheme",
+        show: !!projectId,
+      },
+      {
+        route: `/project/${projectId}/backlog`,
+        icon: faTasks,
+        name: "Backlog",
+        show: !!projectId,
+      },
+      {
+        route: "/project/create",
+        icon: faPlusSquare,
+        name: "Create Project",
+        show: true,
+      },
+      {
+        route: `/project/${projectId}/edit`,
+        icon: faEdit,
+        name: "Edit project",
+        show: !!projectId,
+      },
+    ]
+
+    return sidebarData.filter(({ show }) => show)
+  }
+
   onExtend = () => {
     const { setSidebarExtension, isSidebarExtended } = this.props
 
@@ -65,15 +89,11 @@ class Sidebar extends Component<SidebarProps> {
   }
 
   render() {
-    // const {
-    //   match: {
-    //     params: { projectId },
-    //   },
-    // } = this.props
-
-    const sidebarExtendedIcon = this.props.isSidebarExtended
-      ? faCaretRight
-      : faCaretLeft
+    const {
+      match: {
+        params: { projectId },
+      },
+    } = this.props
 
     return (
       <div
@@ -81,20 +101,18 @@ class Sidebar extends Component<SidebarProps> {
           [styles.sidebarShrink]: this.props.isSidebarExtended,
         })}
       >
-        <div
-          className={classNames(styles.extendButton, {
-            [styles.extendButtonShrink]: this.props.isSidebarExtended,
-          })}
-          onClick={this.onExtend}
-        >
-          <FontAwesomeIcon
-            icon={sidebarExtendedIcon}
-            size={"lg"}
-            className={classNames(styles.iconWrapper,
-              !this.props.isSidebarExtended && styles.iconWrapperRight)
-            }
-          />
+        {this.renderHeader()}
+        {this.renderExtendButton()}
+        <div>
+          <ItemList data={this.getRoutes(projectId)} />
         </div>
+      </div>
+    )
+  }
+
+  private renderHeader = () => {
+    return (
+      <>
         <div className={styles.headerWrapper}>
           <FontAwesomeIcon
             icon={faReact}
@@ -104,10 +122,30 @@ class Sidebar extends Component<SidebarProps> {
           <h6 className={styles.header}>Project Management Tool</h6>
         </div>
         <div className={styles.line} />
-        <div>
-          <ItemList data={data} />
-          {/*{projectId && <ItemList data={this.updateRoutes(projectId)} />}*/}
-        </div>
+      </>
+    )
+  }
+
+  private renderExtendButton = () => {
+    const sidebarExtendedIcon = this.props.isSidebarExtended
+      ? faCaretRight
+      : faCaretLeft
+
+    return (
+      <div
+        className={classNames(styles.extendButton, {
+          [styles.extendButtonShrink]: this.props.isSidebarExtended,
+        })}
+        onClick={this.onExtend}
+      >
+        <FontAwesomeIcon
+          icon={sidebarExtendedIcon}
+          size={"lg"}
+          className={classNames(
+            styles.iconWrapper,
+            !this.props.isSidebarExtended && styles.iconWrapperRight
+          )}
+        />
       </div>
     )
   }

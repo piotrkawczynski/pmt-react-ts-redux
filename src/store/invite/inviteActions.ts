@@ -1,5 +1,5 @@
-import { createPromiseType } from "../../utilities/ReduxFunctions"
 import { InviteFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
 
 export interface CreateInviteBody {
   projectId: number

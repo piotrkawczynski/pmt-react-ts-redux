@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { connect } from "react-redux"
 
 import { ApplicationState } from "../../../../store/redux"
 import { Issue } from "../../../../types/issue"
@@ -15,14 +14,7 @@ interface KanbanItemProps {
   onDragEnd?: (event: React.DragEvent<HTMLDivElement>) => void
 }
 
-interface KanbanItemState {}
-
-class KanbanItem extends Component<KanbanItemProps, KanbanItemState> {
-  constructor(props: KanbanItemProps) {
-    super(props)
-    this.state = {}
-  }
-
+class KanbanItem extends Component<KanbanItemProps> {
   render() {
     const {
       issue,
@@ -48,7 +40,11 @@ class KanbanItem extends Component<KanbanItemProps, KanbanItemState> {
         className={styles.kanbanItem}
       >
         <div className={styles.kanbanItemHeader}>
-          <img className={styles.image} src={tag.image} />
+          <img
+            className={styles.image}
+            src={tag.image}
+            alt={`${title}-${new Date()}`}
+          />
           <div className={styles.tag}>{tag.name}</div>
           <div className={styles.code}>#{code}</div>
         </div>
@@ -59,11 +55,4 @@ class KanbanItem extends Component<KanbanItemProps, KanbanItemState> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({})
-
-const mapDispatchToProps = {}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(KanbanItem)
+export default KanbanItem

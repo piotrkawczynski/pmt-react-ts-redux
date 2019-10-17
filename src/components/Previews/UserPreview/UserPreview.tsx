@@ -1,16 +1,15 @@
+import produce from "immer"
 import React, { Component } from "react"
 
-import FormContainer from "../../FormContainer/FormContainer"
 import {
   FulfillProjectPageState,
   InviteFormValues,
 } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
-
+import { deleteInviteActions } from "../../../store/invite/inviteActions"
+import FormContainer from "../../FormContainer/FormContainer"
 import UserItemPreview from "./UserItemPreview/UserItemPreview"
 
 import styles from "./UserPreview.module.scss"
-import produce from "immer"
-import { deleteInviteActions } from "../../../store/invite/inviteActions"
 
 interface UserPreviewProps {
   users: InviteFormValues[]

@@ -4,22 +4,10 @@ import { format } from "date-fns"
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { RouteComponentProps, withRouter } from "react-router"
-import {
-  getBacklogIssuesActions,
-  getIssueListActions,
-  updateIssueSprintActions,
-} from "../../store/issue/issueActions"
-import { getPermissionListActions } from "../../store/permission/permissionActions"
+
+import { getIssueListActions } from "../../store/issue/issueActions"
 import { ApplicationState } from "../../store/redux"
-import {
-  createSprintActions,
-  deleteSprintActions,
-  getSprintListActions,
-  updateSprintActions,
-} from "../../store/sprint/sprintActions"
-import { getStatusListActions } from "../../store/status/statusActions"
-import { getTagListActions } from "../../store/tag/tagActions"
-import { getUserListActions } from "../../store/user/userActions"
+import { updateSprintActions } from "../../store/sprint/sprintActions"
 import { Sprint } from "../../types/sprint"
 import SprintModal, { SprintFormValues } from "../SprintModal/SprintModal"
 
@@ -44,7 +32,7 @@ interface SprintChooserState {
 }
 
 interface RouteParams {
-  id: string
+  projectId: string
 }
 
 type SprintChooserProps = InnerProps &

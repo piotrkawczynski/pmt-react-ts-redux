@@ -3,12 +3,12 @@
 
 .sidebar {
   position: relative;
-  min-width: 260px;
-  width: 260px;
+  min-width: 230px;
+  width: 230px;
   z-index: 1030;
   background: $midnight-blue;
   color: #fff;
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 
 .sidebarShrink {
@@ -20,7 +20,7 @@
   cursor: pointer;
   color: black;
   position: absolute;
-  left: 247px;
+  left: 215px;
   top: 108px;
   background-color: white;
   border-radius: 50%;
@@ -30,7 +30,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s;
+  transition: all 0.5s;
 
   &:focus {
     outline: none;
@@ -87,7 +87,7 @@
 .line {
   margin-left: 15px;
   height: 1px;
-  width: calc(100% - 30px);
+  width: calc(100% - 35px);
   background-color: $clouds;
   margin-bottom: 5px;
 }

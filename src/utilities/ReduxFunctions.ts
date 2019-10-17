@@ -51,24 +51,16 @@ export const createPromiseState = <T, E>(): PromiseState<T, E> => {
   }
 }
 
-export const createNestedReducer = <State>(type: CreateAsyncType, initialState: State, key: keyof State) => {
+export const createNestedReducer = <State>(
+  type: CreateAsyncType,
+  initialState: State,
+  key: keyof State
+) => {
   return {
-    [type.INIT]: createInitExtendedReducer<State>(
-      initialState,
-      key
-    ),
-    [type.REQUEST]: createRequestExtendedReducer<State>(
-      initialState,
-      key
-    ),
-    [type.SUCCESS]: createSuccessExtendedReducer<State>(
-      initialState,
-      key
-    ),
-    [type.FAILURE]: createFailureExtendedReducer<State>(
-      initialState,
-      key
-    ),
+    [type.INIT]: createInitExtendedReducer<State>(initialState, key),
+    [type.REQUEST]: createRequestExtendedReducer<State>(initialState, key),
+    [type.SUCCESS]: createSuccessExtendedReducer<State>(initialState, key),
+    [type.FAILURE]: createFailureExtendedReducer<State>(initialState, key),
   }
 }
 

@@ -1,10 +1,10 @@
-import React, { Component } from "react"
 import { FormikProps } from "formik"
+import React, { Component } from "react"
 
-import FormContainer from "../../FormContainer/FormContainer"
-import Input from "../../Inputs/Input/Input"
 import { CreateProjectPageFormValues } from "../../../pages/CreateProjectPage/CreateProjectPage"
+import FormContainer from "../../FormContainer/FormContainer"
 import ImageLoader from "../../ImageLoader/ImageLoader"
+import Input from "../../Inputs/Input/Input"
 
 import styles from "./ProjectPicker.module.scss"
 

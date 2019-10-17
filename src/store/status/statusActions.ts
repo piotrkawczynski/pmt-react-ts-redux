@@ -1,5 +1,6 @@
-import { createPromiseType } from "../../utilities/ReduxFunctions"
 import { StatusFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
+
 import { Status } from "./statusRedux"
 
 export interface CreateStatusBody {

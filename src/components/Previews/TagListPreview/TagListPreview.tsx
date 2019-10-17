@@ -1,15 +1,15 @@
+import produce from "immer"
 import React, { Component } from "react"
 
 import {
   FulfillProjectPageState,
   TagFormValues,
 } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
+import { deleteTagActions } from "../../../store/tag/tagActions"
 import FormContainer from "../../FormContainer/FormContainer"
 import TagItemPreview from "./TagItemPreview/TagItemPreview"
 
 import styles from "./TagListPreview.module.scss"
-import produce from "immer"
-import { deleteTagActions } from "../../../store/tag/tagActions"
 
 interface TagListPreviewProps {
   tags: TagFormValues[]

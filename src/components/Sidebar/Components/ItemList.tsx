@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom"
-import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react"
+import { NavLink } from "react-router-dom"
 
 import { SidebarItem } from "../Sidebar"
 
@@ -15,7 +15,9 @@ const ItemList: React.FC<ItemListProps> = ({ data }) => {
     <>
       {data.map((item) => (
         <NavLink key={item.route} className={styles.navLink} to={item.route}>
-          <FontAwesomeIcon icon={item.icon} className={styles.icon} />
+          <div className={styles.iconWrapper}>
+            <FontAwesomeIcon icon={item.icon} className={styles.icon} />
+          </div>
           <div className={styles.title}>{item.name}</div>
         </NavLink>
       ))}

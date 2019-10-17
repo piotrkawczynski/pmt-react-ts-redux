@@ -1,14 +1,14 @@
-import { takeLatest, call, put } from "redux-saga/effects"
-import { ActionType } from "typesafe-actions"
-import { api } from "../../services/api"
 import * as objectToFormdata from "object-to-formdata"
+import { call, put, takeLatest } from "redux-saga/effects"
+import { ActionType } from "typesafe-actions"
+import { TagFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
+import { api } from "../../services/api"
 import {
-  types,
   createTagActions,
   deleteTagActions,
   getTagListActions,
+  types,
 } from "./tagActions"
-import { TagFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import { Tag } from "./tagRedux"
 
 function* createTagFlow(
@@ -30,6 +30,7 @@ function* createTagFlow(
     yield put(createTagActions.createTagSuccess(createdTag))
     setValues()
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error)
     yield put(createTagActions.createTagFailure(error.message))
   }
@@ -46,6 +47,7 @@ function* deleteTagFlow(
     yield put(deleteTagActions.deleteTagSuccess())
     yield call(setValues)
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error)
     yield put(deleteTagActions.deleteTagFailure(error.message))
   }
@@ -61,6 +63,7 @@ function* getTagListFlow(
 
     yield put(getTagListActions.getTagListSuccess(data as Tag[]))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getTagListActions.getTagListFailure(error.message))
   }

@@ -1,11 +1,12 @@
 import { createReducer } from "reduxsauce"
+import { TagFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import {
   createNestedReducer,
   createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
+import { types as userTypes } from "../user/userActions"
 import { types } from "./tagActions"
-import { TagFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 
 export interface Tag {
   id: number
@@ -47,4 +48,5 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "tagList"
   ),
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

@@ -1,14 +1,23 @@
+import produce from "immer"
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { RouteComponentProps, withRouter } from "react-router"
-import produce from "immer"
+import { Redirect, RouteComponentProps, withRouter } from "react-router"
+import Carousel from "../../components/Carousel/Carousel"
 
-import { ApplicationState } from "../../store/redux"
+import FormContainer from "../../components/FormContainer/FormContainer"
+import StatusPicker from "../../components/Pickers/StatusPicker/StatusPicker"
+import TagPicker from "../../components/Pickers/TagPicker/TagPicker"
+import UserPicker from "../../components/Pickers/UserPicker/UserPicker"
+import StatusListPreview from "../../components/Previews/StatusListPreview/StatusListPreview"
+import TagListPreview from "../../components/Previews/TagListPreview/TagListPreview"
+import UserPreview from "../../components/Previews/UserPreview/UserPreview"
 import {
-  createTagActions,
-  deleteTagActions,
-  getTagListActions,
-} from "../../store/tag/tagActions"
+  createInviteActions,
+  deleteInviteActions,
+  getInviteListActions,
+} from "../../store/invite/inviteActions"
+import { projectListActions } from "../../store/project/projectActions"
+import { ApplicationState } from "../../store/redux"
 import {
   createStatusActions,
   deleteStatusActions,
@@ -16,21 +25,12 @@ import {
   updateStatusOrderActions,
 } from "../../store/status/statusActions"
 import {
-  createInviteActions,
-  deleteInviteActions,
-  getInviteListActions,
-} from "../../store/invite/inviteActions"
-
-import TagPicker from "../../components/Pickers/TagPicker/TagPicker"
-import StatusPicker from "../../components/Pickers/StatusPicker/StatusPicker"
-import UserPicker from "../../components/Pickers/UserPicker/UserPicker"
-import Carousel from "../../components/Carousel/Carousel"
-import FormContainer from "../../components/FormContainer/FormContainer"
-import StatusListPreview from "../../components/Previews/StatusListPreview/StatusListPreview"
-import UserPreview from "../../components/Previews/UserPreview/UserPreview"
+  createTagActions,
+  deleteTagActions,
+  getTagListActions,
+} from "../../store/tag/tagActions"
 
 import styles from "./FulfillProjectPage.module.scss"
-import TagListPreview from "../../components/Previews/TagListPreview/TagListPreview"
 
 interface PropsFromState {
   createInvite: ApplicationState["invite"]["createInvite"]
@@ -39,9 +39,11 @@ interface PropsFromState {
   statusList: ApplicationState["status"]["statusList"]
   tagList: ApplicationState["tag"]["tagList"]
   inviteList: ApplicationState["invite"]["inviteList"]
+  projectList: ApplicationState["project"]["projectList"]
 }
 
 interface PropsFromDispatch {
+  projectListRequest: typeof projectListActions.projectListRequest
   createTagRequest: typeof createTagActions.createTagRequest
   createStatusRequest: typeof createStatusActions.createStatusRequest
   createInviteRequest: typeof createInviteActions.createInviteRequest
@@ -58,7 +60,7 @@ interface PropsFromDispatch {
 }
 
 interface RouteParams {
-  id: string
+  projectId: string
 }
 
 type FulfillProjectPageProps = PropsFromDispatch &
@@ -108,14 +110,16 @@ class FulfillProjectPage extends Component<
       getStatusListRequest,
       getTagListRequest,
       getInviteListRequest,
+      projectListRequest,
       match: { params },
     } = this.props
 
-    const projectId = Number(params.id)
+    const projectId = Number(params.projectId)
 
     getStatusListRequest(projectId)
     getTagListRequest(projectId)
     getInviteListRequest(projectId)
+    projectListRequest()
   }
 
   componentDidUpdate(prevProps: FulfillProjectPageProps) {
@@ -226,9 +230,6 @@ class FulfillProjectPage extends Component<
   render() {
     const {
       match: { params },
-    } = this.props
-
-    const {
       createTagRequest,
       createStatusRequest,
       createInviteRequest,
@@ -236,7 +237,21 @@ class FulfillProjectPage extends Component<
       deleteStatusRequest,
       deleteTagRequest,
       deleteInviteRequest,
+      projectList,
     } = this.props
+
+    const projectId = Number(params.projectId)
+
+    const project =
+      projectList.data && projectList.data!.find(({ id }) => projectId === id)
+
+    if (!project) {
+      return <Redirect to={"/"} />
+    }
+
+    if (project && project.permissionId !== 2) {
+      return <Redirect to={"/"} />
+    }
 
     const { users, tags, statuses } = this.state
 
@@ -247,17 +262,17 @@ class FulfillProjectPage extends Component<
             <StatusPicker
               statuses={statuses}
               createStatusRequest={createStatusRequest}
-              projectId={Number(params.id)}
+              projectId={projectId}
             />
             <TagPicker
               tags={tags}
               createTagRequest={createTagRequest}
-              projectId={Number(params.id)}
+              projectId={projectId}
             />
             <UserPicker
               users={users}
               createInviteRequest={createInviteRequest}
-              projectId={Number(params.id)}
+              projectId={projectId}
             />
           </Carousel>
           <FormContainer
@@ -297,9 +312,11 @@ const mapStateToProps = (state: ApplicationState) => ({
   statusList: state.status.statusList,
   tagList: state.tag.tagList,
   inviteList: state.invite.inviteList,
+  projectList: state.project.projectList,
 })
 
 const mapDispatchToProps = {
+  projectListRequest: projectListActions.projectListRequest,
   createTagInit: createTagActions.createTagInit,
   createStatusInit: createStatusActions.createStatusInit,
   createInviteInit: createInviteActions.createInviteInit,
@@ -312,7 +329,7 @@ const mapDispatchToProps = {
   deleteTagRequest: deleteTagActions.deleteTagRequest,
   deleteInviteRequest: deleteInviteActions.deleteInviteRequest,
   getTagListRequest: getTagListActions.getTagListRequest,
-  getInviteListRequest: getInviteListActions.getInviteListRequest
+  getInviteListRequest: getInviteListActions.getInviteListRequest,
 }
 
 export default connect(

@@ -1,6 +1,7 @@
 import { createReducer } from "reduxsauce"
 import { ActionType } from "typesafe-actions"
 
+import { types as userTypes } from "../user/userActions"
 import { setSidebarExtension, types } from "./componentsActions"
 
 /* ------------- Initial UserRedux ------------- */
@@ -30,4 +31,5 @@ const isSidebarExtendedReducer = (
 /* ------------- Hookup Reducers To Types ------------- */
 export default createReducer(INITIAL_STATE, {
   [types.SET_SIDEBAR_EXTENSION]: isSidebarExtendedReducer,
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

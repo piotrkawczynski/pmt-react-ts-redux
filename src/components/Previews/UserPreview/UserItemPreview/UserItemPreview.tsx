@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 
+import { PERMISSION_LIST } from "../../../../consts/userPermission"
+import { InviteFormValues } from "../../../../pages/FulfillProjectPage/FulfillProjectPage"
 import { CloseButton } from "../../../CloseButton/CloseButton"
 
 import styles from "./UserItemPreview.module.scss"
-import { InviteFormValues } from "../../../../pages/FulfillProjectPage/FulfillProjectPage"
-import { PERMISSION_LIST } from "../../../../consts/userPermission"
 
 interface StatusItemPreviewProps {
   user: InviteFormValues

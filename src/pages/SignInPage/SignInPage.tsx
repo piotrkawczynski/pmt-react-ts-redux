@@ -1,15 +1,14 @@
-import React, { Component } from "react"
 import classnames from "classnames"
-import { connect } from "react-redux"
-import Input from "../../components/Inputs/Input/Input"
-import { Button } from "reactstrap"
-import { Link } from "react-router-dom"
 import { Form, Formik, FormikActions } from "formik"
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import { Button } from "reactstrap"
 import * as Yup from "yup"
-import { ApplicationState } from "../../store/redux"
+import Input from "../../components/Inputs/Input/Input"
+import { loginActions } from "../../store/user/userActions"
 
 import styles from "./SignInPage.module.scss"
-import { loginActions } from "../../store/user/userActions"
 
 interface PropsFromDispatch {
   loginActionsRequest: typeof loginActions.loginRequest
@@ -37,8 +36,6 @@ export interface SignInFormValues {
 }
 
 class SignInPage extends Component<SignInPageProps> {
-  componentDidMount() {}
-
   onSubmit = (
     values: SignInFormValues,
     formikActions: FormikActions<SignInFormValues>
@@ -58,10 +55,8 @@ class SignInPage extends Component<SignInPageProps> {
             onSubmit={this.onSubmit}
           >
             {({
-              values: { email, password },
               touched,
               errors,
-              isSubmitting,
               handleChange,
             }) => (
               <Form>
@@ -94,10 +89,7 @@ class SignInPage extends Component<SignInPageProps> {
                   </Link>
                 </div>
                 <div className={styles.buttonWrapper}>
-                  <Button
-                    type="submit"
-                    className="button"
-                  >
+                  <Button type="submit" className="button">
                     Sign in
                   </Button>
                 </div>
@@ -115,13 +107,11 @@ class SignInPage extends Component<SignInPageProps> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({})
-
 const mapDispatchToProps = {
   loginActionsRequest: loginActions.loginRequest,
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(SignInPage)

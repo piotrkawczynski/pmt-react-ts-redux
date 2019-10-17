@@ -1,18 +1,17 @@
+import produce from "immer"
 import React from "react"
 
 import {
   FulfillProjectPageState,
   StatusFormValues,
 } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
-import FormContainer from "../../FormContainer/FormContainer"
-import StatusItemPreview from "./StatusItemPreview/StatusItemPreview"
-
-import styles from "./StatusListPreview.module.scss"
-import produce from "immer"
 import {
   deleteStatusActions,
   updateStatusOrderActions,
 } from "../../../store/status/statusActions"
+import FormContainer from "../../FormContainer/FormContainer"
+import StatusItemPreview from "./StatusItemPreview/StatusItemPreview"
+import styles from "./StatusListPreview.module.scss"
 
 interface StatusListPreviewProps {
   statuses: StatusFormValues[]

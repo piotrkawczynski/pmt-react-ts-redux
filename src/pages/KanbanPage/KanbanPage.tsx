@@ -9,12 +9,13 @@ import SprintModal, {
 import { getIssueListActions } from "../../store/issue/issueActions"
 import { getPermissionListActions } from "../../store/permission/permissionActions"
 import { ApplicationState } from "../../store/redux"
-import { createSprintActions, getSprintListActions } from "../../store/sprint/sprintActions"
+import {
+  createSprintActions,
+  getSprintListActions,
+} from "../../store/sprint/sprintActions"
 import { getStatusListActions } from "../../store/status/statusActions"
 import { getTagListActions } from "../../store/tag/tagActions"
 import { getUserListActions } from "../../store/user/userActions"
-
-import styles from "./KanbanPage.module.scss"
 import KanbanScheme from "./KanbanScheme/KanbanScheme"
 
 interface PropsFromDispatch {
@@ -24,7 +25,7 @@ interface PropsFromDispatch {
   getPermissionListRequest: typeof getPermissionListActions.getPermissionListRequest
   getSprintListRequest: typeof getSprintListActions.getSprintListRequest
   getIssueListRequest: typeof getIssueListActions.getIssueListRequest
-  createSprintRequest: typeof createSprintActions.createSprintRequest,
+  createSprintRequest: typeof createSprintActions.createSprintRequest
 }
 
 interface PropsFromState {
@@ -37,7 +38,7 @@ interface PropsFromState {
 }
 
 interface RouteParams {
-  id: string
+  projectId: string
 }
 
 type KanbanPageProps = PropsFromDispatch &
@@ -59,7 +60,7 @@ class Project extends Component<KanbanPageProps, KanbanPageState> {
       match: { params },
     } = props
 
-    this.projectId = Number(params.id)
+    this.projectId = Number(params.projectId)
 
     this.state = {
       openUpdateIssueModal: true,
@@ -106,7 +107,7 @@ class Project extends Component<KanbanPageProps, KanbanPageState> {
     }
 
     return (
-      <div className={styles.project}>
+      <>
         {sprintList.data && !!sprintList.data.length && (
           <SprintChooser
             sprintList={sprintList}
@@ -124,7 +125,7 @@ class Project extends Component<KanbanPageProps, KanbanPageState> {
           permissionList={permissionList}
           userList={userList}
         />
-      </div>
+      </>
     )
   }
 

@@ -64,8 +64,13 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     sliding: boolean,
     direction: "next" | "prev"
   ) => {
-    if (!sliding) return `translateX(${position * -100}%)`
-    if (direction === "next") return `translateX(${position * -100}%)`
+    if (!sliding) {
+      return `translateX(${position * -100}%)`
+    }
+    if (direction === "next") {
+      return `translateX(${position * -100}%)`
+    }
+
     return `translateX(${position * -100}%)`
   }
 

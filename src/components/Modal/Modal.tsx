@@ -32,12 +32,17 @@ class Modal extends React.Component<ModalProps> {
   }
 
   render() {
-
     const { alignCenter = false } = this.props
 
     return createPortal(
       <Scrolllock>
-        <div className={classNames(styles.modal, {[styles.centerContent]: alignCenter})}>{this.props.children}</div>
+        <div
+          className={classNames(styles.modal, {
+            [styles.centerContent]: alignCenter,
+          })}
+        >
+          {this.props.children}
+        </div>
       </Scrolllock>,
       this.element
     )

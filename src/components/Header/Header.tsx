@@ -1,4 +1,8 @@
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { Component } from "react"
+import { connect } from "react-redux"
+import { NavLink } from "react-router-dom"
 import {
   Collapse,
   DropdownItem,
@@ -9,21 +13,20 @@ import {
   NavbarToggler,
   UncontrolledDropdown,
 } from "reactstrap"
-import { NavLink } from "react-router-dom"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
+
+import { logoutUser } from "../../store/user/userActions"
 import history from "../../utilities/history"
-import { connect } from "react-redux"
-// import { signOut, updateProfile, UserSelector } from "../../store/redux/user"
 
 import styles from "./Header.module.scss"
 
 interface InnerProps {
   title?: string
 }
-interface PropsFromState {}
+interface PropsFromDispatch {
+  logoutUser: typeof logoutUser
+}
 
-type HeaderProps = InnerProps & PropsFromState
+type HeaderProps = InnerProps & PropsFromDispatch
 
 interface HeaderState {
   isOpen: boolean
@@ -45,20 +48,15 @@ class Header extends Component<HeaderProps, HeaderState> {
     history.push("/profile")
   }
 
-  redirectChangePassword = () => {
-    history.push("/change_password")
-  }
-
   onSignOut = () => {
-    // const { signOut } = this.props
+    this.props.logoutUser()
 
-    // signOut()
-
-    history.push("/sign-in")
+    history.push("/login")
   }
 
   render() {
     const { title } = this.props
+
     return (
       <Navbar className={styles.navbar} expand="md">
         {title && (
@@ -81,11 +79,8 @@ class Header extends Component<HeaderProps, HeaderState> {
                 <DropdownItem onClick={this.redirectProfile}>
                   Profile
                 </DropdownItem>
-                <DropdownItem onClick={this.redirectChangePassword}>
-                  Change password
-                </DropdownItem>
                 <DropdownItem divider />
-                {/*<DropdownItem onClick={this.onSignOut}>Sign out</DropdownItem>*/}
+                <DropdownItem onClick={this.onSignOut}>Sign out</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -96,7 +91,7 @@ class Header extends Component<HeaderProps, HeaderState> {
 }
 
 const mapDispatchToProps = {
-  // signOut,
+  logoutUser,
 }
 
 export default connect(

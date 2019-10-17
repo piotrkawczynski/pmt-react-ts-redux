@@ -6,6 +6,7 @@ import {
   createPromiseState,
   PromiseState,
 } from "../../utilities/ReduxFunctions"
+import { types as userTypes } from "../user/userActions"
 import { types } from "./commentActions"
 
 /* ------------- Initial UserRedux ------------- */
@@ -42,4 +43,5 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "deleteComment"
   ),
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })

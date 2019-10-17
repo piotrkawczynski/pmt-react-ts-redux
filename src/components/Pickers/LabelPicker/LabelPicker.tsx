@@ -9,18 +9,18 @@ class LabelPicker extends Component {
     return (
       <FormContainer label={"label"} containerClassName={styles.formContainer}>
         <div className={styles.inputWrapper}>
-        <Input
-          type="text"
-          containerClassName={styles.input}
-          label="title"
-          name="label.title"
-        />
-        <Input
-          type="color"
-          containerClassName={styles.colorInput}
-          label="color"
-          name="label.color"
-        />
+          <Input
+            type="text"
+            containerClassName={styles.input}
+            label="title"
+            name="label.title"
+          />
+          <Input
+            type="color"
+            containerClassName={styles.colorInput}
+            label="color"
+            name="label.color"
+          />
         </div>
       </FormContainer>
     )

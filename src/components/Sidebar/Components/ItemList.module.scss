@@ -2,7 +2,7 @@
 @import "../../../scss/variables";
 
 .navLink {
-  padding: 12px 22px;
+  height: 40px;
   font-size: 1.1em;
   display: flex;
   flex-grow: 1;
@@ -19,14 +19,18 @@
   }
 }
 
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  min-width: 60px;
+}
+
 .icon {
-  font-size: 15px;
-  margin-right: 5px;
+  font-size: 18px;
 }
 
 .title {
-  font-size: 15px;
-  display: flex;
-  flex-grow: 0.8;
-  margin-left: 16px;
+  font-size: 16px;
 }

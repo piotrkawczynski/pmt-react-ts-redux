@@ -2,11 +2,11 @@ import * as React from "react"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 
-import Sidebar from "../Sidebar/Sidebar"
-import Header from "../Header/Header"
-import { ApplicationState } from "../../store/redux"
 import { Route } from "../../routes/routes"
+import { ApplicationState } from "../../store/redux"
 import { userSelector } from "../../store/user/userRedux"
+import Header from "../Header/Header"
+import Sidebar from "../Sidebar/Sidebar"
 
 import styles from "./Layout.module.scss"
 
@@ -18,16 +18,16 @@ interface InnerProps {
 }
 
 interface PropsFromState {
-  loggedIn: boolean
+  token: string | null
 }
 
 type LayoutProps = InnerProps & PropsFromState
 
 class Layout extends React.Component<LayoutProps> {
   render() {
-    const { loggedIn } = this.props
+    const { token } = this.props
 
-    if (!loggedIn) {
+    if (!token) {
       return <Redirect to="/login" />
     }
 
@@ -50,7 +50,7 @@ class Layout extends React.Component<LayoutProps> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  loggedIn: userSelector.loggedIn(state),
+  token: userSelector.token(state),
 })
 
 const mapDispatchToProps = {}

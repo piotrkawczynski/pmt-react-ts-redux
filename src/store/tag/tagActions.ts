@@ -1,6 +1,7 @@
-import { createPromiseType } from "../../utilities/ReduxFunctions"
-import { TagFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import { TagPickerValues } from "../../components/Pickers/TagPicker/TagPicker"
+import { TagFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
+
 import { Tag } from "./tagRedux"
 
 /* ------------- Action Types ------------- */

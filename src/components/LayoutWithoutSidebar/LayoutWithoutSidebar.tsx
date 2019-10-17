@@ -1,6 +1,7 @@
 import React from "react"
-import { Route } from "../../routes/routes"
+
 import signBackground from "../../assets/signBackground.jpeg"
+import { Route } from "../../routes/routes"
 
 import styles from "./LayoutWithoutSidebar.module.scss"
 
@@ -24,9 +25,7 @@ class LayoutWithoutSidebar extends React.Component<InnerProps> {
             alt="backgroundImage"
             className={styles.backgroundImage}
             src={signBackground}
-            style={{
-
-            }}
+            style={{}}
           />
         )}
         <Tag route={route} />

@@ -1,0 +1,47 @@
+@import "../../scss/variables";
+
+.formWrapper {
+  width: 500px;
+  margin-left: 20px;
+}
+
+.containerWrapper {
+  padding: 60px 20px 20px 20px;
+  min-width: 400px;
+  background-color: $white;
+  box-shadow: $elevation-2dp-box-shadow;
+  border-radius: $border-radius;
+}
+
+.logo {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-weight: $font-weight-3;
+  font-style: italic;
+}
+
+.title {
+  margin: 40px 0 20px 0;
+  font-size: $font-size-4;
+  text-align: center;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.linkWrapper {
+  text-align: right;
+}
+
+.forgotPassword {
+  margin-top: 20px;
+}
+
+.loginLink {
+  margin-top: 40px;
+}

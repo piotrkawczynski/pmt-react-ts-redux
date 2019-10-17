@@ -1,18 +1,18 @@
 import classnames from "classnames"
+import { Form, Formik, FormikActions, FormikProps } from "formik"
 import React, { Component } from "react"
 import { Button } from "reactstrap"
 import * as Yup from "yup"
-import { Form, Formik, FormikActions, FormikProps } from "formik"
 
+import { TagFormValues } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
+import { createTagActions } from "../../../store/tag/tagActions"
 import FormContainer from "../../FormContainer/FormContainer"
-import Input from "../../Inputs/Input/Input"
 import ImageLoader from "../../ImageLoader/ImageLoader"
+import Input from "../../Inputs/Input/Input"
 import {
   MEGABYTE_FACTOR,
   PICTURE_MAX_SIZE,
 } from "../ProjectPicker/ProjectPicker"
-import { TagFormValues } from "../../../pages/FulfillProjectPage/FulfillProjectPage"
-import { createTagActions } from "../../../store/tag/tagActions"
 
 import styles from "./TagPicker.module.scss"
 
@@ -23,7 +23,7 @@ interface InnerProps {
 }
 
 export interface TagPickerValues {
-  name: "",
+  name: ""
   image: File | null
 }
 

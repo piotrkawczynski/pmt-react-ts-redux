@@ -1,6 +1,6 @@
-import { createPromiseType } from "../../utilities/ReduxFunctions"
-import { Project } from "../../types/project"
 import { CreateProjectPageFormValues } from "../../pages/CreateProjectPage/CreateProjectPage"
+import { Project } from "../../types/project"
+import { createPromiseType } from "../../utilities/ReduxFunctions"
 
 /* ------------- Action Types ------------- */
 const PROJECT_LIST = createPromiseType("PROJECT_LIST")

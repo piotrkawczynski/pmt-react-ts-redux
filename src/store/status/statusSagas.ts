@@ -1,14 +1,16 @@
-import { takeLatest, call, put } from "redux-saga/effects"
+import { call, put, takeLatest } from "redux-saga/effects"
 import { ActionType } from "typesafe-actions"
+
+import { StatusFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import { api } from "../../services/api"
+
 import {
-  types,
   createStatusActions,
-  updateStatusOrderActions,
   deleteStatusActions,
   getStatusListActions,
+  types,
+  updateStatusOrderActions,
 } from "./statusActions"
-import { StatusFormValues } from "../../pages/FulfillProjectPage/FulfillProjectPage"
 import { Status } from "./statusRedux"
 
 function* createStatusFlow(
@@ -27,6 +29,7 @@ function* createStatusFlow(
     yield put(createStatusActions.createStatusSuccess(createdStatus))
     setValues()
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(createStatusActions.createStatusFailure(error.message))
   }
@@ -45,6 +48,7 @@ function* updateStatusOrderFlow(
 
     yield put(updateStatusOrderActions.updateStatusOrderSuccess())
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(updateStatusOrderActions.updateStatusOrderFailure(error.message))
   }
@@ -61,6 +65,7 @@ function* deleteStatusFlow(
     yield put(deleteStatusActions.deleteStatusSuccess())
     yield call(setValues)
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(deleteStatusActions.deleteStatusFailure(error.message))
   }
@@ -76,6 +81,7 @@ function* getStatusListFlow(
 
     yield put(getStatusListActions.getStatusListSuccess(data as Status[]))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getStatusListActions.getStatusListFailure(error.message))
   }

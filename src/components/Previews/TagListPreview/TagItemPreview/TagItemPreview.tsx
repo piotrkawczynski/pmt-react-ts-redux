@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 
-import styles from "./TagItemPreview.module.scss"
-import { CloseButton } from "../../../CloseButton/CloseButton"
 import { TagFormValues } from "../../../../pages/FulfillProjectPage/FulfillProjectPage"
+import { CloseButton } from "../../../CloseButton/CloseButton"
+
+import styles from "./TagItemPreview.module.scss"
 
 interface TagItemPreviewProps {
   tag: TagFormValues
@@ -19,9 +20,7 @@ class TagItemPreview extends Component<TagItemPreviewProps> {
     return (
       <div className={styles.itemContainer}>
         <div>
-          {image && (
-            <img className={styles.tagImage} src={image} alt="tag" />
-          )}
+          {image && <img className={styles.tagImage} src={image} alt="tag" />}
         </div>
         <div className={styles.name}>{name}</div>
         <CloseButton

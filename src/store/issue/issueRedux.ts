@@ -10,6 +10,7 @@ import {
   PromiseState,
 } from "../../utilities/ReduxFunctions"
 import { ApplicationState } from "../redux"
+import { types as userTypes } from "../user/userActions"
 import { types, updateIssueStatusActions } from "./issueActions"
 
 /* ------------- Initial UserRedux ------------- */
@@ -44,8 +45,6 @@ const changeIssueStatus = (
   >
 ) => {
   const { issueId, statusId } = action.payload
-
-  console.log(issueId, statusId)
 
   return produce(state, (draft) => {
     const issueList = draft.issueList.data!
@@ -91,6 +90,7 @@ export default createReducer(INITIAL_STATE, {
     INITIAL_STATE,
     "updateIssueSprint"
   ),
+  [userTypes.LOGOUT_USER]: () => INITIAL_STATE,
 })
 
 const groupedIssuesByStatus = (state: ApplicationState) => {

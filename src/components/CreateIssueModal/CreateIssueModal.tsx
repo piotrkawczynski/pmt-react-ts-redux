@@ -18,8 +18,6 @@ interface PropsFromDispatch {
   createIssueRequest: typeof createIssueActions.createIssueRequest
 }
 
-interface PropsFromState {}
-
 interface InnerProps {
   projectId: number
   sprintId: number | null
@@ -31,7 +29,7 @@ interface InnerProps {
   onCreate?: () => void
 }
 
-type CreateIssueModalProps = PropsFromDispatch & PropsFromState & InnerProps
+type CreateIssueModalProps = PropsFromDispatch & InnerProps
 
 export interface CreateIssueFormValues {
   attachment: LoaderImage[]
@@ -43,12 +41,9 @@ export interface CreateIssueFormValues {
   description: string
 }
 
-// tslint:disable-next-line:no-empty-interface
-interface CreateIssueModalState extends CreateIssueFormValues {}
-
 class CreateIssueModal extends Component<
   CreateIssueModalProps,
-  CreateIssueModalState
+  CreateIssueFormValues
 > {
   private readonly statusOptions: Option[]
   private readonly userOptions: Option[]
@@ -253,177 +248,12 @@ class CreateIssueModal extends Component<
     return { statusValue, tagValue, assigneeValue, reviewerValue }
   }
 }
-/*
-  render() {
-    return (
-      <Modal>
-        <Formik initialValues={this.state} onSubmit={this.handleSubmit}>
-          {(formikProps) => {
-            console.log("values", formikProps.values)
-
-            const {
-              attachment,
-              assigneeId,
-              reviewerId,
-              statusId,
-              tagId,
-            } = formikProps.values
-
-            const statusValue =
-              this.statusOptions.find(
-                (status) => status.value === statusId.toString()
-              ) || this.statusOptions[0]
-
-            const tagValue =
-              this.tagOptions.find((tag) => tag.value === tagId.toString()) ||
-              this.tagOptions[0]
-
-            const assigneeValue =
-              this.userOptions.find(
-                (user) => user.value === assigneeId.toString()
-              ) || this.userOptions[0]
-
-            const reviewerValue =
-              (reviewerId &&
-                this.userOptions.find(
-                  (user) => user.value === reviewerId!.toString()
-                )) ||
-              null
-
-            return (
-              <Form>
-                <div className={styles.containerWrapper}>
-                  <div className={styles.contentWrapper}>
-                    <div>Create issue</div>
-
-                    <div className={styles.inlineSection}>
-                      <div className={styles.dropdownWrapper}>
-                        <Dropdown
-                          label="status"
-                          options={this.statusOptions}
-                          onSelect={this.handleSelect(formikProps, "statusId")}
-                          value={statusValue}
-                        />
-                      </div>
-                      <div className={styles.multipleDropdownWrapper}>
-                        <Dropdown
-                          label="tag"
-                          options={this.tagOptions}
-                          onSelect={this.handleSelect(formikProps, "tagId")}
-                          value={tagValue}
-                        />
-                      </div>
-                    </div>
-                    <div className={styles.inlineSection}>
-                      <div className={styles.multipleDropdownWrapper}>
-                        <Dropdown
-                          label="assignee"
-                          options={this.userOptions}
-                          onSelect={this.handleSelect(
-                            formikProps,
-                            "assigneeId"
-                          )}
-                          value={assigneeValue}
-                        />
-                      </div>
-                      <div className={styles.multipleDropdownWrapper}>
-                        <Dropdown
-                          label="reviewer"
-                          options={this.userOptions}
-                          onSelect={this.handleSelect(
-                            formikProps,
-                            "reviewerId"
-                          )}
-                          value={reviewerValue}
-                        />
-                      </div>
-                    </div>
-                    <Input
-                      containerClassName={styles.inputWrapper}
-                      placeholder="Title"
-                      type="text"
-                      name="title"
-                      label="Title"
-                      onChange={formikProps.handleChange}
-                    />
-                    <Input
-                      containerClassName={styles.inputWrapper}
-                      placeholder="Description"
-                      type="textarea"
-                      name="description"
-                      label="Description"
-                      onChange={formikProps.handleChange}
-                    />
-                    <div className={styles.imageUploaderWrapper}>
-                      <label htmlFor="attachment" className={styles.label}>
-                        Attachments
-                      </label>
-                      <div className={styles.imagesWrapper}>
-                        {attachment &&
-                          attachment.map((image, index) => (
-                            <AttachmentPreview
-                              key={`attachmentPreview-${index}`}
-                              alternativeText={`attachmentPreview-${index}`}
-                              loaderImage={image}
-                              handleOnDelete={() => {
-                                const attachments = attachment
-
-                                formikProps.setFieldValue("attachment", [
-                                  ...attachments.slice(0, index),
-                                  ...attachments.slice(index + 1),
-                                ])
-                              }}
-                            />
-                          ))}
-                        {!attachment.length && (
-                          <ImageUploader
-                            formikProps={formikProps}
-                            name="attachment"
-                            multipleImages
-                            errorMessage="File rejected"
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div className={styles.buttonsWrapper}>
-                      <Button
-                        type="button"
-                        className="simple-button"
-                        style={{ fontSize: "14px", alignSelf: "flex-start" }}
-                        onClick={this.props.onCancel}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        type="submit"
-                        className={classnames(
-                          "simple-button",
-                          styles.createButton
-                        )}
-                        style={{ fontSize: "14px", alignSelf: "flex-start" }}
-                      >
-                        Create
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </Form>
-            )
-          }}
-        </Formik>
-      </Modal>
-    )
-  }
-}
- */
-
-const mapStateToProps = (state: ApplicationState) => ({})
 
 const mapDispatchToProps = {
   createIssueRequest: createIssueActions.createIssueRequest,
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CreateIssueModal)

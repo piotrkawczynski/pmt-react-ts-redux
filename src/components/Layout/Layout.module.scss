@@ -14,11 +14,12 @@ $background: rgba($clouds, 0.1);
   flex-direction: column;
   height: 100%;
   background-color: $clouds;
-  overflow-y: auto;
   width: 100%;
+  overflow-y: hidden;
 
   .content {
     width: 100%;
     padding: 20px 20px;
+    overflow-y: auto;
   }
 }

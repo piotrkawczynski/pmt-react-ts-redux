@@ -1,15 +1,15 @@
+import classnames from "classnames"
+import { Form, Formik, FormikActions } from "formik"
 import React from "react"
 import { connect } from "react-redux"
-import { Button } from "reactstrap"
 import { Link } from "react-router-dom"
-import { ApplicationState } from "../../store/redux"
-import { Form, Formik, FormikActions } from "formik"
-import classnames from "classnames"
+import { Button } from "reactstrap"
 import * as Yup from "yup"
 
-import styles from "../SignInPage/SignInPage.module.scss"
 import Input from "../../components/Inputs/Input/Input"
 import { registerActions } from "../../store/user/userActions"
+
+import styles from "../SignInPage/SignInPage.module.scss"
 
 interface PropsFromDispatch {
   registerActionRequest: typeof registerActions.registerRequest
@@ -52,11 +52,6 @@ export interface RegisterFormValues {
 
 class RegisterPage extends React.Component<RegisterPageProps> {
 
-  private onSubmit = (values: RegisterFormValues, formikActions: FormikActions<RegisterFormValues>) => {
-    const { registerActionRequest } = this.props
-    registerActionRequest(values, formikActions)
-  }
-
   render() {
     return (
       <div className={styles.containerWrapper}>
@@ -69,10 +64,7 @@ class RegisterPage extends React.Component<RegisterPageProps> {
             onSubmit={this.onSubmit}
           >
             {(formikProps) => {
-              const {
-                isSubmitting,
-                handleChange,
-              } = formikProps
+              const { isSubmitting, handleChange } = formikProps
 
               return (
                 <Form>
@@ -146,15 +138,20 @@ class RegisterPage extends React.Component<RegisterPageProps> {
       </div>
     )
   }
+  private onSubmit = (
+    values: RegisterFormValues,
+    formikActions: FormikActions<RegisterFormValues>
+  ) => {
+    const { registerActionRequest } = this.props
+    registerActionRequest(values, formikActions)
+  }
 }
-
-const mapStateToProps = (state: ApplicationState) => ({})
 
 const mapDispatchToProps = {
   registerActionRequest: registerActions.registerRequest,
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(RegisterPage)

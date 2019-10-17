@@ -9,6 +9,7 @@ import * as Yup from "yup"
 
 import Input from "../../components/Inputs/Input/Input"
 import { changePasswordActions } from "../../store/user/userActions"
+
 import styles from "../SignInPage/SignInPage.module.scss"
 
 interface PropsFromDispatch {
@@ -46,15 +47,7 @@ class ChangePasswordPage extends React.Component<ChangePasswordPageProps> {
 
     const searchParams = queryString.parse(location.search.substring(1))
 
-    const token =
-      typeof searchParams.token === "string" ? searchParams.token : ""
-
-    this.token = token
-  }
-
-  private onSubmit = (values: ChangePasswordFormValues) => {
-    const { changePasswordActionRequest } = this.props
-    changePasswordActionRequest(values, this.token)
+    this.token = typeof searchParams.token === "string" ? searchParams.token : ""
   }
 
   render() {
@@ -110,6 +103,11 @@ class ChangePasswordPage extends React.Component<ChangePasswordPageProps> {
         </div>
       </div>
     )
+  }
+
+  private onSubmit = (values: ChangePasswordFormValues) => {
+    const { changePasswordActionRequest } = this.props
+    changePasswordActionRequest(values, this.token)
   }
 }
 

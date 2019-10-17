@@ -1,26 +1,22 @@
+import classnames from "classnames"
+import { Form, Formik } from "formik"
 import React, { Component } from "react"
-import { Formik, Form } from "formik"
 import { connect } from "react-redux"
 import { Button } from "reactstrap"
-import classnames from "classnames"
 import * as Yup from "yup"
 
-import { ApplicationState } from "../../store/redux"
+import FormContainer from "../../components/FormContainer/FormContainer"
+import ProjectPicker from "../../components/Pickers/ProjectPicker/ProjectPicker"
+import ProjectPreview from "../../components/Previews/ProjectPreview/ProjectPreview"
 import { createProjectActions } from "../../store/project/projectActions"
 
-import ProjectPicker from "../../components/Pickers/ProjectPicker/ProjectPicker"
-import FormContainer from "../../components/FormContainer/FormContainer"
-import ProjectPreview from "../../components/Previews/ProjectPreview/ProjectPreview"
-
 import styles from "./CreateProjectPage.module.scss"
-
-interface PropsFromState {}
 
 interface PropsFromDispatch {
   createProjectRequest: typeof createProjectActions.createProjectRequest
 }
 
-type CreateProjectPageProps = PropsFromDispatch & PropsFromState
+type CreateProjectPageProps = PropsFromDispatch
 
 export interface CreateProjectPageFormValues {
   name: string
@@ -63,7 +59,6 @@ class CreateProjectPage extends Component<CreateProjectPageProps> {
           validationSchema={VALIDATION_SCHEMA}
         >
           {(formikProps) => {
-
             return (
               <>
                 <Form>
@@ -91,13 +86,11 @@ class CreateProjectPage extends Component<CreateProjectPageProps> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({})
-
 const mapDispatchToProps = {
   createProjectRequest: createProjectActions.createProjectRequest,
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CreateProjectPage)

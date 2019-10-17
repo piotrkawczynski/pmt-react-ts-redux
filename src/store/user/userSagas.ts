@@ -1,19 +1,21 @@
-import { takeLatest, call, put, select } from "redux-saga/effects"
-import {
-  updateApiHeader,
-  types,
-  loginActions,
-  registerActions,
-  setUserLoggedIn,
-  getUserListActions,
-  remainPasswordActions,
-  changePasswordActions,
-} from "./userActions"
+import { call, put, select, takeLatest } from "redux-saga/effects"
 import { ActionType } from "typesafe-actions"
-import { userSelector } from "./userRedux"
-import history from "../../utilities/history"
+
 import { api, updateApiHeaders } from "../../services/api"
 import { User } from "../../types/user"
+import history from "../../utilities/history"
+import {
+  changePasswordActions,
+  getUserListActions,
+  loginActions,
+  registerActions,
+  remainPasswordActions,
+  setUserLoggedIn,
+  types,
+  updateApiHeader,
+  updateProfileActions,
+} from "./userActions"
+import { userSelector } from "./userRedux"
 
 function* updateApiHeaderFlow() {
   try {
@@ -24,7 +26,8 @@ function* updateApiHeaderFlow() {
       yield put(setUserLoggedIn())
     }
   } catch (error) {
-    console.log(error)
+    // tslint:disable-next-line:no-console
+    console.error(error)
   }
 }
 
@@ -35,8 +38,8 @@ function* registerUserFlow(
   try {
     yield call(api.auth.register, values)
 
-    yield put(updateApiHeader())
     yield put(registerActions.registerSuccess())
+    yield put(updateApiHeader())
 
     history.push("/login")
   } catch (error) {
@@ -54,8 +57,10 @@ function* loginUserFlow(action: ActionType<typeof loginActions.loginRequest>) {
   try {
     const { data } = yield call(api.auth.login, values)
 
-    yield put(updateApiHeader())
     yield put(loginActions.loginSuccess(data))
+    yield put(updateApiHeader())
+    // @ts-ignore
+    yield call(history.push, "/")
   } catch (error) {
     const { errors } = error.response.data
     Object.keys(errors).map((error) =>
@@ -76,6 +81,7 @@ function* getUserListFlow(
 
     yield put(getUserListActions.getUserListSuccess(userList))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getUserListActions.getUserListFailure(error.message))
   }
@@ -90,6 +96,7 @@ function* remainPasswordFlow(
     yield put(remainPasswordActions.remainPasswordSuccess())
     history.push("/login")
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(remainPasswordActions.remainPasswordFailure(error.message))
   }
@@ -106,8 +113,26 @@ function* changePasswordFlow(
     yield put(changePasswordActions.changePasswordSuccess())
     history.push("/login")
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(changePasswordActions.changePasswordFailure(error.message))
+  }
+}
+
+function* updateProfileFlow(
+  action: ActionType<typeof updateProfileActions.updateProfileRequest>
+) {
+  try {
+    const { updateProfileValues } = action.payload
+
+    yield call(api.users.updateProfile, updateProfileValues)
+
+    yield put(updateProfileActions.updateProfileSuccess())
+    yield put(updateProfileActions.updateUser(updateProfileValues))
+  } catch (error) {
+    // tslint:disable-next-line:no-console
+    console.error(error.message)
+    yield put(updateProfileActions.updateProfileFailure(error.message))
   }
 }
 
@@ -118,6 +143,7 @@ function* userSaga() {
   yield takeLatest(types.GET_USER_LIST.REQUEST, getUserListFlow)
   yield takeLatest(types.REMAIN_PASSWORD.REQUEST, remainPasswordFlow)
   yield takeLatest(types.CHANGE_PASSWORD.REQUEST, changePasswordFlow)
+  yield takeLatest(types.UPDATE_PROFILE.REQUEST, updateProfileFlow)
 }
 
 export { userSaga }

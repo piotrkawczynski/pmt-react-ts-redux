@@ -48,7 +48,6 @@ class KanbanScheme extends Component<KanbanSchemeProps, KanbanSchemeState> {
   }
 
   handleShowModal = (issueId: number) => () => {
-    console.log(issueId)
     this.setState({ selectedIssueId: issueId })
   }
 
@@ -106,9 +105,7 @@ class KanbanScheme extends Component<KanbanSchemeProps, KanbanSchemeState> {
   areListsReady = () => {
     const { statusList, tagList, permissionList, userList } = this.props
 
-    return (
-      statusList && tagList && permissionList.data && userList.data
-    )
+    return statusList && tagList && permissionList.data && userList.data
   }
 
   onCancel = () => {

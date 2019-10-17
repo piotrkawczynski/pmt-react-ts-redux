@@ -4,8 +4,6 @@ import { ActionType } from "typesafe-actions"
 
 import { api } from "../../services/api"
 import { Comment } from "../../types/comment"
-import { LoaderImage } from "../../types/loaderImage"
-import { CreateComment } from "../../types/request/createComment"
 import {
   createCommentActions,
   deleteCommentActions,
@@ -25,6 +23,7 @@ function* getCommentListFlow(
 
     yield put(getCommentListActions.getCommentListSuccess(commentListResponse))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(getCommentListActions.getCommentListFailure(error.message))
   }
@@ -57,6 +56,7 @@ function* createCommentFlow(
     yield put(createCommentActions.createCommentSuccess())
     yield put(getCommentListActions.getCommentListRequest(issueId))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(createCommentActions.createCommentFailure(error.message))
   }
@@ -73,6 +73,7 @@ function* deleteCommentFlow(
     yield put(deleteCommentActions.deleteCommentSuccess())
     yield put(getCommentListActions.getCommentListRequest(issueId))
   } catch (error) {
+    // tslint:disable-next-line:no-console
     console.error(error.message)
     yield put(deleteCommentActions.deleteCommentFailure(error.message))
   }

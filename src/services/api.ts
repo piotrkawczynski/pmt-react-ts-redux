@@ -3,12 +3,12 @@ import { SprintFormValues } from "../components/SprintModal/SprintModal"
 import { ChangePasswordFormValues } from "../pages/ChangePasswordPage/ChangePasswordPage"
 import { SignInFormValues } from "../pages/SignInPage/SignInPage"
 import { RegisterFormValues } from "../pages/SignUpPage/SignUpPage"
+import { UpdateProfileValues } from "../pages/UpdateProfilePage/UpdateProfilePage"
+import { CreateInviteBody } from "../store/invite/inviteActions"
 import {
   CreateStatusBody,
   UpdateStatusOrderBody,
 } from "../store/status/statusActions"
-import { CreateInviteBody } from "../store/invite/inviteActions"
-import { CreateIssue } from "../types/request/createIssue"
 
 const apiInstance = Axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -26,11 +26,9 @@ const apiInstance = Axios.create({
 // })
 
 const updateApiHeaders = (token: string) => {
-  console.log(token)
-
   apiInstance.defaults.headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    "Authorization": `Bearer ${token}`,
   }
 }
 
@@ -44,6 +42,10 @@ const register = async (values: RegisterFormValues) => {
 
 const remainPassword = async (email: string) => {
   return await apiInstance.post("/auth/remain-password", { email })
+}
+
+const updateProfile = async (updateProfileValues: UpdateProfileValues) => {
+  return await apiInstance.post("/users/update-profile", updateProfileValues)
 }
 
 const changePassword = async (
@@ -118,7 +120,7 @@ const getUserList = async (projectId: number) => {
 }
 
 const getPermissionList = async () => {
-  return await apiInstance.get(`/permissions`)
+  return await apiInstance.get("/permissions")
 }
 
 const getSprintList = async (projectId: number) => {
@@ -202,6 +204,7 @@ const api = {
   },
   users: {
     getUserList,
+    updateProfile,
   },
   permissions: {
     getPermissionList,
