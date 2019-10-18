@@ -72,7 +72,7 @@ class SignInPage extends Component<SignInPageProps> {
                 <Input
                   containerClassName={styles.inputWrapper}
                   placeholder="Password"
-                  type="text"
+                  type="password"
                   name="password"
                   label="Password"
                   onChange={handleChange}

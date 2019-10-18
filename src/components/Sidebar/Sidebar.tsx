@@ -45,8 +45,14 @@ type SidebarProps = RouteComponentProps<RouteParams> &
   PropsFromState
 
 class Sidebar extends Component<SidebarProps> {
-  getRoutes = (projectId: string | null) => {
-    const sidebarData: SidebarItem[] = [
+  getRoutes = (projectId: string | null, pathName: string) => {
+    const regexp = new RegExp("\\/project\\/\\d+\\/edit")
+
+    if (regexp.test(pathName)) {
+      projectId = null
+    }
+
+    const sidebarProjectData: SidebarItem[] = [
       {
         route: "/",
         icon: faListOl,
@@ -79,7 +85,7 @@ class Sidebar extends Component<SidebarProps> {
       },
     ]
 
-    return sidebarData.filter(({ show }) => show)
+    return sidebarProjectData.filter(({ show }) => show)
   }
 
   onExtend = () => {
@@ -93,6 +99,7 @@ class Sidebar extends Component<SidebarProps> {
       match: {
         params: { projectId },
       },
+      location: { pathname },
     } = this.props
 
     return (
@@ -104,7 +111,7 @@ class Sidebar extends Component<SidebarProps> {
         {this.renderHeader()}
         {this.renderExtendButton()}
         <div>
-          <ItemList data={this.getRoutes(projectId)} />
+          <ItemList data={this.getRoutes(projectId, pathname)} />
         </div>
       </div>
     )
