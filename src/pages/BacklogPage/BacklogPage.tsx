@@ -190,13 +190,15 @@ class BacklogPage extends Component<BacklogPageProps, BacklogPageState> {
           />
         )}
         <div className={styles.createButtonsWrapper}>
-          <Button
-            type="button"
-            className="button"
-            onClick={() => this.setState({ openCreateIssueModal: true })}
-          >
-            Create issue
-          </Button>
+          {this.state.sprintId && (
+            <Button
+              type="button"
+              className="button"
+              onClick={() => this.setState({ openCreateIssueModal: true })}
+            >
+              Create issue
+            </Button>
+          )}
           {this.isLastSprint() && (
             <Button
               type="button"
