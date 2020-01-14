@@ -36,10 +36,7 @@ export interface SignInFormValues {
 }
 
 class SignInPage extends Component<SignInPageProps> {
-  onSubmit = (
-    values: SignInFormValues,
-    formikActions: FormikActions<SignInFormValues>
-  ) => {
+  onSubmit = (values: SignInFormValues, formikActions: FormikActions<SignInFormValues>) => {
     this.props.loginActionsRequest(values, formikActions)
   }
 
@@ -49,16 +46,8 @@ class SignInPage extends Component<SignInPageProps> {
         <h2 className={styles.logo}>Project Management Tool</h2>
         <p className={styles.title}>Sign In</p>
         <div className={styles.formWrapper}>
-          <Formik
-            initialValues={INITIAL_VALUES}
-            validationSchema={VALIDATION_SCHEMA}
-            onSubmit={this.onSubmit}
-          >
-            {({
-              touched,
-              errors,
-              handleChange,
-            }) => (
+          <Formik initialValues={INITIAL_VALUES} validationSchema={VALIDATION_SCHEMA} onSubmit={this.onSubmit}>
+            {({ touched, errors, handleChange }) => (
               <Form>
                 <Input
                   containerClassName={styles.inputWrapper}
@@ -78,12 +67,7 @@ class SignInPage extends Component<SignInPageProps> {
                   onChange={handleChange}
                   error={errors.password && touched.password && errors.password}
                 />
-                <div
-                  className={classnames(
-                    styles.linkWrapper,
-                    styles.forgotPassword
-                  )}
-                >
+                <div className={classnames(styles.linkWrapper, styles.forgotPassword)}>
                   <Link to="/remain-password" className="link">
                     Forgot password
                   </Link>
