@@ -70,7 +70,8 @@
     "lint:scss": "stylelint 'src/**/*.scss'",
     "prettier:check": "prettier --check 'src/**/*.{ts,tsx,scss}'",
     "prettier:write": "prettier --write 'src/**/*.{ts,tsx,scss}'",
-    "serve:production": "node app.js"
+    "serve:production": "node app.js",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -86,5 +87,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^3.8.3"
   }
 }

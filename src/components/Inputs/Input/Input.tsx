@@ -39,18 +39,15 @@ const Input: React.FC<InputProps> = (props) => {
   return (
     <div className={wrapperClassName}>
       <div className={styles.labelErrorWrapper}>
-        <label htmlFor={name} className={styles.label}>
+        <label htmlFor={name} className={styles.label} data-e2e={`label-${name}`}>
           {label}
         </label>
-        <ErrorMessage
-          component="p"
-          name={name}
-          className={styles.errorMessage}
-        />
+        <ErrorMessage data-e2e={`error-${name}`} component="p" name={name} className={styles.errorMessage} />
       </div>
       <Field
         type={type}
         id={name}
+        data-e2e={`input-${name}`}
         className={classnames(
           styles.input,
           {

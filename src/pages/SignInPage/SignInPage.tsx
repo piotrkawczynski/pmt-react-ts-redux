@@ -43,8 +43,12 @@ class SignInPage extends Component<SignInPageProps> {
   render() {
     return (
       <div className={styles.containerWrapper}>
-        <h2 className={styles.logo}>Project Management Tool</h2>
-        <p className={styles.title}>Sign In</p>
+        <h2 className={styles.logo} data-e2e="header">
+          Project Management Tool
+        </h2>
+        <p className={styles.title} data-e2e="title">
+          Sign In
+        </p>
         <div className={styles.formWrapper}>
           <Formik initialValues={INITIAL_VALUES} validationSchema={VALIDATION_SCHEMA} onSubmit={this.onSubmit}>
             {({ touched, errors, handleChange }) => (
@@ -68,12 +72,12 @@ class SignInPage extends Component<SignInPageProps> {
                   error={errors.password && touched.password && errors.password}
                 />
                 <div className={classnames(styles.linkWrapper, styles.forgotPassword)}>
-                  <Link to="/remain-password" className="link">
+                  <Link to="/remain-password" className="link" data-e2e="link-forgotPassword">
                     Forgot password
                   </Link>
                 </div>
                 <div className={styles.buttonWrapper}>
-                  <Button type="submit" className="button">
+                  <Button type="submit" className="button" data-e2e="signIn">
                     Sign in
                   </Button>
                 </div>
@@ -82,7 +86,7 @@ class SignInPage extends Component<SignInPageProps> {
           </Formik>
         </div>
         <div className={classnames(styles.linkWrapper, styles.loginLink)}>
-          <Link to={"/register"} className="link">
+          <Link to={"/register"} className="link" data-e2e="link-register">
             Direct me to sign up
           </Link>
         </div>
