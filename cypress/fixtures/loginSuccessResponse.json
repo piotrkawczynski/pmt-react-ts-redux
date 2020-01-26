@@ -1,0 +1,9 @@
+{
+  "id": 4,
+  "email": "test@example.com",
+  "username": "john.smith",
+  "firstName": "John",
+  "lastName": "Smith",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTU3OTk2OTM2NiwiZXhwIjoxNTg3MTY5MzY2fQ.jryg34vAk090g46HpJqBzWvaMWB-pqeNZLkewuSH9B4",
+  "remainPasswordId": null
+}

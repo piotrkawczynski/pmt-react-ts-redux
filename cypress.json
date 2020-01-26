@@ -1,0 +1,9 @@
+{
+  "ignoreTestFiles": "**/integration/examples/*",
+  "video": false,
+  "baseUrl": "http://localhost:3000",
+  "defaultCommandTimeout": 10000,
+  "execTimeout": 10000,
+  "taskTimeout": 10000,
+  "pageLoadTimeout": 10000
+}
